@@ -1,4 +1,10 @@
 package com.jk.service.commodity;
 
-public class CommodityService {
+import com.jk.model.commodity.Product;
+
+import java.util.List;
+
+public interface CommodityService {
+
+    List<Product> queryCommodity();
 }
