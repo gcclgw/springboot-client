@@ -14,9 +14,9 @@
     <!-- 引入bootstrap-addTabs的css -->
     <link  href="<%=request.getContextPath()%>/js/addTabs/addTabs.css" rel="stylesheet" >
 
-   <%-- <!-- 引入jquery -->
+    <!-- 引入jquery -->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
---%>
+
     <!-- 引入bootstrap的js-->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
 
