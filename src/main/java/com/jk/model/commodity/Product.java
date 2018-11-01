@@ -1,27 +1,34 @@
 package com.jk.model.commodity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Product {
+public class Product implements Serializable {
+    private static final long serialVersionUID = -4296765510277358216L;
+
     private Integer pid;
 
     private String pname;
 
-    private Double marketPrice;
+    private String market_price;
 
-    private Double shopPrice;
+    private String shop_price;
 
     private String image;
 
     private String pdesc;
 
-    private Integer isHot;
+    private Integer is_hot;
 
     private Date pdate;
 
     private Integer csid;
 
     private Integer status;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getPid() {
         return pid;
@@ -36,23 +43,23 @@ public class Product {
     }
 
     public void setPname(String pname) {
-        this.pname = pname == null ? null : pname.trim();
+        this.pname = pname;
     }
 
-    public Double getMarketPrice() {
-        return marketPrice;
+    public String getMarket_price() {
+        return market_price;
     }
 
-    public void setMarketPrice(Double marketPrice) {
-        this.marketPrice = marketPrice;
+    public void setMarket_price(String market_price) {
+        this.market_price = market_price;
     }
 
-    public Double getShopPrice() {
-        return shopPrice;
+    public String getShop_price() {
+        return shop_price;
     }
 
-    public void setShopPrice(Double shopPrice) {
-        this.shopPrice = shopPrice;
+    public void setShop_price(String shop_price) {
+        this.shop_price = shop_price;
     }
 
     public String getImage() {
@@ -60,7 +67,7 @@ public class Product {
     }
 
     public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
+        this.image = image;
     }
 
     public String getPdesc() {
@@ -68,15 +75,15 @@ public class Product {
     }
 
     public void setPdesc(String pdesc) {
-        this.pdesc = pdesc == null ? null : pdesc.trim();
+        this.pdesc = pdesc;
     }
 
-    public Integer getIsHot() {
-        return isHot;
+    public Integer getIs_hot() {
+        return is_hot;
     }
 
-    public void setIsHot(Integer isHot) {
-        this.isHot = isHot;
+    public void setIs_hot(Integer is_hot) {
+        this.is_hot = is_hot;
     }
 
     public Date getPdate() {
