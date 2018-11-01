@@ -21,6 +21,10 @@ public class BusinessController {
     public String toIndex(){
         return  "/business/show";
     }
+    @RequestMapping("/toaddbus")
+    public String toaddbus(){
+        return  "/business/addBus";
+    }
 
     @RequestMapping("/queryBusiness")
     @ResponseBody
@@ -33,5 +37,12 @@ public class BusinessController {
       public void deleteBus(Integer qid){
       bussinessService.deleteBus(qid);
     }
+
+    @RequestMapping("addBus")
+    @ResponseBody
+    public  void addBus(Business business){
+        bussinessService.addBus(business);
+    }
+
 
 }
