@@ -28,6 +28,8 @@
     <dubbo:reference id="loginService" interface="com.jk.service.login.LoginService"    />
     <dubbo:reference id="ordersService" interface="com.jk.service.orders.OrdersService"    />
     <dubbo:reference id="checkService" interface="com.jk.service.check.CheckService"    />
+    <dubbo:reference id="regService" interface="com.jk.service.register.RegisterService"    />
+    <dubbo:reference id="loginUserService" interface="com.jk.service.loginUser.LoginUserService"    />
 
 </beans>
 
