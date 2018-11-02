@@ -1,5 +1,3 @@
-<%@ page import="java.nio.file.Path" %>
-<%@ page import="org.aspectj.weaver.tools.cache.SimpleCacheFactory" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -40,57 +38,42 @@
 
 
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/themes/fa/theme.js"></script>
+    <style type="text/css">
+        body {padding-top:55px;}
 
+    </style>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 </head>
-<body style="background:#1b6d85">
-<center><font color="#a52a2a"> <h2>编辑用户 </h2></font> </center>
+<body>
+<center><font color="#a52a2a"> <h2>签约合同</h2></font> </center>
 <br>
   <br>
     <br>
-<center>
-      <form method="post" action="<%=request.getContextPath()%>/mans/updateAdd">
-
+      <form method="post" action="<%=request.getContextPath()%>/cont/poixAdd">
+ <center>
 <table border="2">
-    r<input type="hidden" name="uid" value="${user.uid}">
       <tr>
-        <td>用户姓名:<input name="username" value="${user.username}"></td>
-        <td><pre>               <input type="submit" value="确定">                </pre></td>
-          <td>密码:<input name="password" value="${user.password}"></td>
+        <td>合同名称:<input name="htname"></td>
+        <td>状态:<input name="htstatus"></td>
+        <td>生效时间:<input  class="Wdate" name="startdate" type="text"   onClick="WdatePicker({dateFmt:'yyyy-MM-dd  HH:mm:ss'})"></td>
      </tr>
      <tr>
-        <td>真实姓名:<input name="name" value="${user.name}"></td>
-         <td><pre>                <input type="reset" value="重置">                 </pre></td>
-         <td>邮箱:<input name="email" value="${user.email}"></td>
+        <td>结束时间:<input  class="Wdate" name="endtime" type="text"   onClick="WdatePicker({dateFmt:'yyyy-MM-dd  HH:mm:ss'})"></td>
+         <td>企业编号:<input name="qid"></td>
+         <td>描述:<textarea name="htinfo"></textarea></td>
      </tr>
-     <tr>
-        <td>用户电话:<input name="phone" value="${user.phone}"></td>
-         <td><pre>                <input type="button" value="返回" onclick="fh(1)" >                </pre></td>
-         <td>    地址:<input name="addr" value="${user.addr}"></td>
-     </tr>
+ </center>
+</table><br>
+          <input type="reset" value="清除" style="width:90px;height:30px;background-color:black">
+          <input type="submit" value="提交" style="width:90px;height:30px;background-color:white"><br>
 
-</table>
 </form>
-</center>
+<center><br><input type="button" value="返回" onclick="restx()" style="width:120px;height:40px;background-color:grey"></center>
 
 </body>
-<script type="text/javascript">
-    function fh(qid){
-
-        $.ajax({
-            url:"<%=request.getContextPath()%>/mans/querymans",
-            data:{qid:qid},
-            success:function(){
-
-                location.href="<%=request.getContextPath()%>/mans/querymans"
-            }
-        })
-
-
-
-
+<script>
+    function restx(){
+        location.href="<%=request.getContextPath() %>/cont/queryContx";
     }
-
 </script>
-
-
 </html>
