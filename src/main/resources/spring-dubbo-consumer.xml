@@ -21,5 +21,6 @@
 	 <dubbo:reference id="powerTreeService" interface="com.jk.service.powerTree.PowerTreeService"    />
 
 	 <dubbo:reference id="ordersService" interface="com.jk.service.orders.OrdersService"    />
+	 <dubbo:reference id="busService" interface="com.jk.service.business.BussinessService"    />
 
 </beans>  
