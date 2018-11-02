@@ -1,0 +1,6 @@
+0.将 my97的插件包导入  WebRoot 下
+1.在页面引入WdatePicker.js
+2.使用My97的input框写法：
+<input  class="Wdate"  type="text"  onClick="WdatePicker()">
+
+				<td><input  class="Wdate" name="movie.publishDate" type="text"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
