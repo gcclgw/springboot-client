@@ -84,17 +84,12 @@
                             </c:forEach>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="txt_statu">是否热卖</label>
-                        <select class="form-control" name="status" id="sel1">
-                            <option value="">请选择</option>
-                            <option value="1"
-                                    <c:if test="${pro.status==1}">selected</c:if>
-                            >是</option>
-                            <option value="2"
-                                    <c:if test="${pro.status==2}">selected</c:if>
-                            >否</option>
-                        </select>
+                        <label for="txt_departmentlevel">商品图片</label><br>
+                        <img src="${pro.image}" height="100px" width="100px"><br><br>
+                        <input type="file" class="file" id="imgimg" multiple name="image"  width="42">
+                        <input type="hidden" name="image" id="imageId">
                     </div>
 
                 </div>
@@ -109,7 +104,43 @@
 
 
 <script>
-    
+
+
+    $("#imgimg").fileinput({
+
+        language : 'zh',
+        uploadUrl : "<%=request.getContextPath()%>/comm/headImgUpload",
+        showUpload: true, //是否显示上传按钮
+        showRemove : true, //显示移除按钮
+        showPreview : true, //是否显示预览
+        showCaption: false,//是否显示标题
+        autoReplace : true,
+        minFileCount: 0,
+        uploadAsync: true,
+        maxFileCount: 10,//最大上传数量
+        browseOnZoneClick: true,
+        msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+        enctype: 'multipart/form-data',
+        // overwriteInitial: false,//不覆盖已上传的图片
+        allowedFileExtensions : [ "jpg", "png", "gif" ],
+        browseClass : "btn btn-primary", //按钮样式
+        previewFileIcon : "<i class='glyphicon glyphicon-king'></i>"
+    }).on("fileuploaded", function(e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
+
+        $("#imageId").val(data.response.imgUrl);
+
+    });
+
+
+
+
+
+
+
+
+
+
+
     $(function () {
 
         <!-- 修改弹框 -->
