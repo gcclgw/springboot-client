@@ -1,6 +1,6 @@
 package com.jk.service.commodity;
 
-import com.alibaba.dubbo.common.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.Product;
 
