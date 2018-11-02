@@ -2,12 +2,13 @@ package com.jk.model.user;
 
 
 
+import com.jk.utils.Page;
 import com.jk.utils.PageUtil;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class User  extends PageUtil implements Serializable {
+public class User  extends Page implements Serializable {
 
     private static final long serialVersionUID = -1648598031541497891L;
 

@@ -21,6 +21,13 @@ public class IndexController {
         return "index/index";
     }
 
+    /**
+     * 跳转权限设置页面
+     */
+    @RequestMapping("selectUser")
+    public String selectUser(){
+        return "power/list";
+    }
 
 
 }

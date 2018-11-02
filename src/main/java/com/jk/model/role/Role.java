@@ -1,11 +1,11 @@
 package com.jk.model.role;
 
-import com.jk.utils.PageUtil;
+import com.jk.utils.Page;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Role extends PageUtil implements Serializable {
+public class Role extends Page implements Serializable {
 
     /**
      * 角色id

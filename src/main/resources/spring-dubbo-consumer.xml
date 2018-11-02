@@ -19,5 +19,6 @@
 	 <dubbo:reference id="userService" interface="com.jk.service.user.UserService"    />
 	 <dubbo:reference id="loginService" interface="com.jk.service.login.LoginService"    />
 	 <dubbo:reference id="powerTreeService" interface="com.jk.service.powerTree.PowerTreeService"    />
+	 <!--<dubbo:reference id="adverTreeService" interface="com.jk.service.adver.AdverService"    />-->
 
 </beans>  

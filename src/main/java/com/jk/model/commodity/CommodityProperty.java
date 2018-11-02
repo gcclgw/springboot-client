@@ -1,6 +1,9 @@
 package com.jk.model.commodity;
 
-public class CommodityProperty {
+import java.io.Serializable;
+
+public class CommodityProperty implements Serializable {
+    private static final long serialVersionUID = -4328460463673601314L;
     private Integer cid;
 
     private String cname;

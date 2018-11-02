@@ -1,10 +1,10 @@
 package com.jk.model.userRole;
 
-import com.jk.utils.PageUtil;
+import com.jk.utils.Page;
 
 import java.io.Serializable;
 
-public class UserRole  extends PageUtil implements Serializable {
+public class UserRole  extends Page implements Serializable {
 
     private static final long serialVersionUID = 10806609544196726L;
 
