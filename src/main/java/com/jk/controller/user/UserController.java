@@ -1,6 +1,7 @@
 package com.jk.controller.user;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -8,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
     @RequestMapping("/toIndex")
     public String toIndex(){
-        return  "index";
+         return  "index2";
+    }
+    @RequestMapping("/toAdminIndex")
+    public String toAdminIndex(){
+         return  "index";
     }
 }
