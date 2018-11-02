@@ -19,7 +19,8 @@
 	 <dubbo:reference id="userService" interface="com.jk.service.user.UserService"    />
 	 <dubbo:reference id="loginService" interface="com.jk.service.login.LoginService"    />
 	 <dubbo:reference id="powerTreeService" interface="com.jk.service.powerTree.PowerTreeService"    />
-
-	 <dubbo:reference id="ordersService" interface="com.jk.service.orders.OrdersService"    />
-
+	<!-- 程双印 -->
+ 	<dubbo:reference id="ordersService" interface="com.jk.service.orders.OrdersService"    />
+ 	<!--<dubbo:reference id="mongoService" interface="com.jk.service.mongodbLog.MongoService"    />-->
+	<!-- 程双印 -->
 </beans>  

@@ -32,25 +32,37 @@
 </head>
 <body>
 <!--导航条  -->
+<!--导航条  -->
+<!-- navbar-fixed-top  规定在页面最顶部-->
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <!--定义在容器顶部  -->
     <div class="container-fluid">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
         <!-- Brand and toggle get grouped for better mobile display -->
-        <!-- 头部信息 -->
         <div class="navbar-header">
-            <a class="navbar-brand glyphicon glyphicon-globe" href="#" id="menu-toggle">
-                中国电力建设
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- 头部信息 -->
+
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" ></span> 商城管理系统
             </a>
         </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true" ></span> 用户名：</a></li>
+                <li><a href="#">注册</a></li>
+            </ul>
 
 
+        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 <!-- ============================导航结束==================================-->
@@ -98,7 +110,25 @@
             dataType:'json',
             success:function(result){
                 $('#treeDiv').treeview({
-                    data:result,
+                    //data属性 树节点信息 json数组
+                    data: result,
+                    //tree默认展开的节点级别默认为2
+                    //levels: 1,
+                    //含有子节点的图标
+                   // collapseIcon:'glyphicon glyphicon-star-empty',
+                    //没有子节点的图标
+                   // emptyIcon:'glyphicon glyphicon-usd',
+                    //backColor: 'green',yellow,gray,blue
+                   // color: "#090909", //节点的前景色      string
+                    //backColor: "#d8d5d9", //节点的背景色      string
+                    //是否显示复选框
+                   // showCheckbox:false,
+                    //是否允许选中多个节点
+                    //multiSelect:true,
+                    //启用节点的超链接功能默认为false,节点需指定href属性
+                   // enableLinks:true,
+                    //事件当节点选中时
+                  //  expand: false,
                     onNodeSelected:function(event, node) {
 
                         $.addtabs({iframeHeight: 650});
