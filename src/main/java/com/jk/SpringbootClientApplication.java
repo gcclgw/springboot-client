@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ImportResource(value = {"classpath:spring-dubbo-consumer.xml"})
-@MapperScan("com.jk.service")
+
 public class SpringbootClientApplication {
 
     public static void main(String[] args) {

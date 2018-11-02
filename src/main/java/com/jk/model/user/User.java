@@ -1,11 +1,16 @@
 package com.jk.model.user;
 
 import java.io.Serializable;
-
-
 import java.util.List;
 
 public class User  implements Serializable {
+
+    private String userId;
+
+
+
+
+
 
     private static final long serialVersionUID = -1648598031541497891L;
 

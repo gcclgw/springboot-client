@@ -19,14 +19,12 @@
 	 <dubbo:reference id="userService" interface="com.jk.service.user.UserService"    />
 	 <dubbo:reference id="mansService" interface="com.jk.service.mans.MansService"    />
 	 <dubbo:reference id="bersService" interface="com.jk.service.bers.BersService"    />
-
+</beans>
 
 
 	 <dubbo:reference id="loginService" interface="com.jk.service.login.LoginService"    />
 	 <dubbo:reference id="powerTreeService" interface="com.jk.service.powerTree.PowerTreeService"    />
 
 	 <dubbo:reference id="ordersService" interface="com.jk.service.orders.OrdersService"    />
-	 <dubbo:reference id="contService" interface="com.jk.service.contractx.ContService"    />
-	 <dubbo:reference id="poixService" interface="com.jk.service.poix.PoixService"    />
 
 </beans>

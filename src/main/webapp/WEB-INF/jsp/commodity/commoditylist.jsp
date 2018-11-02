@@ -40,17 +40,26 @@
     <!--  引入fileinput的js -->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/js/locales/zh.js"></script>
 
-
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/themes/fa/theme.js"></script>
+
 </head>
 <body>
+<style>
+
+    button{background: #3b72bb; color: #fff; border-radius: 3px; height: 40px; width: 100px; border: none;
+
+        margin: auto; display: block; margin-top: 20px;
+
+    }
+
+</style>
 <div style="text-align: left;">
     <button type="button" onclick="addCommodity()" class="btn btn-info">
         <span class="glyphicon glyphicon-plus"></span> 添加商品
     </button>
 </div>
 <!-- 表格 -->
-<table id="showbus"></table>
+<table id="showcomm"></table>
 
 
 <!-- 新增弹框 -->
@@ -91,12 +100,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="txt_statu">是否热卖</label>
-                    <select class="form-control" name="status" id="sel1">
-                        <option value="">请选择</option>
-                        <option value="1">是</option>
-                        <option value="2">否</option>
-                    </select>
+                    <label for="txt_departmentlevel">商品图片</label>
+                    <input type="file" class="file" id="img" multiple name="image"  width="42">
+                    <input type="hidden" name="image" id="imageId">
                 </div>
 
             </div>
@@ -110,11 +116,50 @@
 </div>
 
 
-
-
 <script type="text/javascript">
+
+    $("#img").fileinput({
+
+        language : 'zh',
+        uploadUrl : "<%=request.getContextPath()%>/comm/headImgUpload",
+        showUpload: true, //是否显示上传按钮
+        showRemove : true, //显示移除按钮
+        showPreview : true, //是否显示预览
+        showCaption: false,//是否显示标题
+        autoReplace : true,
+        minFileCount: 0,
+        uploadAsync: true,
+        maxFileCount: 10,//最大上传数量
+        browseOnZoneClick: true,
+        msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+        enctype: 'multipart/form-data',
+        // overwriteInitial: false,//不覆盖已上传的图片
+        allowedFileExtensions : [ "jpg", "png", "gif" ],
+        browseClass : "btn btn-primary", //按钮样式
+        previewFileIcon : "<i class='glyphicon glyphicon-king'></i>"
+    }).on("fileuploaded", function(e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
+
+
+        //alert(data)
+        // console.info(data.response.imgUrl)
+        //  $("input[name='image']").val(data.response.imgUrl);
+        $("#imageId").val(data.response.imgUrl);
+        //   $("#imageId").attr("src",data.response.imgUrl);
+        /*var res = data.response;
+        console.log(res)
+        imageData.push({
+            "path": res.data.path,
+            "date":res.data.date
+        });
+        console.log(imageData);*/
+    });
+
+
+
+
+
     $(function(){
-        $("#showbus").bootstrapTable({
+        $("#showcomm").bootstrapTable({
             url:"<%=request.getContextPath()%>/comm/queryCommodity",
             method:"post",
             striped: true,  	// 斑马线效果     默认false
@@ -134,18 +179,14 @@
             toolbar:'#tabToolBar',   //  工具定义位置
             columns:[
                 {field:'pid',title:'序号',width:50},
-                {field:'image',title:'商品图片',width:100},
-                {field:'pname',title:'商品名称',width:100},
-                {field:'market_price',title:'商品价格',width:50},
-                {field:'status',title:'是否热门',width:100,
-                formatter:function(value,row,index){
-                        if (value==1) {
-                            return "是";
-                        }else{
-                            return "否";
-                        }
+                {field:'image',title:'商品图片',width:100,
+                formatter:function (value,row,index) {
+                    return '<img src="'+row.image+'" width="30" height="30" >';
                 }
                 },
+                {field:'pname',title:'商品名称',width:100},
+                {field:'market_price',title:'商品价格',width:50},
+                {field:'is_hot',title:'点击量',width:100},
                 {field:'tjsx',title:'添加属性',width:100,
                     formatter:function (value,row,index) {
                         return '<div style="text-align: left;">\n' +

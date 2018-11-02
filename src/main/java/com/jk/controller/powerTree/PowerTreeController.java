@@ -1,7 +1,6 @@
 package com.jk.controller.powerTree;
 
 
-import com.alibaba.fastjson.JSONArray;
 import com.jk.model.power.PowerTree;
 import com.jk.service.powerTree.PowerTreeService;
 import com.jk.utils.ConstantsConf;
