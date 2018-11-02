@@ -65,6 +65,20 @@
             //发送到服务器的数据编码类型
             contentType:'application/x-www-form-urlencoded;charset=UTF-8',   //数据编码纯文本  offset=0&limit=5
             toolbar:'#tabToolBar',   //  工具定义位置
+            //前台--排序字段
+            //sortName:'proPrice',
+            //sortOrder:'desc',
+            //前台--搜索框
+            //search:true,
+            //启动回车键做搜索功能
+            //searchOnEnterKey:true,
+            //分页方式   后台请求的分页方式
+            //sidePagination:'server',
+            pagination: true,                   //是否显示分页（*）
+            pageNum: 1,                       //每页的记录行数（*）
+            pageSize: 6,                       //每页的记录行数（*）
+            pageList: [6,9,12],        //可供选择的每页的行数（*）
+            //得到查询的参数   //  工具定义位置
             columns:[[
                 {
                     field:'uid',
