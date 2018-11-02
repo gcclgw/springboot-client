@@ -1,7 +1,9 @@
 package com.jk.service.commodity;
 
+
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.Product;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,4 +22,10 @@ public interface CommodityService {
     void updateCommodity(Product product);
 
     void addtjsx(Integer pid, String cname, String cvalue);
+
+    List<Product> queryByStatus();
+
+    void updateStatus(Integer pid);
+
+    String updateHead(MultipartFile image, long userId);
 }
