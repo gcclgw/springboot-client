@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CheckService {
     List<Product> queryVipProduct();
-
+    void updatePro(Integer pid);
 }

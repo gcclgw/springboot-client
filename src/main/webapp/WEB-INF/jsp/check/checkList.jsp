@@ -52,48 +52,17 @@
 
 </head>
 <body>
-<div style="text-align: left;">
-    <button type="button" class="btn btn-info" onclick="add()">
-        <span class="glyphicon glyphicon-plus"></span> 新增企业
-    </button>
 
 
-</div>
+<table id="showcheck"></table>
 
-<table id="showbus"></table>
 
-<div class="modal fade" id="adddialod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <form id="addBusForm"  class="form-horizontal">
-
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title" id="myModalLabel">编辑</h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="qnameId">企业名称</label>
-                        <input type="text" name="qname" id="qnameId" class="form-control"  placeholder="企业名称"
-
-                        />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                    <button type="button" id="add" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" ></span>保存</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 
 <script type="text/javascript">
     $(function(){
-        $("#showbus").bootstrapTable({
-            url:"<%=request.getContextPath()%>/business/queryBusiness",
+        $("#showcheck").bootstrapTable({
+            url:"<%=request.getContextPath()%>/check/queryVipCheck",
             method:"post",
             striped: true,  	// 斑马线效果     默认false
             //只允许选中一行
@@ -111,26 +80,29 @@
             contentType:'application/x-www-form-urlencoded;charset=UTF-8',   //数据编码纯文本  offset=0&limit=5
             toolbar:'#tabToolBar',   //  工具定义位置
             columns:[
-                {field:'qid',title:'企业id',width:50},
-                {field:'qname',title:'企业名称',width:100},
-                {field:'qstatus',title:'合作状态',width:100,sortable:true,
-                    formatter:function(value,row,index){   //  格式化  当前单元格内容
-                        if (value==1){
-                            return "签约";
-                        } else {
-                            return "未签约";
+                {field:'pid',title:'序号',width:50},
+                {field:'image',title:'商品图片',width:100},
+                {field:'pname',title:'商品名称',width:100},
+                {field:'market_price',title:'商品价格',width:50},
+                {field:'status',title:'是否热门',width:100,
+                    formatter:function(value,row,index){
+                        if (value==1) {
+                            return "是";
+                        }else{
+                            return "否";
                         }
                     }
-
-
                 },
-                {field:'cz',title:'操作',width:100,sortable:true,
-                    formatter:function(value,row,index){   //  格式化  当前单元格内容
-                        return '<button type="button" onclick="del('+row.qid+')" class="btn btn-danger">\n' +
-                            '                        <span class="glyphicon glyphicon-remove"></span>删除\n' +
-                            '                            </button>;'
+                {field:'sh',title:'审核',width:100,
+                    formatter:function (value,row,index) {
+                        return '<div style="text-align: left;">\n' +
+                            '    <button type="button" onclick="sh('+row.pid+')" class="btn btn-info">\n' +
+                            '        <span class="glyphicon glyphicon-plus"></span> 审核\n' +
+                            '    </button>\n' +
+                            '</div>';
                     }
                 }
+
 
             ],
             //传递参数（*）
@@ -152,71 +124,27 @@
             //sidePagination:'server',
             pagination: true,                   //是否显示分页（*）
             pageNum: 1,                       //每页的记录行数（*）
-            pageSize: 3,                       //每页的记录行数（*）
+            pageSize: 10,                       //每页的记录行数（*）
             pageList: [3, 6, 9,12],        //可供选择的每页的行数（*）
         });
 
-        $('#addBusForm').bootstrapValidator({
-            message: 'This value is not valid',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                qname: {
-                    message: '用户名验证失败',
-                    validators: {
-                        notEmpty: {
-                            message: '用户名不能为空'
-                        }
-                    }
-                }
 
-            }
-        })
 
     });
-function del(qid){
-    alert(qid);
-$.ajax({
-    url:"<%=request.getContextPath()%>/business/deleteBus",
-    data:{qid:qid},
-    success:function(){
-        alert("删除成功")
-        $("#showbus").bootstrapTable('refresh');
-    }
-})
 
-}
 
-$("#add").click(function () {
-    var flag = $('#addBusForm').data("bootstrapValidator").isValid();
-    if (flag){
+
+    function sh (pid) {
         $.ajax({
-            url:"<%=request.getContextPath()%>/business/addBus",
-            data:$("#addBusForm").serialize(),
-            success:function(){
-
-                $("#showbus").bootstrapTable('refresh');
+            url:"<%=request.getContextPath()%>/check/updatePro",
+            data:{pid:pid},
+            success:function () {
+                alert("审核成功")
+                $("#showcheck").bootstrapTable('refresh')
             }
         })
-    }
-})
-
-
-
-
-    //修改
-    function add(){
-        $("#adddialod").modal();
-
 
     }
-
-
-
-
 
 </script>
 
