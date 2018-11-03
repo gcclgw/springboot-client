@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,12 +9,12 @@
     <meta charset="UTF-8"/>
     <title>Insert title here</title>
 
-    <link rel="stylesheet" type="text/css" href="/static/easyui/themes/default/easyui.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/easyui/themes/icon.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/easyui/themes/color.css"/>
-    <script type="text/javascript" src="/static/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="/static/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/static/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/static/easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/static/easyui/themes/color.css"/>
+    <script type="text/javascript" src="<%=path%>/static/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/static/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/static/easyui/locale/easyui-lang-zh_CN.js"></script>
 
     <STYLE>
         body {
@@ -60,7 +61,7 @@
         }
 
         .u_logo {
-            background: url("/images/username.png") no-repeat;
+            background: url("<%=path%>/images/username.png") no-repeat;
             padding: 10px 10px;
             position: absolute;
             top: 43px;
@@ -68,7 +69,7 @@
         }
 
         .p_logo {
-            background: url("/images/password.png") no-repeat;
+            background: url("<%=path%>/images/password.png") no-repeat;
             padding: 10px 10px;
             position: absolute;
             top: 12px;
@@ -80,7 +81,7 @@
         }
 
         .tou {
-            background: url("/images/tou.png") no-repeat;
+            background: url("<%=path%>/images/tou.png") no-repeat;
             width: 97px;
             height: 92px;
             position: absolute;
@@ -89,7 +90,7 @@
         }
 
         .left_hand {
-            background: url("/images/left_hand.png") no-repeat;
+            background: url("<%=path%>/images/left_hand.png") no-repeat;
             width: 32px;
             height: 37px;
             position: absolute;
@@ -98,7 +99,7 @@
         }
 
         .right_hand {
-            background: url("/images/right_hand.png") no-repeat;
+            background: url("<%=path%>/images/right_hand.png") no-repeat;
             width: 32px;
             height: 37px;
             position: absolute;
@@ -107,7 +108,7 @@
         }
 
         .initial_left_hand {
-            background: url("/images/hand.png") no-repeat;
+            background: url("<%=path%>/images/hand.png") no-repeat;
             width: 30px;
             height: 20px;
             position: absolute;
@@ -116,7 +117,7 @@
         }
 
         .initial_right_hand {
-            background: url("/images/hand.png") no-repeat;
+            background: url("<%=path%>/images/hand.png") no-repeat;
             width: 30px;
             height: 20px;
             position: absolute;
@@ -125,7 +126,7 @@
         }
 
         .left_handing {
-            background: url("/images/left-handing.png") no-repeat;
+            background: url("<%=path%>/images/left-handing.png") no-repeat;
             width: 30px;
             height: 20px;
             position: absolute;
@@ -134,7 +135,7 @@
         }
 
         .right_handinging {
-            background: url("/images/right_handing.png") no-repeat;
+            background: url("<%=path%>/images/right_handing.png") no-repeat;
             width: 30px;
             height: 20px;
             position: absolute;
