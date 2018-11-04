@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +16,8 @@
     <link  href="<%=request.getContextPath()%>/js/table/bootstrap-table.min.css" rel="stylesheet" >
     <!-- 引入fileinput的css -->
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/js/fileinput/css/fileinput.min.css" />
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
     <!-- 引入jquery -->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <!-- 引入my97 -->
@@ -38,19 +41,28 @@
 
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/themes/fa/theme.js"></script>
 
+
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/js/bootstrapvalidator/dist/css/bootstrapValidator.css"/>
+
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+
+
+
+
+
 </head>
 <body>
-<input type="button" value="新增" onclick="memAdd()" style="width:90px;height:30px;background-color:#c7254e">
-<table id="berslist"></table>
+
+
+<table id="showcheck"></table>
+
+
 
 
 <script type="text/javascript">
-    $(function(){searchPet();})
-
-    function searchPet(){
-
-        $("#berslist").bootstrapTable({
-            url:"<%=request.getContextPath()%>/bers/bersSelect",
+    $(function(){
+        $("#showcheck").bootstrapTable({
+            url:"<%=request.getContextPath()%>/check/queryVipCheck",
             method:"post",
             striped: true,  	// 斑马线效果     默认false
             //只允许选中一行
@@ -67,6 +79,40 @@
             //发送到服务器的数据编码类型
             contentType:'application/x-www-form-urlencoded;charset=UTF-8',   //数据编码纯文本  offset=0&limit=5
             toolbar:'#tabToolBar',   //  工具定义位置
+            columns:[
+                {field:'pid',title:'序号',width:50},
+                {field:'image',title:'商品图片',width:100},
+                {field:'pname',title:'商品名称',width:100},
+                {field:'market_price',title:'商品价格',width:50},
+                {field:'status',title:'是否热门',width:100,
+                    formatter:function(value,row,index){
+                        if (value==1) {
+                            return "是";
+                        }else{
+                            return "否";
+                        }
+                    }
+                },
+                {field:'sh',title:'审核',width:100,
+                    formatter:function (value,row,index) {
+                        return '<div style="text-align: left;">\n' +
+                            '    <button type="button" onclick="sh('+row.pid+')" class="btn btn-info">\n' +
+                            '        <span class="glyphicon glyphicon-plus"></span> 审核\n' +
+                            '    </button>\n' +
+                            '</div>';
+                    }
+                }
+
+
+            ],
+            //传递参数（*）
+            /*queryParams: function() {
+
+                return {
+                    page:this.pageNum,
+                    rows:this.pageSize
+                };
+            },*/
             //前台--排序字段
             //sortName:'proPrice',
             //sortOrder:'desc',
@@ -78,73 +124,30 @@
             //sidePagination:'server',
             pagination: true,                   //是否显示分页（*）
             pageNum: 1,                       //每页的记录行数（*）
-            pageSize: 6,                       //每页的记录行数（*）
-            pageList: [6,9,12],        //可供选择的每页的行数（*）
-            //得到查询的参数
-            columns:[[
-                {
-                    field:'uid',
-                    title:'编号',
-                    width:100
-                },
-                {
-                    field:'username',
-                    title:'用户名称',
-                    width:100
-                },
-                {
-                    field:'name',
-                    title:'真实名称',
-                    width:100
-                },
-                {field:'xg',title:'操作',width:100,sortable:true,
-                    formatter:function(value,row,index){   //  格式化  当前单元格内容
-                        return '<button type="button" onclick="updateBers('+row.uid+')" class="btn btn-danger">\n' +
-                            '<span class="glyphicon glyphicon-edit"></span>修改\n' +
-                            ' </button>  <button type="button" onclick="delDers('+row.uid+')" class="btn btn-danger">\n'+
-                        ' \<span class="glyphicon glyphicon-remove"></span>删除\n' +
-                        '</button>'
-                    }
-                }
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [3, 6, 9,12],        //可供选择的每页的行数（*）
+        });
 
 
 
-
-
-            ]],
-
-
-        });}
+    });
 
 
 
-
-
-
-
-//删除
- function delDers(uid){
-        alert(uid);
+    function sh (pid) {
         $.ajax({
-            url:"<%=request.getContextPath()%>/bers/delDers",
-            data:{uid:uid},
-            success:function(){
-                alert("删除成功")
-                location.href="<%=request.getContextPath()%>/bers/queryBers";
+            url:"<%=request.getContextPath()%>/check/updatePro",
+            data:{pid:pid},
+            success:function () {
+                alert("审核成功")
+                $("#showcheck").bootstrapTable('refresh')
             }
         })
 
+    }
 
-    }
- //修改
-       function updateBers(uid){
-           location.href="<%=request.getContextPath()%>/bers/updateBers?uid="+uid;
-    }
-    //新增memAdd
-    function memAdd(){
-        location.href="<%=request.getContextPath()%>/bers/queryMen";
-    }
 </script>
+
 </body>
 
 </html>

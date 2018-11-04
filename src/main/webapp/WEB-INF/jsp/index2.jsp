@@ -32,9 +32,9 @@
 			<ul>
 
 				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="<%=request.getContextPath()%>/user_loginPage.action">登录</a>|</li>
+					<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a>|</li>
 				<li id="headerRegister" class="headerRegister"
-					style="display: list-item;"><a href="<%=request.getContextPath()%>/user_registPage.action">注册</a>|
+					style="display: list-item;"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a>|
 				</li>
 
 

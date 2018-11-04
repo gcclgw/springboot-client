@@ -40,8 +40,8 @@
 
 </head>
 <body>
-<input type="button" value="新增" onclick="memAdd()" style="width:90px;height:30px;background-color:#c7254e">
-<table id="berslist"></table>
+<input type="button" value="新增" onclick="poixAdd()" style="width:90px;height:30px;background-color:#c7254e">
+<table id="contxlist"></table>
 
 
 <script type="text/javascript">
@@ -49,8 +49,8 @@
 
     function searchPet(){
 
-        $("#berslist").bootstrapTable({
-            url:"<%=request.getContextPath()%>/bers/bersSelect",
+        $("#contxlist").bootstrapTable({
+            url:"<%=request.getContextPath()%>/cont/queryCont",
             method:"post",
             striped: true,  	// 斑马线效果     默认false
             //只允许选中一行
@@ -78,32 +78,51 @@
             //sidePagination:'server',
             pagination: true,                   //是否显示分页（*）
             pageNum: 1,                       //每页的记录行数（*）
-            pageSize: 6,                       //每页的记录行数（*）
+            pageSize: 5,                       //每页的记录行数（*）
             pageList: [6,9,12],        //可供选择的每页的行数（*）
             //得到查询的参数
             columns:[[
                 {
-                    field:'uid',
-                    title:'编号',
-                    width:100
+                    field:'htid',
+                    title:'合同编号',
+
                 },
                 {
-                    field:'username',
-                    title:'用户名称',
-                    width:100
+                    field:'htname',
+                    title:'合同名称',
+
                 },
                 {
-                    field:'name',
-                    title:'真实名称',
-                    width:100
+                    field:'htstatus',
+                    title:'状态',
+
                 },
-                {field:'xg',title:'操作',width:100,sortable:true,
+                {
+                    field:'startdate',
+                    title:'生效时间',
+
+                },{
+                    field:'endtime',
+                    title:'结束时间',
+
+                },{
+                    field:'qid',
+                    title:'企业编号',
+
+                },{
+                    field:'creatdate',
+                    title:'创建时间',
+
+                },{
+                    field:'htinfo',
+                    title:'描述',
+
+                },
+                {field:'xg',title:'操作',sortable:true,
                     formatter:function(value,row,index){   //  格式化  当前单元格内容
-                        return '<button type="button" onclick="updateBers('+row.uid+')" class="btn btn-danger">\n' +
-                            '<span class="glyphicon glyphicon-edit"></span>修改\n' +
-                            ' </button>  <button type="button" onclick="delDers('+row.uid+')" class="btn btn-danger">\n'+
-                        ' \<span class="glyphicon glyphicon-remove"></span>删除\n' +
-                        '</button>'
+                        return '<button type="button" onclick="poix('+row.htid+')" class="btn btn-danger">\n' +
+                         '<span class="glyphicon glyphicon-edit"></span>导出合同\n' +
+                         ' </button> '
                     }
                 }
 
@@ -122,27 +141,14 @@
 
 
 
-//删除
- function delDers(uid){
-        alert(uid);
-        $.ajax({
-            url:"<%=request.getContextPath()%>/bers/delDers",
-            data:{uid:uid},
-            success:function(){
-                alert("删除成功")
-                location.href="<%=request.getContextPath()%>/bers/queryBers";
-            }
-        })
 
-
-    }
  //修改
-       function updateBers(uid){
-           location.href="<%=request.getContextPath()%>/bers/updateBers?uid="+uid;
+       function poix(htid){
+           location.href="<%=request.getContextPath()%>/poix/export?htid="+htid;
     }
-    //新增memAdd
-    function memAdd(){
-        location.href="<%=request.getContextPath()%>/bers/queryMen";
+//新增memAdd
+    function poixAdd(){
+        location.href="<%=request.getContextPath()%>/cont/queryPoi";
     }
 </script>
 </body>
