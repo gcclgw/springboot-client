@@ -11,6 +11,17 @@ public class Categorysecond implements Serializable {
 
     private Integer cid;
 
+    private String cname;//业务字段
+
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
     public Integer getCsid() {
         return csid;
     }

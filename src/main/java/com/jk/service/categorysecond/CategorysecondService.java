@@ -2,6 +2,7 @@ package com.jk.service.categorysecond;
 
 import com.jk.model.category.Category;
 import com.jk.model.categorysecond.Categorysecond;
+import com.jk.model.commodity.Product;
 
 import java.util.List;
 
@@ -43,4 +44,12 @@ public interface CategorysecondService {
      * 根据一级查二级
      */
     List<Categorysecond> queryOneAndTwo();
+
+    //查询一级表
+    List<Category> queryCategory();
+
+    /**
+     * 根据分类查询商品
+     */
+    List<Product> queryProductByCid();
 }

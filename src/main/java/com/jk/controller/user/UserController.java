@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
     @RequestMapping("/toIndex")
     public String toIndex(){
-        return  "index";
+        return  "index2";
     }
+
 }
