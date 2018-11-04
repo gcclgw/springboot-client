@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,8 +10,34 @@
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/index.css" rel="stylesheet" type="text/css"/>
 
+
+	<!-- 引入bootstrap的css -->
+	<link  href="<%=request.getContextPath()%>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+
+	<!-- 引入bootstrap-treeview的css -->
+	<link  href="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+
+	<!-- 引入bootstrap-addTabs的css -->
+	<link  href="<%=request.getContextPath()%>/js/addTabs/addTabs.css" rel="stylesheet" >
+
+	<!-- 引入jquery -->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+
+	<!-- 引入bootstrap的js-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- 引入bootstrap的js-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.js"></script>
+
+	<!-- 引入bootstrap的js-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/addTabs/addTabs.js"></script>
 </head>
 <body>
+<style>
+.main{width:1080px;min-height:390px;margin:10px auto;}
+.scroll{ float:left; width:50px; height:50px;}
+</style>
+
 
 <div class="container header">
 	<div class="span5">
@@ -53,25 +80,10 @@
 	</div>
 	<div class="span24">
 		<ul class="mainNav">
-			<li><a href="/shop/index.action">首页</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=1&page=1">女装男装</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=2&page=1">鞋靴箱包</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=3&page=1">运动户外</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=4&page=1">珠宝配饰</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=5&page=1">手机数码</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=6&page=1">家电办公</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=7&page=1">护肤彩妆</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=10&page=1">家居饰品</a> |</li>
-
-
+			<li><a href="<%=request.getContextPath()%>/user/toIndex">首页</a> |</li>
+			<c:forEach items="${category}" var="ccc">
+				<li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
+			</c:forEach>
 		</ul>
 	</div>
 
@@ -100,49 +112,17 @@
 			<!-- 					<div class="hotProductAd">
                         <img src="/shop/image/a.jpg" width="260" height="343" alt="热门商品" title="热门商品">
             </div> -->
-			<ul class="tabContent" style="display: block;">
+			<br><br>
+			<div class="main">
+                 <c:forEach items="${pro}" var="pro">
+					 <div class="scroll" style="height: 190px; width: 190px;" >
+						 <center>
+					 <a href="" ><img src="${pro.image}" alt="" width="160px" height="160px"></a>
+						 </center>
+					 </div>
+				 </c:forEach>
+			</div>
 
-				<li>
-					<a href="/shop/product_findByPid.action?pid=79" target="_blank"><img src="<%=request.getContextPath()%>/products/dn2.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=73" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue1.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=74" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue2.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=75" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue3.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=76" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue4.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=57" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs60006.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=51" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs50010.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=68" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs70007.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=60" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs60009.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=21" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs30001.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-				</li>
-
-			</ul>
 			<ul class="tabContent" style="display: none;">
 				<li>
 					<a target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/c5b1b396-181a-4805-9e68-9b400d71f91e-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/c5b1b396-181a-4805-9e68-9b400d71f91e-thumbnail.jpg" style="display: block;"></a>
@@ -218,49 +198,20 @@
                                                 <img src="/shop/image/q.jpg" width="260" height="343" alt="最新商品" title="最新商品">
                                     </div>
                                      -->
-			<ul class="tabContent" style="display: block;">
 
-				<li>
-					<a href="/shop/product_findByPid.action?pid=79" target="_blank"><img src="<%=request.getContextPath()%>/products/dn2.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
+			<br><br>
+			<div class="main">
+				<c:forEach items="${dd}" var="dd">
+					<div class="scroll" style="height: 190px; width: 190px;" >
+						<center>
+							<a href="" ><img src="${dd.image}" alt="" width="160px" height="160px"></a>
+						</center>
+					</div>
+				</c:forEach>
+			</div>
 
-				<li>
-					<a href="/shop/product_findByPid.action?pid=73" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue1.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
 
-				<li>
-					<a href="/shop/product_findByPid.action?pid=72" target="_blank"><img src="<%=request.getContextPath()%>/products/1/nvxie.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
 
-				<li>
-					<a href="/shop/product_findByPid.action?pid=74" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue2.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=75" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue3.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=76" target="_blank"><img src="<%=request.getContextPath()%>/products/1/duanxue4.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=57" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs60006.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=4" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs10004.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=45" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs50004.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
-
-				<li>
-					<a href="/shop/product_findByPid.action?pid=51" target="_blank"><img src="<%=request.getContextPath()%>/products/1/cs50010.png" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-				</li>
-
-			</ul>
 			<ul class="tabContent" style="display: none;">
 				<li>
 					<a  target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/b04a22f5-267d-4e33-ac58-dda941eeaf84-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/b04a22f5-267d-4e33-ac58-dda941eeaf84-thumbnail.jpg" style="display: block;"></a>
@@ -408,5 +359,20 @@
 		<div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
 	</div>
 </div>
+
+
+ 
+
+<script>
+
+	function thePrimaryQuery(cid) {
+	    alert(cid)
+		location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
+    }
+	
+	
+</script>
+
+
 </body>
 </html>

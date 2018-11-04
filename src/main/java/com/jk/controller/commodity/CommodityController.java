@@ -130,4 +130,14 @@ public class CommodityController {
         return value;
     }
 
+
+
+    /*一级分类查询*/
+    @RequestMapping("thePrimaryQuery")
+    public String thePrimaryQuery(String cid,Model model){
+        List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid);
+        model.addAttribute("thePrimaryList", thePrimaryList);
+        return "commodity/thePrimaryQuery";
+    }
+
 }
