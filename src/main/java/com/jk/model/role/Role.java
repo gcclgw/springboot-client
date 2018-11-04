@@ -15,7 +15,7 @@ public class Role extends Page implements Serializable {
     /**
      * 角色名称
      */
-    private String rolename;
+    private String text;
 
     /**
      * 节点
@@ -34,12 +34,12 @@ public class Role extends Page implements Serializable {
         this.rid = rid;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getText() {
+        return text;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Integer getPid() {

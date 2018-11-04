@@ -50,7 +50,7 @@
     </button>
 </div>
 <!-- 表格 -->
-<table id="showbus"></table>
+<table id="showcomm"></table>
 
 
 <!-- 新增弹框 -->
@@ -114,7 +114,7 @@
 
 <script type="text/javascript">
     $(function(){
-        $("#showbus").bootstrapTable({
+        $("#showcomm").bootstrapTable({
             url:"<%=request.getContextPath()%>/comm/queryCommodity",
             method:"post",
             striped: true,  	// 斑马线效果     默认false

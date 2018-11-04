@@ -1,8 +1,10 @@
 package com.jk.model.adver;
 
+import com.jk.utils.Page;
+
 import java.io.Serializable;
 
-public class Adver implements Serializable {
+public class Adver   extends Page implements Serializable {
     private static final long serialVersionUID = -7292932049958909364L;
 
     /**
@@ -29,6 +31,20 @@ public class Adver implements Serializable {
      * 广告位id
      */
     private  String  adseatid;
+
+    /**
+     * 广告位名称  业务字段
+     * @return
+     */
+    private String seatname;
+
+    public String getSeatname() {
+        return seatname;
+    }
+
+    public void setSeatname(String seatname) {
+        this.seatname = seatname;
+    }
 
     public String getAdverid() {
         return adverid;

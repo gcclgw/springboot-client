@@ -16,10 +16,8 @@
     <link  href="<%=request.getContextPath()%>/js/table/bootstrap-table.min.css" rel="stylesheet" >
     <!-- 引入fileinput的css -->
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/js/fileinput/css/fileinput.min.css" />
-
-
-
-
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
     <!-- 引入jquery -->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <!-- 引入my97 -->
@@ -42,16 +40,56 @@
 
 
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/themes/fa/theme.js"></script>
+
+
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/js/bootstrapvalidator/dist/css/bootstrapValidator.css"/>
+
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+
+
+
+
+
 </head>
 <body>
 <div style="text-align: left;">
-    <button type="button" class="btn btn-info">
-        <span class="glyphicon glyphicon-plus"></span> 添加用户
+    <button type="button" class="btn btn-info" onclick="add()">
+        <span class="glyphicon glyphicon-plus"></span> 新增企业
     </button>
 
 
 </div>
+
 <table id="showbus"></table>
+
+<div class="modal fade" id="adddialod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <form id="addBusForm"  class="form-horizontal">
+
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="myModalLabel">编辑</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="qnameId">企业名称</label>
+                        <input type="text" name="qname" id="qnameId" class="form-control"  placeholder="企业名称"
+
+                        />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="add" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" ></span>保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <script type="text/javascript">
     $(function(){
         $("#showbus").bootstrapTable({
@@ -118,7 +156,25 @@
             pageList: [3, 6, 9,12],        //可供选择的每页的行数（*）
         });
 
+        $('#addBusForm').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                qname: {
+                    message: '用户名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不能为空'
+                        }
+                    }
+                }
 
+            }
+        })
 
     });
 function del(qid){
@@ -132,10 +188,35 @@ $.ajax({
     }
 })
 
-
-
-
 }
+
+$("#add").click(function () {
+    var flag = $('#addBusForm').data("bootstrapValidator").isValid();
+    if (flag){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/business/addBus",
+            data:$("#addBusForm").serialize(),
+            success:function(){
+
+                $("#showbus").bootstrapTable('refresh');
+            }
+        })
+    }
+})
+
+
+
+
+    //修改
+    function add(){
+        $("#adddialod").modal();
+
+
+    }
+
+
+
+
 
 </script>
 

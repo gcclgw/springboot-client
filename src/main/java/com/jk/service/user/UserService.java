@@ -12,7 +12,7 @@ public interface UserService {
 
     List<User> findUserRoleById(String userId);
 
-    List<LinkedHashMap<String, String>> findRole(Role role);
+    ResultPage findRole(Role role);
 
     void SaveUserRole(String userId, String[] split);
 }

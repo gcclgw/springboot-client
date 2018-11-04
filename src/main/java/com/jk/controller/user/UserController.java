@@ -7,6 +7,7 @@ import com.jk.service.user.UserService;
 import com.jk.utils.ResultPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +27,11 @@ public class UserController {
 
     @RequestMapping("/toIndex")
     public String toIndex(){
-        return  "index";
+         return  "index2";
+    }
+    @RequestMapping("/toAdminIndex")
+    public String toAdminIndex(){
+         return  "index";
     }
 
 
@@ -57,9 +62,10 @@ public class UserController {
      */
     @RequestMapping("findRole")
     @ResponseBody
-    List<LinkedHashMap<String, String>> findRole(Role role) {
+    ResultPage findRole(Role role) {
         return userService.findRole(role);
     }
+
 
     /**
      * 给用户绑角色
