@@ -104,20 +104,20 @@
             <div id="result" class="result table clearfix">
                 <ul>
                     <c:forEach items="${thePrimaryList}" var="the">
-                    <li>
-                        <a href="/product_findByPid.action?pid=1">
-                            <img src="${the.image}" width="170" height="170"  style="display: inline-block;">
+                        <li>
+                            <a href="javascript:querydetails(${the.pid})">
+                                <img src="${the.image}" width="170" height="170"  style="display: inline-block;">
 
-                            <span style='color:green'>
-                                    ${the.pname}
-											</span>
+                                <span style='color:green'>
+                                        ${the.pname}
+                                </span>
 
-                            <span class="price">
+                                <span class="price">
 												商城价:${the.shop_price}
 											</span>
 
-                        </a>
-                    </li>
+                            </a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -236,6 +236,11 @@
 
 <script>
 
+    function querydetails(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
+    
+    
     function thePrimaryQuery(cid) {
         /*alert(cid)*/
         location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;

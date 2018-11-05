@@ -95,7 +95,7 @@
 				<c:forEach items="${pro}" var="pro">
 					<div class="scroll" style="height: 190px; width: 190px;" >
 						<center>
-							<a href="" ><img src="${pro.image}" alt="" width="160px" height="160px"></a>
+							<a href="javascript:querys(${pro.pid})" ><img src="${pro.image}" alt="" width="160px" height="160px"></a>
 						</center>
 					</div>
 				</c:forEach>
@@ -178,7 +178,7 @@
 				<c:forEach items="${dd}" var="dd">
 					<div class="scroll" style="height: 190px; width: 190px;" >
 						<center>
-							<a href="" ><img src="${dd.image}" alt="" width="160px" height="160px"></a>
+							<a href="javascript:queryd(${dd.pid})" ><img src="${dd.image}" alt="" width="160px" height="160px"></a>
 						</center>
 					</div>
 				</c:forEach>
@@ -338,6 +338,16 @@
 
 
 <script>
+
+
+
+    function querys(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
+
+    function queryd(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
 
     function thePrimaryQuery(cid) {
         location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
