@@ -1,5 +1,6 @@
 package com.jk.model.user;
 
+import com.jk.utils.PageUtil;
 import java.io.Serializable;
 import java.util.List;
 

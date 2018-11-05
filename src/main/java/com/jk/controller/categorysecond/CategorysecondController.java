@@ -2,6 +2,7 @@ package com.jk.controller.categorysecond;
 
 import com.jk.model.category.Category;
 import com.jk.model.categorysecond.Categorysecond;
+import com.jk.model.commodity.Product;
 import com.jk.service.categorysecond.CategorysecondService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,15 +18,26 @@ public class CategorysecondController {
     @Autowired
     private CategorysecondService categorysecondService;
 
+
     /**
-     * 根据一级查二级
+     * 进入男装女装
      */
-    @RequestMapping("queryOneAndTwo")
-    @ResponseBody
-    public  List<Categorysecond> queryOneAndTwo(){
+    @RequestMapping("toClothing")
+    public String toClothing(Model model){
+        /*Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+        mm.addAttribute("user",dbuser);*/
+        //查询一级二级商品
+        List<Product> products = categorysecondService.queryProductByCid();
+        //查询一级表
+        List<Category> cate = categorysecondService.queryCategory();
+        //查询二级
         List<Categorysecond> cs = categorysecondService.queryOneAndTwo();
-        return cs;
+        model.addAttribute("products",products);
+        model.addAttribute("cs",cs);
+        model.addAttribute("cate",cate);
+        return "frontpage/clothing";
     }
+
 
     /**
      * 进入二级页面
@@ -82,6 +94,8 @@ public class CategorysecondController {
         Categorysecond categorysecond = categorysecondService.querysecondByid(scid);
         model.addAttribute("cs",categorysecond);
         model.addAttribute("scid",scid);
+        List<Category> category = categorysecondService.querycate();
+        model.addAttribute("category",category);
         return "categorysecond/categorysecond_edit";
     }
 

@@ -58,9 +58,9 @@
 	</div>
 	<div class="span24">
 		<ul class="mainNav">
-			<li><a href="/shop/index.action">首页</a> |</li>
+			<li><a href="<%=request.getContextPath()%>/user/toIndex">首页</a> |</li>
 
-			<li><a href="/shop/product_findByCid.action?cid=1&page=1">女装男装</a> |</li>
+			<li><a href="<%=request.getContextPath()%>/categorysecond/toClothing">女装男装</a> |</li>
 
 			<li><a href="/shop/product_findByCid.action?cid=2&page=1">鞋靴箱包</a> |</li>
 
