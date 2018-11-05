@@ -22,10 +22,10 @@ public class CategorysecondController {
     /**
      * 进入男装女装
      */
-    @RequestMapping("toClothing")
+    /*@RequestMapping("toClothing")
     public String toClothing(Model model){
-        /*Users dbuser = (Users) request.getSession().getAttribute("dbuser");
-        mm.addAttribute("user",dbuser);*/
+        *//*Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+        mm.addAttribute("user",dbuser);*//*
         //查询一级二级商品
         List<Product> products = categorysecondService.queryProductByCid();
         //查询一级表
@@ -36,7 +36,7 @@ public class CategorysecondController {
         model.addAttribute("cs",cs);
         model.addAttribute("cate",cate);
         return "frontpage/clothing";
-    }
+    }*/
 
 
     /**
