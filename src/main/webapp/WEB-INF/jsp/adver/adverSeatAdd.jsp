@@ -63,9 +63,11 @@
                         <label for="txt_departmentname">广告路径</label>
                         <input type="text" name="adverurl" class="form-control"  placeholder="请输入路径">
                     </div>
+
                     <div class="form-group">
-                        <label for="txt_departmentname">广告图片</label>
-                        <input type="text" name="adverimg" class="form-control"  placeholder="请输入名称">
+                        <label for="txt_departmentlevel">广告图片</label>
+                        <input type="file" class="file" id="img" multiple name="image"  width="42">
+                        <input type="hidden" name="adimg" id="adverimg">
                     </div>
                 </div>
 
@@ -101,6 +103,49 @@
     $("#gb").click(function(){
         location.href="<%=request.getContextPath()%>/selectAdver";
     })
+
+    $("#img").fileinput({
+
+        language : 'zh',
+        uploadUrl : "<%=request.getContextPath()%>/adver/headImgUpload",
+        showUpload: true, //是否显示上传按钮
+        showRemove : true, //显示移除按钮
+        showPreview : true, //是否显示预览
+        showCaption: false,//是否显示标题
+        autoReplace : true,
+        minFileCount: 0,
+        uploadAsync: true,
+        maxFileCount: 10,//最大上传数量
+        browseOnZoneClick: true,
+        msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+        enctype: 'multipart/form-data',
+        // overwriteInitial: false,//不覆盖已上传的图片
+        allowedFileExtensions : [ "jpg", "png", "gif" ],
+        browseClass : "btn btn-primary", //按钮样式
+        previewFileIcon : "<i class='glyphicon glyphicon-king'></i>"
+    }).on("fileuploaded", function(e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
+
+
+        //alert(data)
+        // console.info(data.response.imgUrl)
+        //  $("input[name='image']").val(data.response.imgUrl);
+        $("#adverimg").val(data.response.imgUrl);
+        //   $("#imageId").attr("src",data.response.imgUrl);
+        /*var res = data.response;
+        console.log(res)
+        imageData.push({
+            "path": res.data.path,
+            "date":res.data.date
+        });
+        console.log(imageData);*/
+    });
+
+
+
+
+
+
+
 </script>
 
 </body>

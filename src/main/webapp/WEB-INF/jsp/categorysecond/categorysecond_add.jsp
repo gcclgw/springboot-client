@@ -67,10 +67,6 @@
                                 <option value="${a.cid}">${a.cname}</option>
                             </c:forEach>
                         </select>
-                        <c:forEach items="${cate}" var="a">
-
-                        </c:forEach>
-                        </select>
                     </div>
                 </div>
 

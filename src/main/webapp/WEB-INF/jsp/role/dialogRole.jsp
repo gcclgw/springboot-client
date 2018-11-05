@@ -59,20 +59,23 @@
             };
         },
         onLoadSuccess:function (data){  // 加载成功后执行的方法
-            var roleArray=eval('${roleList}');
+            /*var roleArray=eval('');JSON.parse('')*/
+            var roleArray =  eval('${roleList}');
+            alert(roleArray);
             $.each(roleArray,function (index,obj){
                 $("[name='chk1'][value='"+this.rid+"']").prop("checked",true);
-                $("#roleTable").bootstrapTable(this.rid);
+                $("#roleTable").bootstrapTable('getSelections',this.rid);
+               /* selectRecord   getSelections*/
             });
         },
         columns:[
             {field:'chkid',checkbox:true,width:100},
-            {field:'rid',title:'ID',align:'center',width:150},
-            /*{field:'rid',title:'角色ID',width:100,
+            {field:'rid',title:'角色ID',width:100,
                        formatter: function (value,row,index){
                             return "<input  type='checkbox'  name='chk1' value='"+row.rid+"'  >";
                     }
-            },*/
+            },
+            {field:'rid',title:'ID',align:'center',width:150},
             {field:'text',title:'名称',align:'center',width:150},
             {field:'crud',title:'操作',width:100,
              formatter: function (value,row,index){

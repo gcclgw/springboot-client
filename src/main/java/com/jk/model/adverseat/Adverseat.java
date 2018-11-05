@@ -25,7 +25,7 @@ public class Adverseat implements Serializable {
      */
     private Integer htid;
 
-    private Integer adverid;
+    private String adverid;
 
     private Integer qid;
 
@@ -61,11 +61,11 @@ public class Adverseat implements Serializable {
         this.htid = htid;
     }
 
-    public Integer getAdverid() {
+    public String getAdverid() {
         return adverid;
     }
 
-    public void setAdverid(Integer adverid) {
+    public void setAdverid(String adverid) {
         this.adverid = adverid;
     }
 
@@ -75,9 +75,5 @@ public class Adverseat implements Serializable {
 
     public void setQid(Integer qid) {
         this.qid = qid;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 }

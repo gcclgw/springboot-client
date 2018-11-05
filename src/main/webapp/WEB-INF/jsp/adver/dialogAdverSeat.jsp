@@ -15,8 +15,7 @@
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
     <title>Insert title here</title>
-
-
+    <!-- 引入bootstrap的css -->
     <link  href="<%=request.getContextPath()%>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
     <!-- 引入bootstrap-treeview的css -->
     <link  href="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
@@ -26,6 +25,8 @@
     <link  href="<%=request.getContextPath()%>/js/table/bootstrap-table.min.css" rel="stylesheet" >
     <!-- 引入fileinput的css -->
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/js/fileinput/css/fileinput.min.css" />
+
+
 
 
     <!-- 引入jquery -->
@@ -49,30 +50,30 @@
 
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/themes/fa/theme.js"></script>
 
+
 </head>
 
 <body>
 
 <div class="container-fluid">
     <div class="col-md-12">
-
-        <input type="button" class="btn btn-success" value="新增" onclick="addAdver()">
-        <table  class="table" id="adverTable" ></table>
-
+        <table  class="table" id="adverSeatTable" ></table>
+        <input type="hidden" value="${adverid}" id="adverid">
     </div>
 
 </div>
 <script type="text/javascript">
-
+    var  adver = $("#adverid").val();
+    alert(adver);
 
     $(function(){
         initTable();
     })
 
     function initTable(){
-        $('#adverTable').bootstrapTable({
+        $('#adverSeatTable').bootstrapTable({
             toolbar:'#toolbar',
-            url:'/adver/selectAdverList',//获取数据地址
+            url:'/adverseat/selectAdverSeatList',//获取数据地址
             pagination:true, //是否展示分页
             pageList:[3, 6, 9, 12],//分页组件
             pageNumber:1,
@@ -80,14 +81,15 @@
             //search:true,//是否显示搜索框
             //searchText:'试试',//初始化搜索文字
             showColumns:false,//是否显示 内容列下拉框
-            showToggle:false,//是否显示 切换试图(table/card)按钮
+            showToggle:false,//是否显示 切换试图（table/card）按钮
             showPaginationSwitch:false,//是否显示 数据条数选择框
             showRefresh:false,//是否显示刷新按钮
-            detailView:false,//设置为 true 可以显示详细页面模式.
+            detailView:false,//设置为 true 可以显示详细页面模式。
             showFooter:false,//是否显示列脚
             clickToSelect: true, //是否启用点击选中行
-            sidePagination:'server',/*//分页方式：client客户端分页，server服务端分页（**/
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
             striped:true,
+            idField :"seatid",
             queryParams:function(){
                 var searchGoodsName = $('#searchGoodsName').val();
                 return {
@@ -96,98 +98,97 @@
                     'goodsBean.name':searchGoodsName,
                 };
             },
+            onLoadSuccess:function (data){  // 加载成功后执行的方法
+                var adverSeat=eval('${adverSeatList}');
+                $.each(adverSeat,function (index,obj){
+                    $("[name='chk1'][value='"+this.seatid+"']").prop("checked",true);
+                    $("#adverSeatTable").bootstrapTable("getSelections",this.seatid);
+                });
+            },
             columns:[
                 /*{checkbox:true},*/
-                {field:'adverid',title:'ID',align:'center',width:150},
-                {field:'advername',title:'广告名称',align:'center',width:100},
-                {field:'adverurl',title:'广告路径',align:'center',width:150},
-                {field:'adimg',title:'广告图片',align:'center',width:150,
-                    formatter:function(value,row,index){
-                        var s;
-                        if(row.adimg!=null){
-                            var url = row.adimg;
-                            s = '<a class = "view"  href="javascript:void(0)"><img style="width:300;height:40px;"  src="'+url+'" /></a>';
-                        }
-                        return s;
+                {field:'chkid',checkbox:true,width:100},
+                {field:'seatid',title:'ID',align:'center',width:150,
+                       formatter: function (value,row,index){
+                            return "<input  type='checkbox'  name='chk1' value='"+row.seatid+"'  >";
                     }
                 },
-                {field:'seatname',title:'广告位名称',align:'center',width:50},
-                {field:'cruds',title:'操作',width:100,
+
+                {field:'seatname',title:'广告位名称',align:'center',width:150},
+
+                {field:'crud',title:'操作',width:100,
                     formatter: function (value,row,index){
-                        return "<a href='javascript:findAdverSeat("+row.adverid+")'>用户赋角色</a>";
+                        return "<a href='javascript:findUserRole("+row.adverid+")'>操作</a>";
                     }
+
                 }
             ],
         });
     }
+    /*
+        var res;
+        function createAddContent(url){
+            $.ajax({
+                url:url,
+                async:false,
+                success:function(data){
+                    res = data;
+                }
+            });
+            return res;
+        }
 
-    //新增
-    function addAdver(){
-        location.href="<%=request.getContextPath()%>/toAddAdver";
-    }
+        function findUserRole(uid){
+            alert(uid);
+            bootbox.dialog({
+                title: '角色赋权限',
+                message: createAddContent('/user/dialogRole?userId='+uid),
+                closeButton: true,
+                //queryParams:{id:id},
+                keyboard:true,
+                buttons: {
+                    "success": {
+                        "label": "<i class='icon-ok'></i> 保存",
+                        "className": "btn-sm btn-success",
+                        "callback": function(){    //提交   表单信息   添加   修改  用一个
+                            var rows=$("#roleTable").bootstrapTable("getSelections");
+                            //  第一步  获取  复选框选中的值
+                            var roleIds="";
+                            $.each(rows,function (index,obj){
+                                roleIds+=obj.rid+",";
 
-    var res;
-    function createAddContent(url){
-        $.ajax({
-            url:url,
-            async:false,
-            success:function(data){
-                res = data;
-            }
-        });
-        return res;
-    }
+                            });
+                            alert(roleIds)
+                            //  拼成一个ids      1,2,3
 
-    //修改
-    function findAdverSeat(adverid){
-        alert(adverid);
-        bootbox.dialog({
-            title: '广告位设置',
-            message: createAddContent('<%=request.getContextPath()%>/adver/dialogAdverSeat?adverid='+adverid),
-            closeButton: true,
-            //queryParams:{id:id},
-            keyboard:true,
-            buttons: {
-                "success": {
-                    "label": "<i class='icon-ok'></i> 保存",
-                    "className": "btn-sm btn-success",
-                    "callback": function(){    //提交   表单信息   添加   修改  用一个
-                        var rows=$("#adverSeatTable").bootstrapTable("getSelections");
-                        //  第一步  获取  复选框选中的值
-                        var roleIds="";
-                        $.each(rows,function (index,obj){
-                            roleIds+=obj.rid+",";
+                            $.ajax({
+                                type:"post",
+                                url:"/user/saveUserRole",
+                                async: false,
+                                data: {
+                                    "userId":$("#userId").val(),
+                                    "roleIds":roleIds
+                                },
+                                success: function (resutlt) {
+                                    $("#userTable").bootstrapTable("refresh")
+                                    $("#userRole").bootstrapTable("close");
+                                    $('#userTable').bootstrapTable("load");
+                                }
+                            });
+                        }
+                    },
+                    "cancel": {
+                        "label": "<i class='icon-info'></i> 关闭",
+                        "className": "btn-sm btn-danger",
+                        "callback": function () {
 
-                        });
-                        alert(roleIds)
-                        //  拼成一个ids      1,2,3
-
-                        $.ajax({
-                            type:"post",
-                            url:"/user/saveUserRole",
-                            async: false,
-                            data: {
-                                "uid":$("#userId").val(),
-                                "roleIds":roleIds
-                            },
-                            success: function (resutlt) {
-                                $("#userTable").bootstrapTable("refresh")
-                              /*  $("#userRole").bootstrapTable("close");
-                                $('#userTable').bootstrapTable("load");*/
-                            }
-                        });
-                    }
-                },
-                "cancel": {
-                    "label": "<i class='icon-info'></i> 关闭",
-                    "className": "btn-sm btn-danger",
-                    "callback": function () {
-
+                        }
                     }
                 }
-            }
-        });
-    }
+            });
+        }
+        */
+
 </script>
 </body>
 </html>

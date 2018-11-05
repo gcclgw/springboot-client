@@ -26,11 +26,15 @@
 	 <dubbo:reference id="mansService" interface="com.jk.service.mans.MansService"    />
 	 <dubbo:reference id="bersService" interface="com.jk.service.bers.BersService"    />
     <dubbo:reference id="loginService" interface="com.jk.service.login.LoginService"    />
+    <dubbo:reference id="loginUserService" interface="com.jk.service.loginUser.LoginUserService"    />
     <dubbo:reference id="ordersService" interface="com.jk.service.orders.OrdersService"    />
     <dubbo:reference id="checkService" interface="com.jk.service.check.CheckService"    />
     <dubbo:reference id="roleService" interface="com.jk.service.role.RoleService"    />
     <dubbo:reference id="adverService" interface="com.jk.service.adver.AdverService"    />
     <dubbo:reference id="adverSeatService" interface="com.jk.service.adverSeat.AdverSeatService"    />
+    <dubbo:reference id="contService" interface="com.jk.service.contractx.ContService"    />
+    <dubbo:reference id="poixService" interface="com.jk.service.poix.PoixService"    />
+    <dubbo:reference id="registerService" interface="com.jk.service.register.RegisterService"    />
 
 </beans>
 

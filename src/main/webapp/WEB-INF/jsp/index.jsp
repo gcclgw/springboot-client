@@ -45,7 +45,7 @@
         <!-- 头部信息 -->
         <div class="navbar-header">
             <a class="navbar-brand glyphicon glyphicon-globe" href="#" id="menu-toggle">
-                中国电力建设
+                商城后台管理系统
             </a>
         </div>
 

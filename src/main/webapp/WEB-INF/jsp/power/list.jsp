@@ -121,7 +121,7 @@
                 {field:'username',title:'名称',align:'center',width:150},
                 {field:'crud',title:'用户赋角色',width:100,
                     formatter: function (value,row,index){
-                        return "<a href='javascript:findUserRole("+row.uid+")'>用户赋角色</a>";
+                        return '<a href="javascript:findUserRole('+row.uid+')">用户赋角色</a>';
                     }
                 }
             ],
@@ -160,17 +160,19 @@
 						  roleIds+=obj.rid+",";
 
 					  });
+
                          alert(roleIds)
 					  //  拼成一个ids      1,2,3
-
+                  		alert($("#userId").val()),
                       $.ajax({
                           type:"post",
                           url:"/user/saveUserRole",
 						  async: false,
 						  data: {
-                              "userId":$("#userId").val(),
+                              "uid":$("#use	rId").val(),
                               "roleIds":roleIds
 						  },
+
 						  success: function (resutlt) {
 						  	$("#userTable").bootstrapTable("refresh")
                               $("#userRole").bootstrapTable("close");
