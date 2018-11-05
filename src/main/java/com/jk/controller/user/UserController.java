@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("user")
 public class UserController {
+    @RequestMapping("/toIndex")
     public String toIndex(HttpServletRequest request,Model mm){
         if (request.getSession().getAttribute("dbuser")!=null){
            Users dbuser = (Users) request.getSession().getAttribute("dbuser");

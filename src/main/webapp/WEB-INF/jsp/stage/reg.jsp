@@ -8,14 +8,16 @@
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/register.css" rel="stylesheet" type="text/css"/>
 	<!--引入bootstrap css-->
+<%--
 	<link  href="<%=request.getContextPath()%>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+--%>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
 	<!--引入jquery-->
 	<!--引入bootstrap js-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
+	<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootbox/bootbox.js"></script>
-
+--%>
 
 </head>
 <body>
@@ -38,9 +40,9 @@
 			<ul>
 
 				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="/shop/user_loginPage.action">登录</a>|</li>
+					<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a>|</li>
 				<li id="headerRegister" class="headerRegister"
-					style="display: list-item;"><a href="/shop/user_registPage.action">注册</a>|
+					style="display: list-item;"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a>|
 				</li>
 
 
