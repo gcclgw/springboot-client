@@ -30,4 +30,5 @@
 	<dubbo:reference id="loginUserService" interface="com.jk.service.loginUser.LoginUserService"/>
 	<dubbo:reference id="oixServiceService" interface="com.jk.service.poix.PoixService"/>
 	<dubbo:reference id="poixService" interface="com.jk.service.poix.PoixService"/>
+	<dubbo:reference id="logoService" interface="com.jk.service.logo.LogoService"/>
 </beans>

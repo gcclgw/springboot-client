@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LogoService {
     List<Logo> queryLogo();
-    void updateLogo(Logo logo);
+    void updateLogo(String logo);
 
 
 }

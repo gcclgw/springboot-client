@@ -18,7 +18,7 @@
 	<div class="span5">
 		<div class="logo">
 			<a href="./网上商城/index.htm">
-				<img src="<%=request.getContextPath()%>/image/r___________renleipic_01/logo.gif" alt="传智播客"/>
+				<img src="${logo[0].logimg}" width="100px" height="100px" />
 			</a>
 		</div>
 	</div>
