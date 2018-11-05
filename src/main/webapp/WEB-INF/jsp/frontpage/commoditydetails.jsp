@@ -1,18 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
-    <!-- 引入bootstrap的css -->
-    <link  href="<%=request.getContextPath()%>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>网上商城</title>
+    <link href="/css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/product.css" rel="stylesheet" type="text/css"/>
 
-    <!-- 引入bootstrap-treeview的css -->
-    <link  href="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
-
-    <!-- 引入bootstrap-addTabs的css -->
-    <link  href="<%=request.getContextPath()%>/js/addTabs/addTabs.css" rel="stylesheet" >
 
     <!-- 引入jquery -->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
@@ -25,93 +21,252 @@
 
     <!-- 引入bootstrap的js-->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/addTabs/addTabs.js"></script>
-    <style type="text/css">
-        body {padding-top:55px;}
-
-    </style>
 </head>
 <body>
-<!--导航条  -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <!--定义在容器顶部  -->
-    <div class="container-fluid">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <!-- 头部信息 -->
-        <div class="navbar-header">
-            <a class="navbar-brand glyphicon glyphicon-globe" href="#" id="menu-toggle">
-                商城后台管理系统
+
+<div class="container header">
+    <div class="span5">
+        <div class="logo">
+            <a>
+                <img src="/image/r___________renleipic_01/logo.gif" alt="传智播客">
             </a>
         </div>
-
-
-
-    </div><!-- /.container-fluid -->
-</nav>
-<!-- ============================导航结束==================================-->
-
-<!--=========栅格布局 ==============-->
-<div class="row">
-    <div class="col-md-3">
-
-        <a class="list-group-item" data-addtab="userMenu" data-target="#tabs" data-url="http://www.baidu.com">
-            后台管理菜单
-        </a>
-
-        <!-- tree 的插件 -->
-        <div id="treeDiv"></div>
-
     </div>
+    <div class="span9">
+        <div class="headerAd">
+            <img src="/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障">
+        </div>	</div>
 
-    <div class="col-md-9">
 
-        <!--   选项卡    -->
-        <!-- Nav tabs -->
-        <ul id="tabs" class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
-                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">欢迎</a></li>
-        </ul>
-        <!-- 选项卡  内容 -->
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" style="" class="tab-pane active " id="home">后台管理系统</div>
+    <div class="span10 last">
+        <div class="topNav clearfix">
+            <ul>
+
+                <li id="headerLogin" class="headerLogin" style="display: list-item;">
+                    <a href="/user_loginPage.action">登录</a>|</li>
+                <li id="headerRegister" class="headerRegister"
+                    style="display: list-item;"><a href="/user_registPage.action">注册</a>|
+                </li>
+
+
+
+                <li><a>会员中心</a> |</li>
+                <li><a>购物指南</a> |</li>
+                <li><a>关于我们</a></li>
+            </ul>
+        </div>
+        <div class="cart">
+            <a href="/cart_myCart.action">购物车</a>
+        </div>
+        <div class="phone">
+            客服热线: <strong>96008/53277764</strong>
         </div>
     </div>
+    <div class="span24">
+        <ul class="mainNav">
+            <c:forEach items="${cate}" var="ccc">
+                <li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
+            </c:forEach>
+
+        </ul>
+    </div>
+
+</div><div class="container productContent">
+    <div class="span6">
+        <div class="hotProductCategory">
+            <c:forEach items="${cate}" var="ca">
+                <dl>
+
+                    <dt>
+
+                        <a href="<%=request.getContextPath()%>/categorysecond/queryProductByCid>" >${ca.cname}</a>
+                    </dt>
+
+                    <c:forEach items="${cs}" var="cs">
+                        <input type="hidden" value="${ca.cid}"/>
+                        <input type="hidden" value="${cs.cid}"/>
+
+
+                        <c:if test="${ca.cid==cs.cid}">
+
+                            <dd>
+                                <a href="#">${cs.csname}</a>
+                            </dd>
+
+                        </c:if>
+
+                    </c:forEach>
+
+                </dl>
+
+            </c:forEach>
+        </div>
+
+
+    </div>
+
+    <div class="span18 last">
+        <c:forEach items="${details}" var="det">
+        <div class="productImage">
+            <a title="" style="outline-style: none; text-decoration: none;" id="zoom" href="http://image/r___________renleipic_01/bigPic1ea8f1c9-8b8e-4262-8ca9-690912434692.jpg" rel="gallery">
+                <div class="zoomPad"><img style="opacity: 1;" title="" class="medium" src="${det.image}"><div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div><div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow"><div style="width: 368px;" class="zoomWrapper"><div style="width: 100%; position: absolute; display: none;" class="zoomWrapperTitle"></div><div style="width: 0%; height: 0px;" class="zoomWrapperImage"><img src="${det.image}" style="position: absolute; border: 0px none; display: block; left: -432px; top: 0px;"></div></div></div><div style="visibility: hidden; top: 129.5px; left: 106px; position: absolute;" class="zoomPreload">Loading zoom</div></div>
+            </a>
+
+        </div>
+
+        <div class="name">${det.pname}</div>
+        <div class="sn">
+            <div>编号：${det.pid}</div>
+        </div>
+        <div class="info">
+            <dl>
+                <dt>商城价:</dt>
+                <dd>
+                    <strong>￥：${det.shop_price}元</strong>
+                    参 考 价：
+                    <del>￥${det.market_price}元</del>
+                </dd>
+            </dl>
+            <dl>
+                <dt>促销:</dt>
+                <dd>
+                    <a target="_blank" title="限时抢购 (2014-07-30 ~ 2015-01-01)">限时抢购</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>    </dt>
+                <dd>
+                    <span>    </span>
+                </dd>
+            </dl>
+        </div>
+
+        <form id="cartForm" action="/cart_addCart.action" method="post" >
+            <input type="hidden" name="pid" value="73"/>
+            <div class="action">
+                <dl class="quantity">
+                    <dt>购买数量:</dt>
+                    <dd>
+                        <input id="count" name="count" value="1" maxlength="4" onpaste="return false;" type="text"/>
+                    </dd>
+                    <dd>
+                        件
+                    </dd>
+                </dl>
+
+                <div class="buy">
+                    <input id="addCart" class="addCart" value="加入购物车" type="button" onclick="saveCart()"/>
+                </div>
+            </div>
+        </form>
+
+        <div id="bar" class="bar">
+            <ul>
+                <li id="introductionTab">
+                    <a href="#introduction">商品介绍</a>
+                </li>
+                <li id="introductionidid">
+                    <a href="javascript:querydetails(${det.pid})">商品属性</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="introduction" name="introduction" class="introduction">
+            <div class="title">
+                <strong>${det.pdesc}</strong>
+            </div>
+            <div>
+                <img src="${det.image}">
+            </div>
+        </div>
+        </c:forEach>
+
+        <c:forEach items="${cProperties}" var="cpp">
+            <div id="introductionid" name="introductionid" class="introductionid" hidden>
+                <div>
+                    编号：${cpp.cid}<br>
+                    属性名称：${cpp.cname}<br>
+                    属性：${cpp.cvamue}
+                </div>
+            </div>
+
+        </c:forEach>
+
+    </div>
+
 </div>
-<script type="text/javascript">
-    $(function(){
-        initTree();
+<div class="container footer">
+    <div class="span24">
+        <div class="footerAd">
+            <img src="/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势">
+        </div>
+    </div>
+    <div class="span24">
+        <ul class="bottomNav">
+            <li>
+                <a href="#">关于我们</a>
+                |
+            </li>
+            <li>
+                <a href="#">联系我们</a>
+                |
+            </li>
+            <li>
+                <a href="#">诚聘英才</a>
+                |
+            </li>
+            <li>
+                <a href="#">法律声明</a>
+                |
+            </li>
+            <li>
+                <a>友情链接</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">支付方式</a>
+                |
+            </li>
+            <li>
+                <a target="_blank">配送方式</a>
+                |
+            </li>
+            <li>
+                <a >SHOP++官网</a>
+                |
+            </li>
+            <li>
+                <a>SHOP++论坛</a>
 
-    })
-    function initTree(){
+            </li>
+        </ul>
+    </div>
+    <div class="span24">
+        <div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
+    </div>
+</div>
 
-        $.ajax({
 
-            url:'<%=request.getContextPath()%>/powertree/getTreeNavCommon',
-            type:'post',
-            data:{},
-            dataType:'json',
-            success:function(result){
-                $('#treeDiv').treeview({
-                    data:result,
-                    onNodeSelected:function(event, node) {
 
-                        $.addtabs({iframeHeight: 650});
-                        $.addtabs.add({
-                            id:node.id,
-                            title:node.text,
-                            url:node.href
-                        });
-                    }
-                });
-            }
-        })
+<script>
+    function saveCart(){
+        document.getElementById("cartForm").submit();
     }
+
+
+    function querydetails(pid) {
+        alert(pid)
+
+           location.href='<%=request.getContextPath()%>/comm/querydetails?pid='+pid;
+        $(".introduction").hide();
+        $(".introductionid").show();
+
+    }
+
 </script>
+
+
+
+
 </body>
 </html>

@@ -48,8 +48,11 @@
     <div class="span24">
         <ul class="mainNav">
             <li><a href="<%=request.getContextPath()%>/user/toIndex">首页</a> |</li>
-            <c:forEach items="${cate}" var="ca">
+            <%--<c:forEach items="${cate}" var="ca">
                 <li><a href="<%=request.getContextPath()%>/categorysecond/toClothing">${ca.cname}</a> |</li>
+            </c:forEach>--%>
+            <c:forEach items="${cate}" var="ccc">
+                <li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
             </c:forEach>
         </ul>
     </div>
@@ -94,128 +97,22 @@
 
             <div id="result" class="result table clearfix">
                 <ul>
-
+                    <c:forEach items="${thePrimaryList}" var="the">
                     <li>
-                        <a href="/product_findByPid.action?pid=1">
-                            <img src="/products/1/cs10001.jpg" width="170" height="170"  style="display: inline-block;">
+                        <a href="javascript:querydetails(${the.pid})">
+                            <img src="${the.image}" width="170" height="170"  style="display: inline-block;">
 
                             <span style='color:green'>
-											 韩版连帽加厚毛衣女外套
+                                    ${the.pname}
 											</span>
 
                             <span class="price">
-												商城价： ￥228.0
+												商城价:${the.shop_price}
 											</span>
 
                         </a>
                     </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=2">
-                            <img src="/products/1/cs10002.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 女装立领长袖拼接PU皮毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥172.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=3">
-                            <img src="/products/1/cs10003.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=4">
-                            <img src="/products/1/cs10004.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=5">
-                            <img src="/products/1/cs10005.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=6">
-                            <img src="/products/1/cs10006.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 冬装韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=7">
-                            <img src="/products/1/cs10007.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 新款优雅奢华毛领白鸭绒轻薄羽绒服
-											</span>
-
-                            <span class="price">
-												商城价： ￥590.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=8">
-                            <img src="/products/1/cs10008.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 秋冬季毛呢外套女中长款圆领小香风呢子大衣
-											</span>
-
-                            <span class="price">
-												商城价： ￥336.0
-											</span>
-
-                        </a>
-                    </li>
-
-
+                    </c:forEach>
                 </ul>
             </div>
             <div class="pagination">
@@ -329,6 +226,21 @@
         <div class="copyright">Copyright©2005-2015 网上商城 版权所有</div>
     </div>
 </div>
+
+
+<script>
+
+    function thePrimaryQuery(cid) {
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
+    }
+
+
+    function querydetails(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
+
+</script>
+
 
 </body>
 </html>
