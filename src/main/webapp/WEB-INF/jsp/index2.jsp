@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,8 +34,8 @@
 </head>
 <body>
 <style>
-.main{width:1080px;min-height:390px;margin:10px auto;}
-.scroll{ float:left; width:50px; height:50px;}
+	.main{width:1080px;min-height:390px;margin:10px auto;}
+	.scroll{ float:left; width:50px; height:50px;}
 </style>
 
 
@@ -112,13 +112,13 @@
 
 			<br><br>
 			<div class="main">
-                 <c:forEach items="${pro}" var="pro">
-					 <div class="scroll" style="height: 190px; width: 190px;" >
-						 <center>
-					 <a href="" ><img src="${pro.image}" alt="" width="160px" height="160px"></a>
-						 </center>
-					 </div>
-				 </c:forEach>
+				<c:forEach items="${pro}" var="pro">
+					<div class="scroll" style="height: 190px; width: 190px;" >
+						<center>
+							<a href="javascript:querys(${pro.pid})" ><img src="${pro.image}" alt="" width="160px" height="160px"></a>
+						</center>
+					</div>
+				</c:forEach>
 			</div>
 
 			<ul class="tabContent" style="display: none;">
@@ -198,7 +198,7 @@
 				<c:forEach items="${dd}" var="dd">
 					<div class="scroll" style="height: 190px; width: 190px;" >
 						<center>
-							<a href="" ><img src="${dd.image}" alt="" width="160px" height="160px"></a>
+							<a href="javascript:queryd(${dd.pid})" ><img src="${dd.image}" alt="" width="160px" height="160px"></a>
 						</center>
 					</div>
 				</c:forEach>
@@ -359,8 +359,18 @@
 
 <script>
 
-	function thePrimaryQuery(cid) {
-		location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
+
+
+    function querys(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
+
+    function queryd(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
+
+    function thePrimaryQuery(cid) {
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
     }
 
 

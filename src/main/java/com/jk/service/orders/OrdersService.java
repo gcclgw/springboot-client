@@ -22,4 +22,7 @@ public interface OrdersService {
     Orders queryDetailsById(Orders orders);
 
     void updateOrder(Orders orders);
+
+    //修改订单状态
+    void updateOrderById(Integer oid);
 }

@@ -2,14 +2,17 @@ package com.jk.controller.loginUser;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.jk.model.orders.Orders;
 import com.jk.model.users.Users;
 import com.jk.service.loginUser.LoginUserService;
+import com.jk.service.orders.OrdersService;
 import com.jk.utils.ConstantsConf;
 import com.jk.utils.HttpUtils;
 import com.jk.utils.Md5Util;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,17 +20,20 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("loginUser")
 public class LoginUserController {
     @Autowired
     private LoginUserService loginUserService;
+    @Autowired
+    private OrdersService ordersService;
 
 
     @RequestMapping("toLoginUser")
     public  String toLoginUser(){
-        return "loginuser";
+        return "/stage/loginuser";
     }
 
 
@@ -42,13 +48,34 @@ public class LoginUserController {
     }
 
 
+    @RequestMapping("/exitUser")
+
+    public String  exitUser(HttpServletRequest request){
+    request.getSession().removeAttribute("dbuser");
+    return "index2";
+}
+
+    @RequestMapping("madd")
+
+    public String madd(HttpServletRequest request, Model mm){
+        Users users = (Users) request.getSession().getAttribute("dbuser");
+        List<Orders> orders = loginUserService.queryOrder(users.getUid());
+        System.out.println(orders);
+        mm.addAttribute("orders",orders);
+        mm.addAttribute("user",users);
+        return "/stage/order";
+}
 
 
 
+    @RequestMapping("updateOrderById")
+    @ResponseBody
+    public  void   updateOrderById(Integer oid,HttpServletRequest request, Model mm){
+        System.out.println(oid);
+        ordersService.updateOrderById(oid);
 
 
-
-
+    }
 
 
 }

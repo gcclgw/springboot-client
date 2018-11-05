@@ -34,7 +34,7 @@ public interface CommodityService {
 
     List<Product> queryDate();
 
-    List<Product> thePrimaryQuery(String cid);
+    List<Product> thePrimaryQuery(String cid,String csid);
 
     List<Product> queryDetails(String pid);
 

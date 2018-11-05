@@ -108,7 +108,7 @@
     <div class="span18 last">
         <c:forEach items="${details}" var="det">
         <div class="productImage">
-            <a title="" style="outline-style: none; text-decoration: none;" id="zoom" href="http://image/r___________renleipic_01/bigPic1ea8f1c9-8b8e-4262-8ca9-690912434692.jpg" rel="gallery">
+            <a title="" style="outline-style: none; text-decoration: none;" id="zoom" href="${det.image}" rel="gallery">
                 <div class="zoomPad"><img style="opacity: 1;" title="" class="medium" src="${det.image}"><div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div><div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow"><div style="width: 368px;" class="zoomWrapper"><div style="width: 100%; position: absolute; display: none;" class="zoomWrapperTitle"></div><div style="width: 0%; height: 0px;" class="zoomWrapperImage"><img src="${det.image}" style="position: absolute; border: 0px none; display: block; left: -432px; top: 0px;"></div></div></div><div style="visibility: hidden; top: 129.5px; left: 106px; position: absolute;" class="zoomPreload">Loading zoom</div></div>
             </a>
 
@@ -163,7 +163,7 @@
         <div id="bar" class="bar">
             <ul>
                 <li id="introductionTab">
-                    <a href="#introduction">商品介绍</a>
+                    <a href="javascript:sx()">商品介绍</a>
                 </li>
                 <li id="introductionidid">
                     <a href="javascript:querydetails(${det.pid})">商品属性</a>
@@ -181,16 +181,13 @@
         </div>
         </c:forEach>
 
-        <c:forEach items="${cProperties}" var="cpp">
             <div id="introductionid" name="introductionid" class="introductionid" hidden>
                 <div>
-                    编号：${cpp.cid}<br>
-                    属性名称：${cpp.cname}<br>
-                    属性：${cpp.cvamue}
+                    商品属性：<span id="sxmc"></span><br>
+                   <span id="sx"></span><br>
                 </div>
             </div>
 
-        </c:forEach>
 
     </div>
 
@@ -255,14 +252,25 @@
 
 
     function querydetails(pid) {
-        alert(pid)
-
-           location.href='<%=request.getContextPath()%>/comm/querydetails?pid='+pid;
         $(".introduction").hide();
         $(".introductionid").show();
-
+        $.ajax({
+               url:"<%=request.getContextPath()%>/comm/queryaaa?pid="+pid,
+               type:"post",
+                dataType:"text",
+                    success:function (data) {
+                   var da = eval(data);
+                        for (var i = 0; i < da.length; i++){
+                               $("#sxmc").html(da[i].cname)
+                               $("#sx").html(da[i].cvalue)
+                        }
+            }
+        })
     }
 
+    function sx() {
+        location.href=location
+    }
 </script>
 
 

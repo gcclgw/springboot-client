@@ -7,6 +7,8 @@
     <link href="/css/product.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<input type="hidden" value="${user.uid}" id="userId">
+<input type="hidden" value="${user.username}" id="userName">
 <div class="container header">
     <div class="span5">
         <div class="logo">
@@ -25,11 +27,16 @@
         <div class="topNav clearfix">
             <ul>
 
-                <li id="headerLogin" class="headerLogin" style="display: list-item;">
-                    <a href="/user_loginPage.action">登录</a>|</li>
-                <li id="headerRegister" class="headerRegister"
-                    style="display: list-item;"><a href="/user_registPage.action">注册</a>|
+                <li id="loginuser" class="loginuser"
+                    style="display: list-item;"><span id="usernameSpan"></span>|
                 </li>
+
+                <li id="headerLogin" class="headerLogin" style="display: list-item;">
+                    <span id="mydd">	<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a></span>|</li>
+                <li id="headerRegister" class="headerRegister"
+                    style="display: list-item;"><span id="exit"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a></span>|
+                </li>
+
 
 
 
@@ -67,18 +74,17 @@
 
                     <dt>
 
-                        <a href="<%=request.getContextPath()%>/categorysecond/queryProductByCid>" >${ca.cname}</a>
+                        <a href="javascript:thePrimaryQuery(${ca.cid})">${ca.cname}</a>
                     </dt>
 
                     <c:forEach items="${cs}" var="cs">
                         <input type="hidden" value="${ca.cid}"/>
                         <input type="hidden" value="${cs.cid}"/>
 
-
                         <c:if test="${ca.cid==cs.cid}">
 
                             <dd>
-                                <a href="#">${cs.csname}</a>
+                                <a href="javascript:queryById(${cs.csid})">${cs.csname}</a>
                             </dd>
 
                         </c:if>
@@ -98,20 +104,20 @@
             <div id="result" class="result table clearfix">
                 <ul>
                     <c:forEach items="${thePrimaryList}" var="the">
-                    <li>
-                        <a href="javascript:querydetails(${the.pid})">
-                            <img src="${the.image}" width="170" height="170"  style="display: inline-block;">
+                        <li>
+                            <a href="javascript:querydetails(${the.pid})">
+                                <img src="${the.image}" width="170" height="170"  style="display: inline-block;">
 
-                            <span style='color:green'>
-                                    ${the.pname}
-											</span>
+                                <span style='color:green'>
+                                        ${the.pname}
+                                </span>
 
-                            <span class="price">
+                                <span class="price">
 												商城价:${the.shop_price}
 											</span>
 
-                        </a>
-                    </li>
+                            </a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -230,14 +236,36 @@
 
 <script>
 
+    function querydetails(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
+    
+    
     function thePrimaryQuery(cid) {
+        /*alert(cid)*/
         location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
     }
 
 
-    function querydetails(pid) {
-        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    function queryById(csid) {
+        /*alert(cid)*/
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?csid="+csid;
     }
+
+
+    $(function () {
+        console.info($("#userId"))
+        var uid = $("#userId").val();
+        var username = $("#userName").val();
+        if (uid!='' && uid!=null) {
+            $("#usernameSpan").html(username);
+            $("#mydd").html("<a href='<%=request.getContextPath()%>/loginUser/madd'>我的订单</a>");
+            $("#exit").html("<a href='<%=request.getContextPath()%>/loginUser/exitUser'>退出</a>");
+
+        }
+    })
+
+
 
 </script>
 
