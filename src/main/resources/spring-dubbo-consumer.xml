@@ -23,9 +23,7 @@
 	<dubbo:reference id="loginService" interface="com.jk.service.login.LoginService"/>
 	<dubbo:reference id="powerTreeService" interface="com.jk.service.powerTree.PowerTreeService"/>
 	<dubbo:reference id="ordersService" interface="com.jk.service.orders.OrdersService"/>
-	<dubbo:reference id="busService" interface="com.jk.service.business.BussinessService"/>
 	<dubbo:reference id="contService" interface="com.jk.service.contractx.ContService"/>
-	<dubbo:reference id="checkService" interface="com.jk.service.check.CheckService"/>
 	<dubbo:reference id="regService" interface="com.jk.service.register.RegisterService"/>
 	<dubbo:reference id="loginUserService" interface="com.jk.service.loginUser.LoginUserService"/>
 	<dubbo:reference id="oixServiceService" interface="com.jk.service.poix.PoixService"/>
