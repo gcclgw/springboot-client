@@ -1,7 +1,10 @@
 package com.jk.controller.commodity;
 
+import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
+import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
+import com.jk.service.categorysecond.CategorysecondService;
 import com.jk.service.commodity.CommodityService;
 import com.jk.utils.OSSClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,9 @@ public class CommodityController {
 
     @Autowired
     private CommodityService commodityService;
+
+    @Autowired
+    private CategorysecondService categorysecondService;
 
 /*跳转商品展示页面*/
     @RequestMapping("toCommodity")
@@ -132,12 +138,42 @@ public class CommodityController {
 
 
 
-    /*一级分类查询*/
+    /*前台*/
     @RequestMapping("thePrimaryQuery")
     public String thePrimaryQuery(String cid,Model model){
+        //根据一级分类查询商品
         List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid);
         model.addAttribute("thePrimaryList", thePrimaryList);
-        return "commodity/thePrimaryQuery";
+        //查询一级表
+        List<Category> cate = categorysecondService.queryCategory();
+        model.addAttribute("cate",cate);
+        //查询二级
+        List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
+        model.addAttribute("cs",cs);
+        return "frontpage/clothing";
+    }
+
+
+    /*前台*/
+    @RequestMapping("querydetails")
+    public String queryDetails(String cid,Model model,String pid){
+        //根据一级分类查询商品
+        List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid);
+        model.addAttribute("thePrimaryList", thePrimaryList);
+        //查询一级表
+        List<Category> cate = categorysecondService.queryCategory();
+        model.addAttribute("cate",cate);
+        //查询二级
+        List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
+        model.addAttribute("cs",cs);
+        //商品详情
+        List<Product> details = commodityService.queryDetails(pid);
+        model.addAttribute("details", details);
+        //商品属性
+        List<CommodityProperty> cProperties = commodityService.queryCommodityProperty(pid);
+        model.addAttribute("cProperties", cProperties);
+        System.out.println(cProperties+"============");
+        return "frontpage/commoditydetails";
     }
 
 }
