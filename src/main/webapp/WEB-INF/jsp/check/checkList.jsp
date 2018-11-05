@@ -81,7 +81,14 @@
             toolbar:'#tabToolBar',   //  工具定义位置
             columns:[
                 {field:'pid',title:'序号',width:50},
-                {field:'image',title:'商品图片',width:100},
+                {field:'image',title:'商品图片',width:100,
+                    formatter:function(value,row,index){
+
+                            return "<img src='"+row.image+"' width='100px' height='100px'/>";
+                        }
+
+
+                },
                 {field:'pname',title:'商品名称',width:100},
                 {field:'market_price',title:'商品价格',width:50},
                 {field:'status',title:'是否热门',width:100,

@@ -8,10 +8,12 @@
 	<link href="<%=request.getContextPath()%>/css/slider.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/index.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
 </head>
 <body>
-
+<input type="hidden" value="${user.uid}" id="userId">
+<input type="hidden" value="${user.username}" id="userName">
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
@@ -30,11 +32,14 @@
 	<div class="span10 last">
 		<div class="topNav clearfix">
 			<ul>
+				<li id="loginuser" class="loginuser"
+					style="display: list-item;"><span id="usernameSpan"></span>|
+				</li>
 
 				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a>|</li>
+					<span id="mydd">	<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a></span>|</li>
 				<li id="headerRegister" class="headerRegister"
-					style="display: list-item;"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a>|
+					style="display: list-item;"><span id="exit"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a></span>|
 				</li>
 
 
@@ -408,5 +413,19 @@
 		<div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
 	</div>
 </div>
+<script type="text/javascript">
+$(function () {
+	console.info($("#userId"))
+    var uid = $("#userId").val();
+	var username = $("#userName").val();
+    if (uid!='' && uid!=null) {
+		$("#usernameSpan").html(username);
+		$("#mydd").html("<a href='<%=request.getContextPath()%>/loginUser/madd'>我的订单</a>");
+		$("#exit").html("<a href='<%=request.getContextPath()%>/loginUser/exitUser'>退出</a>");
+
+	}
+})
+
+</script>
 </body>
 </html>

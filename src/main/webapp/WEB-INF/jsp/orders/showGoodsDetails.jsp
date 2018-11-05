@@ -14,16 +14,24 @@
 
 
 <c:forEach items="${goodsDetailsList}" var="goodsDetailsList">
+    <h4>※所购商品※</h4>
     <div id="introduction" name="introduction" class="introduction">
         <div class="title">
-            <strong>${goodsDetailsList.pname}</strong>
+            <strong>商品名称：${goodsDetailsList.pname}</strong>
         </div>
         <div>
-            <img src="${goodsDetailsList.image}">
+            <img src="${goodsDetailsList.image}" height="100" width="100">
+            商品描述：${goodsDetailsList.pdesc}
         </div>
+        <div>
+            <span style="color: #ff894f">原价：${goodsDetailsList.marketPrice}</span>
+            现价：${goodsDetailsList.shopPrice}
+        </div>
+
+
     </div>
 
-<hr>
+    <hr>
 </c:forEach>
 
 

@@ -44,21 +44,21 @@ public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
-    @RequestMapping("toregPage")
+    @RequestMapping("/toregPage")
     public  String toregPage(){
-        return "reg";
+        return "/stage/reg";
         //return "area";
     }
 
-    @RequestMapping("toarea")
+    @RequestMapping("/toarea")
     public  String toarea(){
 
-        return "area";
+        return "/stage/area";
     }
 
 
 
-    @RequestMapping("regUser")
+    @RequestMapping("/regUser")
     @ResponseBody
     public  int regUser(HttpServletRequest request,Users users){
        /* HttpSession session = request.getSession();

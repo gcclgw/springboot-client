@@ -15,7 +15,8 @@ public class UserController {
     public String toIndex(HttpServletRequest request,Model mm){
         if (request.getSession().getAttribute("dbuser")!=null){
            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
-            mm.addAttribute("uid",dbuser.getUid());
+            mm.addAttribute("user",dbuser);
+            System.out.println(dbuser);
         }
         return  "index2";
     }
