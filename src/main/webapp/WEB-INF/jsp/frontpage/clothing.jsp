@@ -7,6 +7,8 @@
     <link href="/css/product.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<input type="hidden" value="${user.uid}" id="userId">
+<input type="hidden" value="${user.username}" id="userName">
 <div class="container header">
     <div class="span5">
         <div class="logo">
@@ -25,11 +27,16 @@
         <div class="topNav clearfix">
             <ul>
 
-                <li id="headerLogin" class="headerLogin" style="display: list-item;">
-                    <a href="/user_loginPage.action">登录</a>|</li>
-                <li id="headerRegister" class="headerRegister"
-                    style="display: list-item;"><a href="/user_registPage.action">注册</a>|
+                <li id="loginuser" class="loginuser"
+                    style="display: list-item;"><span id="usernameSpan"></span>|
                 </li>
+
+                <li id="headerLogin" class="headerLogin" style="display: list-item;">
+                    <span id="mydd">	<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a></span>|</li>
+                <li id="headerRegister" class="headerRegister"
+                    style="display: list-item;"><span id="exit"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a></span>|
+                </li>
+
 
 
 
@@ -48,8 +55,11 @@
     <div class="span24">
         <ul class="mainNav">
             <li><a href="<%=request.getContextPath()%>/user/toIndex">首页</a> |</li>
-            <c:forEach items="${cate}" var="ca">
+            <%--<c:forEach items="${cate}" var="ca">
                 <li><a href="<%=request.getContextPath()%>/categorysecond/toClothing">${ca.cname}</a> |</li>
+            </c:forEach>--%>
+            <c:forEach items="${cate}" var="ccc">
+                <li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
             </c:forEach>
         </ul>
     </div>
@@ -64,18 +74,17 @@
 
                     <dt>
 
-                        <a href="<%=request.getContextPath()%>/categorysecond/queryProductByCid>" >${ca.cname}</a>
+                        <a href="javascript:thePrimaryQuery(${ca.cid})">${ca.cname}</a>
                     </dt>
 
                     <c:forEach items="${cs}" var="cs">
                         <input type="hidden" value="${ca.cid}"/>
                         <input type="hidden" value="${cs.cid}"/>
 
-
                         <c:if test="${ca.cid==cs.cid}">
 
                             <dd>
-                                <a href="#">${cs.csname}</a>
+                                <a href="javascript:queryById(${cs.csid})">${cs.csname}</a>
                             </dd>
 
                         </c:if>
@@ -94,128 +103,22 @@
 
             <div id="result" class="result table clearfix">
                 <ul>
-
+                    <c:forEach items="${thePrimaryList}" var="the">
                     <li>
                         <a href="/product_findByPid.action?pid=1">
-                            <img src="/products/1/cs10001.jpg" width="170" height="170"  style="display: inline-block;">
+                            <img src="${the.image}" width="170" height="170"  style="display: inline-block;">
 
                             <span style='color:green'>
-											 韩版连帽加厚毛衣女外套
+                                    ${the.pname}
 											</span>
 
                             <span class="price">
-												商城价： ￥228.0
+												商城价:${the.shop_price}
 											</span>
 
                         </a>
                     </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=2">
-                            <img src="/products/1/cs10002.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 女装立领长袖拼接PU皮毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥172.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=3">
-                            <img src="/products/1/cs10003.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=4">
-                            <img src="/products/1/cs10004.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=5">
-                            <img src="/products/1/cs10005.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=6">
-                            <img src="/products/1/cs10006.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 冬装韩版女装翻领羔绒夹棉格子毛呢外套
-											</span>
-
-                            <span class="price">
-												商城价： ￥119.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=7">
-                            <img src="/products/1/cs10007.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 新款优雅奢华毛领白鸭绒轻薄羽绒服
-											</span>
-
-                            <span class="price">
-												商城价： ￥590.0
-											</span>
-
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/product_findByPid.action?pid=8">
-                            <img src="/products/1/cs10008.jpg" width="170" height="170"  style="display: inline-block;">
-
-                            <span style='color:green'>
-											 秋冬季毛呢外套女中长款圆领小香风呢子大衣
-											</span>
-
-                            <span class="price">
-												商城价： ￥336.0
-											</span>
-
-                        </a>
-                    </li>
-
-
+                    </c:forEach>
                 </ul>
             </div>
             <div class="pagination">
@@ -329,6 +232,38 @@
         <div class="copyright">Copyright©2005-2015 网上商城 版权所有</div>
     </div>
 </div>
+
+
+<script>
+
+    function thePrimaryQuery(cid) {
+        /*alert(cid)*/
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
+    }
+
+
+    function queryById(csid) {
+        /*alert(cid)*/
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?csid="+csid;
+    }
+
+
+    $(function () {
+        console.info($("#userId"))
+        var uid = $("#userId").val();
+        var username = $("#userName").val();
+        if (uid!='' && uid!=null) {
+            $("#usernameSpan").html(username);
+            $("#mydd").html("<a href='<%=request.getContextPath()%>/loginUser/madd'>我的订单</a>");
+            $("#exit").html("<a href='<%=request.getContextPath()%>/loginUser/exitUser'>退出</a>");
+
+        }
+    })
+
+
+
+</script>
+
 
 </body>
 </html>

@@ -1,7 +1,10 @@
 package com.jk.controller.commodity;
 
+import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.Product;
+import com.jk.model.users.Users;
+import com.jk.service.categorysecond.CategorysecondService;
 import com.jk.service.commodity.CommodityService;
 import com.jk.utils.OSSClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,9 @@ public class CommodityController {
 
     @Autowired
     private CommodityService commodityService;
+
+    @Autowired
+    private CategorysecondService categorysecondService;
 
 /*跳转商品展示页面*/
     @RequestMapping("toCommodity")
@@ -128,6 +132,27 @@ public class CommodityController {
         value.put("fileName", fileName);
         value.put("imgUrl",imgUrl);
         return value;
+    }
+
+
+
+    /*前台*/
+    @RequestMapping("thePrimaryQuery")
+    public String thePrimaryQuery(HttpServletRequest request,String cid,String csid,Model model){
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            model.addAttribute("user",dbuser);
+        }
+        //根据一级分类查询商品
+        List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,csid);
+        model.addAttribute("thePrimaryList", thePrimaryList);
+        //查询一级表
+        List<Category> cate = categorysecondService.queryCategory();
+        model.addAttribute("cate",cate);
+        //查询二级
+        List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
+        model.addAttribute("cs",cs);
+        return "frontpage/clothing";
     }
 
 }

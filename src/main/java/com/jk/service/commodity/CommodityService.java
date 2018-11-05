@@ -28,4 +28,10 @@ public interface CommodityService {
     void updateStatus(Integer pid);
 
     String updateHead(MultipartFile image, long userId);
+
+    List<Product> querySell();
+
+    List<Product> queryDate();
+
+    List<Product> thePrimaryQuery(String cid,String csid);
 }
