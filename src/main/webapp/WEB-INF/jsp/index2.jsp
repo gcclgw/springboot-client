@@ -33,11 +33,9 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/addTabs/addTabs.js"></script>
 </head>
 <body>
-<input type="hidden" value="${user.uid}" id="userId">
-<input type="hidden" value="${user.username}" id="userName">
 <style>
-.main{width:1080px;min-height:390px;margin:10px auto;}
-.scroll{ float:left; width:50px; height:50px;}
+	.main{width:1080px;min-height:390px;margin:10px auto;}
+	.scroll{ float:left; width:50px; height:50px;}
 </style>
 
 
@@ -59,15 +57,13 @@
 	<div class="span10 last">
 		<div class="topNav clearfix">
 			<ul>
-				<li id="loginuser" class="loginuser"
-					style="display: list-item;"><span id="usernameSpan"></span>|
-				</li>
 
 				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<span id="mydd">	<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a></span>|</li>
+					<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a>|</li>
 				<li id="headerRegister" class="headerRegister"
-					style="display: list-item;"><span id="exit"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a></span>|
+					style="display: list-item;"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a>|
 				</li>
+
 
 
 				<li><a>会员中心</a> |</li>
@@ -116,13 +112,13 @@
 
 			<br><br>
 			<div class="main">
-                 <c:forEach items="${pro}" var="pro">
-					 <div class="scroll" style="height: 190px; width: 190px;" >
-						 <center>
-					 <a href="" ><img src="${pro.image}" alt="" width="160px" height="160px"></a>
-						 </center>
-					 </div>
-				 </c:forEach>
+				<c:forEach items="${pro}" var="pro">
+					<div class="scroll" style="height: 190px; width: 190px;" >
+						<center>
+							<a href="" ><img src="${pro.image}" alt="" width="160px" height="160px"></a>
+						</center>
+					</div>
+				</c:forEach>
 			</div>
 
 			<ul class="tabContent" style="display: none;">
@@ -202,7 +198,7 @@
 				<c:forEach items="${dd}" var="dd">
 					<div class="scroll" style="height: 190px; width: 190px;" >
 						<center>
-							<a href="" ><img src="${dd.image}" width="160px" height="160px"></a>
+							<a href="" ><img src="${dd.image}" alt="" width="160px" height="160px"></a>
 						</center>
 					</div>
 				</c:forEach>
@@ -363,22 +359,9 @@
 
 <script>
 
-	function thePrimaryQuery(cid) {
-		location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
+    function thePrimaryQuery(cid) {
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
     }
-
-
-$(function () {
-	console.info($("#userId"))
-    var uid = $("#userId").val();
-	var username = $("#userName").val();
-    if (uid!='' && uid!=null) {
-		$("#usernameSpan").html(username);
-		$("#mydd").html("<a href='<%=request.getContextPath()%>/loginUser/madd'>我的订单</a>");
-		$("#exit").html("<a href='<%=request.getContextPath()%>/loginUser/exitUser'>退出</a>");
-
-	}
-})
 
 
 </script>
