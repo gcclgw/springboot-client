@@ -9,41 +9,21 @@
 	<link href="<%=request.getContextPath()%>/css/slider.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/index.css" rel="stylesheet" type="text/css"/>
-
-
-	<!-- 引入bootstrap的css -->
-	<link  href="<%=request.getContextPath()%>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
-
-	<!-- 引入bootstrap-treeview的css -->
-	<link  href="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
-
-	<!-- 引入bootstrap-addTabs的css -->
-	<link  href="<%=request.getContextPath()%>/js/addTabs/addTabs.css" rel="stylesheet" >
-
-	<!-- 引入jquery -->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
-	<!-- 引入bootstrap的js-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
-
-	<!-- 引入bootstrap的js-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.js"></script>
-
-	<!-- 引入bootstrap的js-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/addTabs/addTabs.js"></script>
+	<style>
+		.main{width:1080px;min-height:390px;margin:10px auto;}
+		.scroll{ float:left; width:50px; height:50px;}
+	</style>
 </head>
 <body>
-<style>
-	.main{width:1080px;min-height:390px;margin:10px auto;}
-	.scroll{ float:left; width:50px; height:50px;}
-</style>
-
-
+<input type="hidden" value="${user.uid}" id="userId">
+<input type="hidden" value="${user.username}" id="userName">
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
 			<a href="./网上商城/index.htm">
-				<img src="<%=request.getContextPath()%>/image/r___________renleipic_01/logo.gif" alt="传智播客"/>
+				<img src="${logo[0].logimg}" width="50px" height="70px" alt="金科商城"/>
 			</a>
 		</div>
 	</div>
@@ -52,19 +32,19 @@
 			<img src="<%=request.getContextPath()%>/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障"/>
 		</div>
 	</div>
-
-
-	<div class="span10 last">
+<div class="span10 last">
 		<div class="topNav clearfix">
 			<ul>
 
-				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a>|</li>
-				<li id="headerRegister" class="headerRegister"
-					style="display: list-item;"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a>|
+				<li id="loginuser" class="loginuser"
+					style="display: list-item;"><span id="usernameSpan"></span>|
 				</li>
 
-
+				<li id="headerLogin" class="headerLogin" style="display: list-item;">
+					<span id="mydd">	<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a></span>|</li>
+				<li id="headerRegister" class="headerRegister"
+					style="display: list-item;"><span id="exit"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a></span>|
+				</li>
 
 				<li><a>会员中心</a> |</li>
 				<li><a>购物指南</a> |</li>
@@ -372,6 +352,17 @@
     function thePrimaryQuery(cid) {
         location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
     }
+    $(function () {
+        console.info($("#userId"))
+        var uid = $("#userId").val();
+        var username = $("#userName").val();
+        if (uid!='' && uid!=null) {
+            $("#usernameSpan").html(username);
+            $("#mydd").html("<a href='<%=request.getContextPath()%>/loginUser/madd'>我的订单</a>");
+            $("#exit").html("<a href='<%=request.getContextPath()%>/loginUser/exitUser'>退出</a>");
+
+        }
+    })
 
 
 </script>
