@@ -84,25 +84,6 @@
 			<c:forEach items="${category}" var="ccc">
 				<li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
 			</c:forEach>
-			<li><a href="<%=request.getContextPath()%>/user/toIndex">首页</a> |</li>
-
-			<li><a href="<%=request.getContextPath()%>/categorysecond/toClothing">女装男装</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=2&page=1">鞋靴箱包</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=3&page=1">运动户外</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=4&page=1">珠宝配饰</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=5&page=1">手机数码</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=6&page=1">家电办公</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=7&page=1">护肤彩妆</a> |</li>
-
-			<li><a href="/shop/product_findByCid.action?cid=10&page=1">家居饰品</a> |</li>
-
-
 		</ul>
 	</div>
 
@@ -128,9 +109,7 @@
 					<a target="_blank"></a>
 				</li>
 			</ul>
-			<!-- 					<div class="hotProductAd">
-                        <img src="/shop/image/a.jpg" width="260" height="343" alt="热门商品" title="热门商品">
-            </div> -->
+
 			<br><br>
 			<div class="main">
                  <c:forEach items="${pro}" var="pro">
@@ -213,10 +192,6 @@
 					<a target="_blank"></a>
 				</li>
 			</ul>
-			<!-- 					<div class="newProductAd">
-                                                <img src="/shop/image/q.jpg" width="260" height="343" alt="最新商品" title="最新商品">
-                                    </div>
-                                     -->
 
 			<br><br>
 			<div class="main">
@@ -385,7 +360,6 @@
 <script>
 
 	function thePrimaryQuery(cid) {
-	    alert(cid)
 		location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
     }
 
