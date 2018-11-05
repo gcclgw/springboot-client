@@ -55,6 +55,17 @@
                     <div class="form-group">二级分类名称<input type="text" name="csname" value="${cs.csname}" class="form-control"  placeholder="请输入名称">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="txt_departmentname">所属的一级分类</label>
+                    <select class="form-control" name="cid" id="sele">
+                        <option value="">请选择</option>
+                        <c:forEach items="${category}" var="a">
+                            <option value="${a.cid}"
+                            <c:if test="${a.cid==cs.cid}">selected</c:if>
+                            >${a.cname}</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
                 <div class="modal-footer">
                     <button type="button" id="gb" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>

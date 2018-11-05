@@ -63,7 +63,7 @@
             detailView: false,                  //是否显示父子表
             //发送到服务器的数据编码类型
             contentType:'application/x-www-form-urlencoded;charset=UTF-8',   //数据编码纯文本  offset=0&limit=5
-            toolbar:'#tabToolBar',   //  工具定义位置
+            toolbar:'#toolBar',   //  工具定义位置
             columns:[
                 {field:'csid',title:'序号',width:50,align:'center'},
                 {field:'csname',title:'二级分类名称',width:100,align:'center'},
@@ -83,21 +83,6 @@
                 }
 
             ],
-            //传递参数（*）
-            /*queryParams: function() {
-
-                return {
-                    page:this.pageNum,
-                    rows:this.pageSize
-                };
-            },*/
-            //前台--排序字段
-            //sortName:'proPrice',
-            //sortOrder:'desc',
-            //前台--搜索框
-            //search:true,
-            //启动回车键做搜索功能
-            //searchOnEnterKey:true,
             //分页方式   后台请求的分页方式
             //sidePagination:'server',
             pagination: true,                   //是否显示分页（*）

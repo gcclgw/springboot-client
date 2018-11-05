@@ -3,108 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>会员注册</title>
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/register.css" rel="stylesheet" type="text/css"/>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
-	<script>
-        function checkusername() {
-            // 校验用户名:
-            // 获得用户名文本框的值:
-            var username = document.getElementById("username").value;
-            if (username == null || username == '') {
-                alert("用户名不能为空!");
-                return false;
-            }
 
-        }
-            function checkpassword() {
-                // 校验密码:
-                // 获得密码框的值:
-                var password = document.getElementById("password").value;
-                if(password == null || password == ''){
-                    alert("密码不能为空!");
-                    return false;
-                }
-            }
-          function checkrepassword() {
-              // 校验确认密码:
-              var password = document.getElementById("password").value;
-            var repassword = document.getElementById("repassword").value;
-              if(repassword != password){
-                  alert("两次密码输入不一致!");
-                  return false;
-              }
-
-
-
-        }
-
-        function submitReg() {
-			if (checkusername()&&checkpassword()&&checkrepassword()) {
-			    $.ajax({
-					url:"<%=request.getContextPath()%>/reg/regUser",
-					data:$("#registerForm").serialize(),
-					success:function (data) {
-                        if (1 == data) {
-                            alert("用户名已存在！");
-                        } else if (2 == data) {
-                            alert("注册成功！")
-                            location.href = "<%=request.getContextPath()%>/user/toIndex";
-                        } else if (3 == data) {
-                            alert("验证码错误！");
-                        }
-                    }
-				})
-			}
-        }
-
-      /*  function checkUsername(){
-            // 获得文件框值:
-            var username = document.getElementById("username").value;
-            // 1.创建异步交互对象
-            var xhr = createXmlHttp();
-            // 2.设置监听
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4){
-                    if(xhr.status == 200){
-                        document.getElementById("span1").innerHTML = xhr.responseText;
-                    }
-                }
-            }
-            // 3.打开连接
-            xhr.open("GET","/shop/user_findByName.action?time="+new Date().getTime()+"&username="+username,true);
-            // 4.发送
-            xhr.send(null);
-        }
-
-        function createXmlHttp(){
-            var xmlHttp;
-            try{ // Firefox, Opera 8.0+, Safari
-                xmlHttp=new XMLHttpRequest();
-            }
-            catch (e){
-                try{// Internet Explorer
-                    xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
-                }
-                catch (e){
-                    try{
-                        xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    catch (e){}
-                }
-            }
-
-            return xmlHttp;
-        }
-*/
-        function change(){
-            var img1 = document.getElementById("checkImg");
-            img1.src="<%=request.getContextPath()%>/reg/verificationCode?t="+new Date();
-        }
-	</script>
 </head>
 <body>
 <div class="container header">
@@ -179,7 +84,7 @@
 				<div>
 
 				</div>
-				<form id="registerForm"  novalidate="novalidate" >
+				<form id="registerForm" >
 					<table>
 						<tbody><tr>
 							<th>
@@ -240,7 +145,9 @@
 								地址:
 							</th>
 							<td>
-								<input type="text" name="addr" class="text" maxlength="200"/>
+								<%--<button onclick="choseArea()">选择地址</button>--%>
+
+							<input type="text" name="addr" class="text" maxlength="200"/>
 								<span></span>
 							</td>
 						</tr>
@@ -250,7 +157,9 @@
 							</th>
 							<td>
 										<span class="fieldSet">
-											<input type="text" onblur="checkForm()" id="checkcode" name="code" class="text captcha" maxlength="4" autocomplete="off"><img id="checkImg" class="captchaImage" src="<%=request.getContextPath()%>/reg/verificationCode" onclick="change()" title="点击更换验证码">
+											<input type="text"  id="checkcode" name="code" class="text captcha"  >
+											<input type="button" value="获取验证码" onclick="loginphone()">
+											<%--<img id="checkImg" class="captchaImage" src="<%=request.getContextPath()%>/reg/verificationCode" onclick="change()" title="点击更换验证码">--%>
 										</span>
 							</td>
 						</tr>
@@ -259,7 +168,7 @@
 
 							</th>
 							<td>
-								<input type="button" onclick="submitReg()" class="submit" value="同意以下协议并注册">
+								<input type="button" onclick="submitReg()"  value="同意以下协议并注册">
 							</td>
 						</tr>
 						<tr>
@@ -359,4 +268,83 @@
 		<div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
 	</div>
 </div>
-<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 190px; height: 191px;" src="./会员注册 - Powered By Mango Team_files/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div></body></html>
+<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 190px; height: 191px;" src="./会员注册 - Powered By Mango Team_files/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+<script>
+    function checkusername() {
+        // 校验用户名:
+        // 获得用户名文本框的值:
+        var username = document.getElementById("username").value;
+        if (username == null || username == '') {
+            alert("用户名不能为空!");
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+    function checkpassword() {
+        // 校验密码:
+        // 获得密码框的值:
+        var password = document.getElementById("password").value;
+        if(password == null || password == ''){
+            alert("密码不能为空!");
+            return false;
+        }else {
+            return true;
+        }
+    }
+    function checkrepassword() {
+        // 校验确认密码:
+        var password = document.getElementById("password").value;
+        var repassword = document.getElementById("repassword").value;
+        if(repassword != password){
+            alert("两次密码输入不一致!");
+            return false;
+        }else {
+            return true;
+        }
+    }
+    function loginphone(){
+
+        $.ajax({
+            url:"<%=request.getContextPath()%>/reg/getPhone",
+            data:$("form").serialize(),
+            type:"post",
+            success:function(a){
+                if (a==true) {
+                    alert("短信发送成功")
+                }else{
+                    alert("短信发送失败")
+                }
+            }
+        })
+    }
+    function submitReg() {
+
+        if (checkusername() & checkpassword() & checkrepassword()) {
+            $.ajax({
+                url:"<%=request.getContextPath()%>/reg/regUser",
+                data:$("#registerForm").serialize(),
+                success:function (data) {
+                    if (1 == data) {
+                        alert("用户名已存在！");
+                    } else if (2 == data) {
+                        alert("注册成功！")
+                        location.href = "<%=request.getContextPath()%>/user/toIndex";
+                    } else if (3 == data) {
+                        alert("验证码错误！");
+                    }
+                }
+            })
+        }
+    }
+function choseArea() {
+	location.href="<%=request.getContextPath()%>/reg/toarea"
+}
+
+    function change(){
+        var img1 = document.getElementById("checkImg");
+        img1.src="<%=request.getContextPath()%>/reg/verificationCode?t="+new Date();
+    }
+</script>
+</body></html>
