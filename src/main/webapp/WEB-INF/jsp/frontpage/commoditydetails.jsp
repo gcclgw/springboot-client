@@ -64,6 +64,7 @@
     </div>
     <div class="span24">
         <ul class="mainNav">
+            <a href="<%=request.getContextPath()%>/user/toIndex">首页</a>
             <c:forEach items="${cate}" var="ccc">
                 <li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
             </c:forEach>
@@ -182,10 +183,7 @@
         </c:forEach>
 
             <div id="introductionid" name="introductionid" class="introductionid" hidden>
-                <div>
-                    商品属性：<span id="sxmc"></span><br>
-                   <span id="sx"></span><br>
-                </div>
+
             </div>
 
 
@@ -259,11 +257,14 @@
                type:"post",
                 dataType:"text",
                     success:function (data) {
+                  // alert(data)
+                        var str ="";
                    var da = eval(data);
+                   alert(da)
                         for (var i = 0; i < da.length; i++){
-                               $("#sxmc").html(da[i].cname)
-                               $("#sx").html(da[i].cvalue)
+                            str+= da[i].cname+":"+da[i].cvalue+"<br>";
                         }
+                        $("#introductionid").replaceWith(str)
             }
         })
     }
@@ -271,6 +272,20 @@
     function sx() {
         location.href=location
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

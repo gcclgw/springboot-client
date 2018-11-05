@@ -172,10 +172,7 @@ public class CommodityController {
         //商品详情
         List<Product> details = commodityService.queryDetails(pid);
         model.addAttribute("details", details);
-        //商品属性
-       /* List<CommodityProperty> cProperties = commodityService.queryCommodityProperty(pid);
-        model.addAttribute("cProperties", cProperties);
-        System.out.println(cProperties+"============");*/
+
         return "frontpage/commoditydetails";
     }
 
