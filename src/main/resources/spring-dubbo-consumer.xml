@@ -33,11 +33,15 @@
     <dubbo:reference id="poixService" interface="com.jk.service.poix.PoixService"    />
     <dubbo:reference id="registerService" interface="com.jk.service.register.RegisterService"    />
     <dubbo:reference id="logoService" interface="com.jk.service.logo.LogoService"    />
+    <dubbo:reference id="busService" interface="com.jk.service.business.BussinessService"    />
 
 	<dubbo:reference id="userService" interface="com.jk.service.user.UserService"/>
 	<dubbo:reference id="regService" interface="com.jk.service.register.RegisterService"/>
 	<dubbo:reference id="oixServiceService" interface="com.jk.service.poix.PoixService"/>
+	<dubbo:reference id="poixService" interface="com.jk.service.poix.PoixService"/>
+	<dubbo:reference id="checkService" interface="com.jk.service.check.CheckService"/>
     <dubbo:reference id="commodityService" interface="com.jk.service.commodity.CommodityService"    />
 	<dubbo:reference id="contService" interface="com.jk.service.contractx.ContService"/>
-	<dubbo:reference id="checkService" interface="com.jk.service.check.CheckService"/>
 </beans>
+
+
