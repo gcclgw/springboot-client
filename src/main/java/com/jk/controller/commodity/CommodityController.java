@@ -1,5 +1,6 @@
 package com.jk.controller.commodity;
 
+import com.jk.model.ResultPage;
 import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.Product;
@@ -142,6 +143,7 @@ public class CommodityController {
         if (request.getSession().getAttribute("dbuser")!=null){
             Users dbuser = (Users) request.getSession().getAttribute("dbuser");
             model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
         }
         //根据一级分类查询商品
         List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,csid);
@@ -153,6 +155,16 @@ public class CommodityController {
         List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
         model.addAttribute("cs",cs);
         return "frontpage/clothing";
+    }
+
+
+    /**
+     * 前端分页
+     */
+    @RequestMapping("limitProduct")
+    @ResponseBody
+    public ResultPage limitProduct(Product product,String cid,String csid){
+        return commodityService.limitProduct(product,cid,csid);
     }
 
 }

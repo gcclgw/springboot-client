@@ -37,7 +37,8 @@
 	.main{width:1080px;min-height:390px;margin:10px auto;}
 	.scroll{ float:left; width:50px; height:50px;}
 </style>
-
+<input type="hidden" value="${user.uid}" id="userId">
+<input type="hidden" value="${user.username}" id="userName">
 
 <div class="container header">
 	<div class="span5">
@@ -58,10 +59,14 @@
 		<div class="topNav clearfix">
 			<ul>
 
+				<li id="loginuser" class="loginuser"
+					style="display: list-item;"><span id="usernameSpan"></span>|
+				</li>
+
 				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a>|</li>
+					<span id="mydd">	<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a></span>|</li>
 				<li id="headerRegister" class="headerRegister"
-					style="display: list-item;"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a>|
+					style="display: list-item;"><span id="exit"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a></span>|
 				</li>
 
 
@@ -362,6 +367,21 @@
     function thePrimaryQuery(cid) {
         location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
     }
+
+
+
+    $(function () {
+        console.info($("#userId"))
+        var uid = $("#userId").val();
+        var username = $("#userName").val();
+        if (uid!='' && uid!=null) {
+            $("#usernameSpan").html(username);
+            $("#mydd").html("<a href='<%=request.getContextPath()%>/loginUser/madd'>我的订单</a>");
+            $("#exit").html("<a href='<%=request.getContextPath()%>/loginUser/exitUser'>退出</a>");
+
+        }
+    })
+
 
 
 </script>
