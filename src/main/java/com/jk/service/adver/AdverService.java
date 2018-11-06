@@ -14,4 +14,5 @@ public interface AdverService {
     List<Adver> findAdveSrById(String adverid);
 
     void delAllAdver(Adver adver);
+
 }

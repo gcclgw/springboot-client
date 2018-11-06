@@ -40,4 +40,6 @@ public interface CommodityService {
 
 
     List<CommodityProperty> queryCommodityProperty(String pid);
+
+    void updateIs_Hot(String pid);
 }

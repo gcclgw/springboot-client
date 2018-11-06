@@ -1,8 +1,10 @@
 package com.jk.controller.user;
 
 import com.alibaba.fastjson.JSONArray;
+import com.jk.model.adver.Adver;
 import com.jk.model.role.Role;
 import com.jk.model.user.User;
+import com.jk.service.adver.AdverService;
 import com.jk.service.user.UserService;
 import com.jk.utils.ResultPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,7 @@ public class UserController {
     @Autowired
     private CategoryService categoryService;
 
+
     @RequestMapping("/toIndex")
     public String toIndex(HttpServletRequest request,Model mm){
         if (request.getSession().getAttribute("dbuser")!=null){
@@ -63,6 +66,7 @@ public class UserController {
         mm.addAttribute("category", category);
         List<Product> qDate = commodityService.queryDate();
         mm.addAttribute("dd", qDate);
+
         return  "index2";
     }
 

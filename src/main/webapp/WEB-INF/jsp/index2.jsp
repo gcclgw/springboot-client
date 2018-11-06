@@ -21,30 +21,26 @@
 
 <input type="hidden" value="${user.uid}" id="userId">
 <input type="hidden" value="${user.username}" id="userName">
-
+<!-- 广告位左 -->
 	<div class="scrol" style="float:left; width:15%; height:1000px;" >
 		<center>
 			<br><br><br><br><br><br><br><br>
 			<div style="height: 300px; width: 200px; ">
-
-			</div>
-			<br><br><br><br><br><br><br><br>
-			<div style="height: 300px; width: 200px; ">
-
+				<a>
+					<img src="" alt="广告位左">
+				</a>
 			</div>
 		</center>
 
 	</div>
-<!-- 广告列表 -->
-	<div class="scro" style="float:right; width:15%; height:1000px; " >
+<!-- 广告位右 -->
+	<div class="scro" style="float:right; width:15%; height:1000px;  " >
 		<center>
 			<br><br><br><br><br><br><br><br>
 			<div style="height: 300px; width: 200px; ">
-
-			</div>
-			<br><br><br><br><br><br><br><br>
-			<div style="height: 300px; width: 200px; ">
-
+                   <a>
+					   <img src="" alt="广告位右">
+				   </a>
 			</div>
 		</center>
 	</div>
@@ -60,9 +56,10 @@
 			</a>
 		</div>
 	</div>
+	<!-- 广告位上 -->
 	<div class="span9">
 		<div class="headerAd">
-			<img src="<%=request.getContextPath()%>/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障"/>
+			<img src="" width="320" height="50" alt="广告位上" title="正品保障"/>
 		</div>
 	</div>
 <div class="span10 last">

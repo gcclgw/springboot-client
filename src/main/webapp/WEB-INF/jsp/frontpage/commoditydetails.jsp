@@ -79,18 +79,17 @@
 
                     <dt>
 
-                        <a href="<%=request.getContextPath()%>/categorysecond/queryProductByCid>" >${ca.cname}</a>
+                        <a href="javascript:thePrimaryQuery(${ca.cid})">${ca.cname}</a>
                     </dt>
 
                     <c:forEach items="${cs}" var="cs">
                         <input type="hidden" value="${ca.cid}"/>
                         <input type="hidden" value="${cs.cid}"/>
 
-
                         <c:if test="${ca.cid==cs.cid}">
 
                             <dd>
-                                <a href="#">${cs.csname}</a>
+                                <a href="javascript:queryById(${cs.csid})">${cs.csname}</a>
                             </dd>
 
                         </c:if>

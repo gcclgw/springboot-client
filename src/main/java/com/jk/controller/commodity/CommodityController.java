@@ -1,11 +1,13 @@
 package com.jk.controller.commodity;
 
+import com.jk.model.adver.Adver;
 import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
 import com.jk.model.logo.Logo;
 import com.jk.model.users.Users;
+import com.jk.service.adver.AdverService;
 import com.jk.service.categorysecond.CategorysecondService;
 import com.jk.service.categorysecond.CategorysecondService;
 import com.jk.service.commodity.CommodityService;
@@ -37,6 +39,7 @@ public class CommodityController {
 
     @Autowired
     private LogoService logoService;
+
 /*跳转商品展示页面*/
     @RequestMapping("toCommodity")
     public String toCommodity(Model model){
@@ -163,6 +166,8 @@ public class CommodityController {
         System.out.println(logos.size());
         model.addAttribute("logo",logos);
 
+
+
         return "frontpage/clothing";
     }
 
@@ -186,10 +191,14 @@ public class CommodityController {
         System.out.println(logos.size());
         model.addAttribute("logo",logos);
 
+        //点击量加一
+        commodityService.updateIs_Hot(pid);
+
         return "frontpage/commoditydetails";
     }
 
 
+    //商品属性
     @RequestMapping("queryaaa")
     @ResponseBody
     public List<CommodityProperty> queryCommodityProperty(String pid){

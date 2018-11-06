@@ -70,30 +70,30 @@
         <div class="hotProductCategory">
 
             <c:forEach items="${cate}" var="ca">
-                <dl>
+            <dl>
 
-                    <dt>
+                <dt>
 
-                        <a href="javascript:thePrimaryQuery(${ca.cid})">${ca.cname}</a>
-                    </dt>
+                    <a href="javascript:thePrimaryQuery(${ca.cid})">${ca.cname}</a>
+                </dt>
 
-                    <c:forEach items="${cs}" var="cs">
-                        <input type="hidden" value="${ca.cid}"/>
-                        <input type="hidden" value="${cs.cid}"/>
+                <c:forEach items="${cs}" var="cs">
+                    <input type="hidden" value="${ca.cid}"/>
+                    <input type="hidden" value="${cs.cid}"/>
 
-                        <c:if test="${ca.cid==cs.cid}">
+                    <c:if test="${ca.cid==cs.cid}">
 
-                            <dd>
-                                <a href="javascript:queryById(${cs.csid})">${cs.csname}</a>
-                            </dd>
+                        <dd>
+                            <a href="javascript:queryById(${cs.csid})">${cs.csname}</a>
+                        </dd>
 
-                        </c:if>
+                    </c:if>
 
-                    </c:forEach>
+                </c:forEach>
 
-                </dl>
+            </dl>
 
-            </c:forEach>
+        </c:forEach>
 
         </div>
     </div>
