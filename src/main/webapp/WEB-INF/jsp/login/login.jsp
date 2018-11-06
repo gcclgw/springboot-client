@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -260,7 +260,7 @@
                     alert("用户名或密码错误！");
                 } else if (4 == data.flag){
                     alert("登陆成功！");
-                    location.href = "<%=path%>/user/toIndex";
+                    location.href = "<%=path%>/user/toAdminIndex";
                 }
             }
         })
