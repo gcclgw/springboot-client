@@ -3,6 +3,7 @@ package com.jk.service.commodity;
 
 import com.jk.model.ResultPage;
 import com.jk.model.commodity.Categorysecond;
+import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,4 +44,9 @@ public interface CommodityService {
      * @return
      */
     ResultPage limitProduct(Product product,String cid, String csid);
+
+    List<Product> queryDetails(String pid);
+
+
+    List<CommodityProperty> queryCommodityProperty(String pid);
 }

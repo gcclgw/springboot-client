@@ -245,7 +245,6 @@
 
     <!-- 删除 -->
              function deleteCommodity(pid) {
-             alert(pid)
              $.ajax({
                  url:"<%=request.getContextPath()%>/comm/deleteCommodity?pid="+pid,
                  success:function (data) {

@@ -3,6 +3,7 @@ package com.jk.controller.commodity;
 import com.jk.model.ResultPage;
 import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
+import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
 import com.jk.model.users.Users;
 import com.jk.service.categorysecond.CategorysecondService;
@@ -165,6 +166,36 @@ public class CommodityController {
     @ResponseBody
     public ResultPage limitProduct(Product product,String cid,String csid){
         return commodityService.limitProduct(product,cid,csid);
+    }
+
+    /*前台*/
+    @RequestMapping("querydetails")
+    public String queryDetails(String cid,Model model,String pid){
+        //根据一级分类查询商品
+        List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,pid);
+        model.addAttribute("thePrimaryList", thePrimaryList);
+        //查询一级表
+        List<Category> cate = categorysecondService.queryCategory();
+        model.addAttribute("cate",cate);
+        //查询二级
+        List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
+        model.addAttribute("cs",cs);
+        //商品详情
+        List<Product> details = commodityService.queryDetails(pid);
+        model.addAttribute("details", details);
+        //商品属性
+       /* List<CommodityProperty> cProperties = commodityService.queryCommodityProperty(pid);
+        model.addAttribute("cProperties", cProperties);
+        System.out.println(cProperties+"============");*/
+        return "frontpage/commoditydetails";
+    }
+
+
+    @RequestMapping("queryaaa")
+    @ResponseBody
+    public List<CommodityProperty> queryCommodityProperty(String pid){
+        List<CommodityProperty> cProperties = commodityService.queryCommodityProperty(pid);
+             return cProperties;
     }
 
 }

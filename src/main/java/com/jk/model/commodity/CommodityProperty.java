@@ -1,6 +1,5 @@
 package com.jk.model.commodity;
 
-
 import java.io.Serializable;
 
 public class CommodityProperty implements Serializable {

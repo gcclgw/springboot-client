@@ -1,11 +1,11 @@
 package com.jk.model.role;
 
-import com.jk.utils.PageUtil;
+import com.jk.utils.Page;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Role extends PageUtil implements Serializable {
+public class Role extends Page implements Serializable {
 
     /**
      * 角色id
@@ -15,7 +15,7 @@ public class Role extends PageUtil implements Serializable {
     /**
      * 角色名称
      */
-    private String rolename;
+    private String text;
 
     /**
      * 节点
@@ -34,12 +34,12 @@ public class Role extends PageUtil implements Serializable {
         this.rid = rid;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getText() {
+        return text;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Integer getPid() {
