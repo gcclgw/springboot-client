@@ -10,7 +10,7 @@ public class Adver   extends Page implements Serializable {
     /**
      * 广告Id
      */
-    private  Integer  adverid;
+    private  String  adverid;
 
     /**
      * 广告名
@@ -38,12 +38,25 @@ public class Adver   extends Page implements Serializable {
      */
     private String seatname;
 
+    /**
+     * 批删  业务字段
+     * @return
+     */
+    private String	  ids;
 
-    public Integer getAdverid() {
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
+
+    public String getAdverid() {
         return adverid;
     }
 
-    public void setAdverid(Integer adverid) {
+    public void setAdverid(String adverid) {
         this.adverid = adverid;
     }
 

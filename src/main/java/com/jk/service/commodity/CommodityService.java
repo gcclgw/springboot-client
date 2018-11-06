@@ -2,6 +2,7 @@ package com.jk.service.commodity;
 
 
 import com.jk.model.commodity.Categorysecond;
+import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,4 +29,15 @@ public interface CommodityService {
     void updateStatus(Integer pid);
 
     String updateHead(MultipartFile image, long userId);
+
+    List<Product> querySell();
+
+    List<Product> queryDate();
+
+    List<Product> thePrimaryQuery(String cid,String csid);
+
+    List<Product> queryDetails(String pid);
+
+
+    List<CommodityProperty> queryCommodityProperty(String pid);
 }

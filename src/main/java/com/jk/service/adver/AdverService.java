@@ -1,6 +1,7 @@
 package com.jk.service.adver;
 
 import com.jk.model.adver.Adver;
+import com.jk.model.user.User;
 import com.jk.utils.ResultPage;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface AdverService {
     void addAdver(Adver adver);
 
     List<Adver> findAdveSrById(String adverid);
+
+    void delAllAdver(Adver adver);
 }

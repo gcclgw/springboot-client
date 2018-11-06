@@ -55,8 +55,13 @@
 
 <div class="container-fluid">
     <div class="col-md-12">
-
-        <input type="button" class="btn btn-success" value="新增" onclick="addAdver()">
+        <div id="toolbar">
+            <%--<button class="btn btn-default glyphicon glyphicon-zoom-in" onclick="searchTable()">搜索</button>--%>
+            <input type="button" class="btn btn-success" value="新增" onclick="addAdver()">
+           <%-- <button class="btn btn-info"><i class="glyphicon glyphicon-pencil" onclick="editUser()"></i>修改</button>--%>
+           <%-- <button class="btn btn-danger"><i class="glyphicon glyphicon-trash" onclick="delAllAdver()"></i>批量删除</button>--%>
+                <input type="button" class="btn btn-danger ,glyphicon glyphicon-trash" value="批量删除" onclick="delAllAdver()">
+        </div>
         <table  class="table" id="adverTable" ></table>
 
     </div>
@@ -97,8 +102,8 @@
                 };
             },
             columns:[
-                /*{checkbox:true},*/
-                {field:'adverid',title:'ID',align:'center',width:150},
+                {checkbox:true},
+                {field:'adverid',title:'ID',align:'center',width:100},
                 {field:'advername',title:'广告名称',align:'center',width:100},
                 {field:'adverurl',title:'广告路径',align:'center',width:150},
                 {field:'adimg',title:'广告图片',align:'center',width:150,
@@ -106,7 +111,7 @@
                         var s;
                         if(row.adimg!=null){
                             var url = row.adimg;
-                            s = '<a class = "view"  href="javascript:void(0)"><img style="width:300;height:40px;"  src="'+url+'" /></a>';
+                            s = '<a class = "view"  href="javascript:void(0)"><img style="width:400;height:50px;"  src="'+url+'" /></a>';
                         }
                         return s;
                     }
@@ -188,6 +193,68 @@
             }
         });
     }
+
+    /* 批量删除 */
+    function delAllAdver() {
+        //是否选中了数据
+        var delete_arrry = $("#adverTable").bootstrapTable('getSelections'); //获取表选择的行
+        if (0 == delete_arrry.length) {
+            bootbox.alert("提示", "请至少选中一条数据");
+        } else {
+            bootbox.confirm('确认','您确认想要删除记录吗？',function(r){
+                if (r){
+                    //删除操作
+                    var ids = "";
+                    for (var i = 0; i < delete_arrry.length; i++) {
+                        ids += "," + delete_arrry[i].adverid;
+                    }
+                    if (0 < ids.length) {
+                        ids = ids.substr(1);
+                    }
+                    $.ajax({
+                        url:"<%=path%>/adver/delAllAdver",
+                        data:{ids:ids},
+                        type:"post",
+                        success:function(data) {
+                            bootbox.alert('删除成功');
+                            $("#adverTable").bootstrapTable('refresh');
+                        }
+                    });
+                }
+            });
+        }
+    };
+
+/*
+    //批删
+    function delAllAdver(){
+        var selects = $('#adverTable').bootstrapTable('getSelections'); //获取表选择的行
+        if (selects.length <= 0) {
+            bootbox.alert('请选择有效数据');
+            return;
+        }
+        var ids = "";
+        for (var i = 0; i < selects.length; i++) {
+            ids += "," +"'"+ selects[i].adverid+"'";
+        }
+        if (0 < ids.length) {
+            ids = ids.substr(1);
+        }
+        alert(ids);
+        bootbox.confirm("确认要删除选择的数据吗？",function (result) {
+            if (result) {
+                $.ajax({
+                    url: '/adver/delAllAdver',
+                    type: 'post',
+                    data: {adverid:ids},
+                    success: function (data, status) {
+                        bootbox.alert('删除成功');
+                        $("#adverTable").bootstrapTable('refresh');
+                    }
+                });
+            }
+        })
+    }*/
 </script>
 </body>
 </html>

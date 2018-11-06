@@ -7,8 +7,17 @@
 	<title>会员注册</title>
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/register.css" rel="stylesheet" type="text/css"/>
+	<!--引入bootstrap css-->
+<%--
+	<link  href="<%=request.getContextPath()%>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+--%>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
+	<!--引入jquery-->
+	<!--引入bootstrap js-->
+	<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootbox/bootbox.js"></script>
+--%>
 
 </head>
 <body>
@@ -31,9 +40,9 @@
 			<ul>
 
 				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="/shop/user_loginPage.action">登录</a>|</li>
+					<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">登录</a>|</li>
 				<li id="headerRegister" class="headerRegister"
-					style="display: list-item;"><a href="/shop/user_registPage.action">注册</a>|
+					style="display: list-item;"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a>|
 				</li>
 
 
@@ -158,7 +167,7 @@
 							<td>
 										<span class="fieldSet">
 											<input type="text"  id="checkcode" name="code" class="text captcha"  >
-											<input type="button" value="获取验证码" onclick="loginphone()">
+											<input type="button" class="submit" value="获取验证码" onclick="loginphone()">
 											<%--<img id="checkImg" class="captchaImage" src="<%=request.getContextPath()%>/reg/verificationCode" onclick="change()" title="点击更换验证码">--%>
 										</span>
 							</td>
@@ -338,9 +347,69 @@
             })
         }
     }
-function choseArea() {
-	location.href="<%=request.getContextPath()%>/reg/toarea"
-}
+
+    /*var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+
+    //修改
+    function choseArea(){
+        bootbox.dialog({
+            title: '修改订单',
+            message: createAddContent('<%=request.getContextPath()%>/reg/toarea'),
+            closeButton: true,
+            //queryParams:{id:id},
+            keyboard:true,
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 保存",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+                        $.ajax({
+                            url: '<%=request.getContextPath()%>/orders/updateOrder',
+                            async: false,
+                            data: $("#ordersform").serialize(),
+                            success: function (resutlt) {
+                                $("#findLog").bootstrapTable("refresh");
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 关闭",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
+            }
+        })
+
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function change(){
         var img1 = document.getElementById("checkImg");

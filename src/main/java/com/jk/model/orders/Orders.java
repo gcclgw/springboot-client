@@ -24,6 +24,40 @@ public class Orders implements Serializable {
 
     private Integer orderid;
 
+
+
+    //业务字段
+    //商品名称
+    private String pname;
+    //商品图片
+    private String pimg;
+    //商品价格
+    private String price;
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getPimg() {
+        return pimg;
+    }
+
+    public void setPimg(String pimg) {
+        this.pimg = pimg;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public Integer getOid() {
         return oid;
     }

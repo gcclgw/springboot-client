@@ -72,6 +72,21 @@ public class AdverController {
     }*/
 
 
+    /**
+     * 批删广告
+     * @param request
+     * @param image
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("delAllAdver")
+    @ResponseBody
+    private Object delAllAdver(Adver adver){
+
+        adverService.delAllAdver(adver);
+
+        return null;
+    }
 
 
     /*添加图片*/
@@ -91,9 +106,6 @@ public class AdverController {
         value.put("imgUrl",imgUrl);
         return value;
     }
-
-
-
 
 
 
