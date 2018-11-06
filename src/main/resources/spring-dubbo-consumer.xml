@@ -19,7 +19,6 @@
        <!-- 生成远程服务代理，可以和本地bean一样使用demoService，该interface需要与服务端暴露的服务interface保持一致，该id已注入Spring -->
 	<dubbo:reference id="commodityService" interface="com.jk.service.commodity.CommodityService"    />
        <!-- 生成远程服务代理，可以和本地bean一样使用demoService，该interface需要与服务端暴露的服务interface保持一致，该id已注入Spring -->
-	 <dubbo:reference id="powerTreeService" interface="com.jk.service.powerTree.PowerTreeService"    />
 	 <!--<dubbo:reference id="adverTreeService" interface="com.jk.service.adver.AdverService"    />-->
 
 	 <dubbo:reference id="mansService" interface="com.jk.service.mans.MansService"    />
@@ -33,13 +32,10 @@
     <dubbo:reference id="adverService" interface="com.jk.service.adver.AdverService"    />
     <dubbo:reference id="adverSeatService" interface="com.jk.service.adverSeat.AdverSeatService"    />
     <dubbo:reference id="poixService" interface="com.jk.service.poix.PoixService"    />
-    <dubbo:reference id="registerService" interface="com.jk.service.register.RegisterService"    />
     <dubbo:reference id="logoService" interface="com.jk.service.logo.LogoService"    />
-    <dubbo:reference id="busService" interface="com.jk.service.business.BussinessService"    />
 	<dubbo:reference id="userService" interface="com.jk.service.user.UserService"/>
 	<dubbo:reference id="regService" interface="com.jk.service.register.RegisterService"/>
 	<dubbo:reference id="oixServiceService" interface="com.jk.service.poix.PoixService"/>
-	<dubbo:reference id="checkService" interface="com.jk.service.check.CheckService"/>
 	<dubbo:reference id="contService" interface="com.jk.service.contractx.ContService"/>
 </beans>
 
