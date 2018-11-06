@@ -5,7 +5,6 @@ import com.jk.model.power.PowerTree;
 import com.jk.service.powerTree.PowerTreeService;
 import com.jk.utils.ConstantsConf;
 import com.jk.utils.SessionUserUtil;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -26,11 +25,88 @@ public class PowerTreeController {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    @RequestMapping("getTreeNavCommon")
+    /*@RequestMapping("getTreeNavCommon")
     @ResponseBody
     public  List<PowerTree> getTreeNavCommon(){
         return  powerTreeService.getTreeNavCommon();
+    }*/
+
+    @RequestMapping("getTreeNavCommon")
+    @ResponseBody
+    public List<PowerTree> getTreeNavCommon(HttpServletRequest request) {
+      //*  //获取用户id
+        String userId = SessionUserUtil.getUserId(request);
+        /*List<PowerTree> childrenList = powerTreeMapper.getUserPowerChildrenList(userId)*/;
+        String id = "0";
+        List<PowerTree> node = getNode(id, userId);
+        return node;
     }
+
+    private List<PowerTree> getNode(String id,String userId) {
+        List<PowerTree> trees = powerTreeService.getNode(id,userId);
+        for (PowerTree tree:trees){
+            List<PowerTree> node = getNode(tree.getId(),userId);
+            if (node != null && node.size() > 0){
+                tree.setLeaf(false);
+                tree.setSelectable(false);
+                tree.setNodes(node);
+            }else {
+                tree.setLeaf(true);
+                tree.setSelectable(true);
+            }
+        }
+        return  trees;
+    }
+
+
+
+
+
+
+    /*public List<PowerTree> getTreeNavCommon(HttpServletRequest request) {
+        String id = "0";
+        //获取用户id
+        String userId = SessionUserUtil.getUserId(request);
+        String cachekey = ConstantsConf.NAV_CACHE + userId;
+        String navcaChe = redisTemplate.opsForValue().get(cachekey);
+        if ( null == navcaChe ) {
+            //查询出用户的权限的最子级的节点
+            List<PowerTree> childrenList = powerTreeService.getUserPowerChildrenList(userId);
+            //构建总返回集合
+            ArrayList<PowerTree> result = new ArrayList<>();
+            //所有节点放入到总返回集合中
+            childrenList.forEach((s)->{result.add(s);});
+            getNode(id,childrenList,result,userId);
+            return result;
+        }else {
+            //将json数据转换为list集合数据
+             List<PowerTree> parseArray =  JSONArray.parseArray(navcaChe,PowerTree.class);
+            return parseArray;
+        }
+        //List<PowerTree> node = getNode(id);
+
+    }
+
+    private List<PowerTree> getNode(String id, List<PowerTree> childrenList, ArrayList<PowerTree> result, String userId) {
+        //List<PowerTree> trees = powerTreeService.getNode(id);
+        for (PowerTree tree:childrenList){
+            result.add(tree);
+            List<PowerTree> node = powerTreeService.getNode(tree.getId(),userId);
+            if (node != null && node.size() > 0){
+                tree.setLeaf(false);
+                tree.setSelectable(false);
+                tree.setNodes(node);
+            }else {
+                tree.setLeaf(true);
+                tree.setSelectable(true);
+            }
+        }
+        return  childrenList;
+    }*/
+
+
+
+
 
 
     /*@RequestMapping("getTreeNavCommon")

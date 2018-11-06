@@ -67,18 +67,18 @@ public class BersController {
 
         return  "bersx/MemList";
     }
-//查询非会员
+    //查询非会员
     @RequestMapping("memSelect")
     @ResponseBody
     public List<Userx> memSelect(){
         List<Userx> list=bersService.memSelect();
         return list;
     }
-//升级为会员
+    //升级为会员
     @RequestMapping("updateMen")
     public String updateMen(String uid){
         bersService.updateMen(uid);
-     return "bersx/BersList";
+        return "bersx/BersList";
     }
 
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -42,10 +43,11 @@ public class LoginUserController {
 
 
     @RequestMapping("/exitUser")
-
-    public String  exitUser(HttpServletRequest request){
+    @ResponseBody
+    public ModelAndView exitUser(HttpServletRequest request){
     request.getSession().removeAttribute("dbuser");
-    return "index2";
+        ModelAndView mv = new ModelAndView("forward:/user/toIndex");//默认为forward模式
+    return mv;
 }
 
     @RequestMapping("madd")

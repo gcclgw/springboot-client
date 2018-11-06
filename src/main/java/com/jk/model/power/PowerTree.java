@@ -1,11 +1,11 @@
 package com.jk.model.power;
 
-import com.jk.utils.PageUtil;
+import com.jk.utils.Page;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class PowerTree extends PageUtil implements Serializable {
+public class PowerTree extends Page implements Serializable {
 
     private static final long serialVersionUID = -6760607400872654131L;
     private String id ;
