@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>传智商城</title>
+	<title>金科商城</title>
 	<link href="<%=request.getContextPath()%>/css/slider.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/index.css" rel="stylesheet" type="text/css"/>
@@ -13,12 +13,45 @@
 
 	<style>
 		.main{width:1080px;min-height:390px;margin:10px auto;}
-		.scroll{ float:left; width:50px; height:50px;}
+		.scroll{ float:left; width:50px; height:50px; }
+
 	</style>
 </head>
 <body>
+
 <input type="hidden" value="${user.uid}" id="userId">
 <input type="hidden" value="${user.username}" id="userName">
+
+	<div class="scrol" style="float:left; width:15%; height:1000px;" >
+		<center>
+			<br><br><br><br><br><br><br><br>
+			<div style="height: 300px; width: 200px; ">
+
+			</div>
+			<br><br><br><br><br><br><br><br>
+			<div style="height: 300px; width: 200px; ">
+
+			</div>
+		</center>
+
+	</div>
+<!-- 广告列表 -->
+	<div class="scro" style="float:right; width:15%; height:1000px; " >
+		<center>
+			<br><br><br><br><br><br><br><br>
+			<div style="height: 300px; width: 200px; ">
+
+			</div>
+			<br><br><br><br><br><br><br><br>
+			<div style="height: 300px; width: 200px; ">
+
+			</div>
+		</center>
+	</div>
+
+
+
+<div class="scrolll" style="width:70%; height:1000px; float: left">
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
@@ -58,6 +91,7 @@
 			客服热线: <strong>96008/53277764</strong>
 		</div>
 	</div>
+
 	<div class="span24">
 		<ul class="mainNav">
 			<li><a href="<%=request.getContextPath()%>/user/toIndex">首页</a> |</li>
@@ -332,6 +366,8 @@
 	<div class="span24">
 		<div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
 	</div>
+</div>
+
 </div>
 
 

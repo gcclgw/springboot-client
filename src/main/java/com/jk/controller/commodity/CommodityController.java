@@ -4,10 +4,12 @@ import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
+import com.jk.model.logo.Logo;
 import com.jk.model.users.Users;
 import com.jk.service.categorysecond.CategorysecondService;
 import com.jk.service.categorysecond.CategorysecondService;
 import com.jk.service.commodity.CommodityService;
+import com.jk.service.logo.LogoService;
 import com.jk.utils.OSSClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,8 @@ public class CommodityController {
     @Autowired
     private CategorysecondService categorysecondService;
 
+    @Autowired
+    private LogoService logoService;
 /*跳转商品展示页面*/
     @RequestMapping("toCommodity")
     public String toCommodity(Model model){
@@ -154,6 +158,11 @@ public class CommodityController {
         //查询二级
         List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
         model.addAttribute("cs",cs);
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
+
         return "frontpage/clothing";
     }
 
@@ -172,6 +181,10 @@ public class CommodityController {
         //商品详情
         List<Product> details = commodityService.queryDetails(pid);
         model.addAttribute("details", details);
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
 
         return "frontpage/commoditydetails";
     }

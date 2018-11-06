@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>传智网上商城</title>
+    <title>金科网上商城</title>
     <link href="/css/common.css" rel="stylesheet" type="text/css"/>
     <link href="/css/product.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -13,7 +13,7 @@
     <div class="span5">
         <div class="logo">
             <a href="http://localhost:8080/mango/">
-                <img src="/image/r___________renleipic_01/logo.gif" alt="传智播客">
+                <img src="${logo[0].logimg}" width="50px" height="70px" alt="金科商城"/>
             </a>
         </div>
     </div>
