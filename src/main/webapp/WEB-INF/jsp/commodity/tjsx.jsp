@@ -103,8 +103,6 @@ $(function () {
     <!-- 保存属性 -->
     $("#ttttt").click(function () {
         var qq = $("#aaa").val()
-        alert("11111")
-        alert(qq)
         var ids = "";
         $("[name='cname']").each(function(){
             ids+=","+$(this).val()

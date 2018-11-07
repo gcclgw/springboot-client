@@ -26,7 +26,10 @@ public class PageUtil implements Serializable {
 
 	//当前页
 	private int page = 1;
-	
+
+	//每页条数
+	private int limit = 3;
+
 	//每页条数
 	private int rows = 3;
 
@@ -44,5 +47,13 @@ public class PageUtil implements Serializable {
 
 	public void setRows(int rows) {
 		this.rows = rows;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 }
