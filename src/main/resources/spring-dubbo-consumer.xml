@@ -29,7 +29,8 @@
     <dubbo:reference  id="poixService" interface="com.jk.service.poix.PoixService"  />
     <dubbo:reference  id="powerTreeService" interface="com.jk.service.powerTree.PowerTreeService"  />
     <dubbo:reference  id="registerService" interface="com.jk.service.register.RegisterService"  />
-
+    <dubbo:reference  id="myWorkService" interface="com.jk.service.mywork.MyWorkService"  />
+    <dubbo:reference  id="timingService" interface="com.jk.service.timing.TimingService"  />
 
 
 

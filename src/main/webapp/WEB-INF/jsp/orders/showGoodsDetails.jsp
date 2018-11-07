@@ -20,7 +20,7 @@
             <strong>商品名称：${goodsDetailsList.pname}</strong>
         </div>
         <div>
-            <img src="<%=request.getContextPath()%>/${goodsDetailsList.image}" height="100" width="100">
+            <img src="${goodsDetailsList.image}" height="100" width="100">
             商品描述：${goodsDetailsList.pdesc}
         </div>
         <div>

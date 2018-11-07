@@ -64,7 +64,7 @@ public class WebLogAspect {
             cs+=("参数:" + args[i]);
         }
         logBean.setUserId(UUID.randomUUID().toString());//uuid                                          setUserId
-        logBean.setClassName(joinPoint.getClass().getName());//目标简单类名  setClassName
+        logBean.setClassName(joinPoint.getSignature().getDeclaringTypeName());//目标简单类名  setClassName
         logBean.setMethodName(joinPoint.getSignature().getName());//方法名                               setMethodName
         //System.out.println("类名："+joinPoint.getSignature().getDeclaringTypeName()+"方法名"+logBean.getMethodName());
         //解决时间

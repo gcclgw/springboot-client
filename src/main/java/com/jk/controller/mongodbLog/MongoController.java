@@ -18,7 +18,7 @@ public class MongoController {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    //树的跳转路径
+    //
     @RequestMapping("toMongodbLog")
     public String toMongodbLog(){
         return "/mongodbLog/mongodbLog";
