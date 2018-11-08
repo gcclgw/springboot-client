@@ -1,9 +1,11 @@
 package com.jk.model.commodity;
 
+import com.jk.model.Page;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class Product implements Serializable {
+public class Product extends Page implements Serializable {
     private static final long serialVersionUID = -4296765510277358216L;
 
     private Integer pid;

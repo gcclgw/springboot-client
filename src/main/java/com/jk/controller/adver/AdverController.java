@@ -1,15 +1,12 @@
 package com.jk.controller.adver;
 
-
 import com.alibaba.fastjson.JSONArray;
 import com.jk.model.adver.Adver;
-import com.jk.model.user.User;
 import com.jk.service.adver.AdverService;
 import com.jk.utils.OSSClientUtil;
 import com.jk.utils.ResultPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

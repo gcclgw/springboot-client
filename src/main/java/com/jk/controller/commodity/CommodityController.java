@@ -1,13 +1,15 @@
 package com.jk.controller.commodity;
 
+import com.jk.model.ResultPage;
 import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
+import com.jk.model.logo.Logo;
 import com.jk.model.users.Users;
 import com.jk.service.categorysecond.CategorysecondService;
-import com.jk.service.categorysecond.CategorysecondService;
 import com.jk.service.commodity.CommodityService;
+import com.jk.service.logo.LogoService;
 import com.jk.utils.OSSClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,8 @@ public class CommodityController {
     @Autowired
     private CategorysecondService categorysecondService;
 
+    @Autowired
+    private LogoService logoService;
 /*跳转商品展示页面*/
     @RequestMapping("toCommodity")
     public String toCommodity(Model model){
@@ -144,6 +148,7 @@ public class CommodityController {
         if (request.getSession().getAttribute("dbuser")!=null){
             Users dbuser = (Users) request.getSession().getAttribute("dbuser");
             model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
         }
         //根据一级分类查询商品
         List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,csid);
@@ -154,7 +159,22 @@ public class CommodityController {
         //查询二级
         List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
         model.addAttribute("cs",cs);
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
+
         return "frontpage/clothing";
+    }
+
+
+    /**
+     * 前端分页
+     */
+    @RequestMapping("limitProduct")
+    @ResponseBody
+    public ResultPage limitProduct(Product product,String cid,String csid){
+        return commodityService.limitProduct(product,cid,csid);
     }
 
     /*前台*/
@@ -172,10 +192,11 @@ public class CommodityController {
         //商品详情
         List<Product> details = commodityService.queryDetails(pid);
         model.addAttribute("details", details);
-        //商品属性
-       /* List<CommodityProperty> cProperties = commodityService.queryCommodityProperty(pid);
-        model.addAttribute("cProperties", cProperties);
-        System.out.println(cProperties+"============");*/
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
+
         return "frontpage/commoditydetails";
     }
 

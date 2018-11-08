@@ -28,7 +28,7 @@
     <div class="span5">
         <div class="logo">
             <a>
-                <img src="/image/r___________renleipic_01/logo.gif" alt="传智播客">
+                <img src="${logo[0].logimg}" width="50px" height="70px" alt="金科商城"/>
             </a>
         </div>
     </div>
@@ -64,10 +64,10 @@
     </div>
     <div class="span24">
         <ul class="mainNav">
+            <a href="<%=request.getContextPath()%>/user/toIndex">首页</a>
             <c:forEach items="${cate}" var="ccc">
                 <li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
             </c:forEach>
-
         </ul>
     </div>
 
@@ -182,10 +182,7 @@
         </c:forEach>
 
             <div id="introductionid" name="introductionid" class="introductionid" hidden>
-                <div>
-                    商品属性：<span id="sxmc"></span><br>
-                   <span id="sx"></span><br>
-                </div>
+
             </div>
 
 
@@ -251,6 +248,27 @@
     }
 
 
+
+    function querydetails(pid) {
+        location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
+    }
+
+
+    function thePrimaryQuery(cid) {
+        /*alert(cid)*/
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
+    }
+
+
+    function queryById(csid) {
+        /*alert(cid)*/
+        location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?csid="+csid;
+    }
+
+
+
+
+
     function querydetails(pid) {
         $(".introduction").hide();
         $(".introductionid").show();
@@ -259,11 +277,13 @@
                type:"post",
                 dataType:"text",
                     success:function (data) {
+                  // alert(data)
+                        var str ="";
                    var da = eval(data);
                         for (var i = 0; i < da.length; i++){
-                               $("#sxmc").html(da[i].cname)
-                               $("#sx").html(da[i].cvalue)
+                            str+= da[i].cname+":"+da[i].cvalue+"<br>";
                         }
+                        $("#introductionid").replaceWith(str)
             }
         })
     }
@@ -271,6 +291,20 @@
     function sx() {
         location.href=location
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

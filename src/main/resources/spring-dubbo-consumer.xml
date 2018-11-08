@@ -38,3 +38,5 @@
 	<dubbo:reference id="blackService" interface="com.jk.service.blacklist.BlackListService"/>
 
 </beans>
+
+

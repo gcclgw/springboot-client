@@ -49,8 +49,17 @@
             </a>
         </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true" ></span> 用户名：</a></li>
+                <li><a href="#">注册</a></li>
+            </ul>
 
 
+        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 <!-- ============================导航结束==================================-->

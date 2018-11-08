@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>订单管理</title>
     <!-- 引入bootstrap的css -->
     <link  href="<%=request.getContextPath()%>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
     <!-- 引入bootstrap-treeview的css -->
@@ -44,6 +44,8 @@
 
 </head>
 <body>
+
+
 <table id="findLog"></table>
 <script type="text/javascript">
 $(function () {
@@ -69,9 +71,9 @@ $(function () {
         //sortName:'proPrice',
         //sortOrder:'desc',
         //前台--搜索框
-        //search:true,
+        search:true,
         //启动回车键做搜索功能
-        //searchOnEnterKey:true,
+        searchOnEnterKey:true,
         //分页方式   后台请求的分页方式
         //sidePagination:'server',
         pagination: true,                   //是否显示分页（*）
@@ -89,12 +91,12 @@ $(function () {
             };
             return temp;
         },*/
-        columns: [{
+        columns: [/*{
             checkbox: true,
             visible: true                  //是否显示复选框
-        }, {
+        }, */{
             field: 'orderid',
-            title: '编号',
+            title: '订单编号',
         }, {
             field: 'total',
             title: '订单金额',
@@ -139,10 +141,13 @@ $(function () {
             formatter:function(value,row,index){   //  格式化  当前单元格内容
                 return '<button type="button" onclick="del('+row.oid+')" class="btn btn-danger">\n' +
                     '                        <span class="glyphicon glyphicon-trash"></span>删除\n' +
-                    '                            </button>'+
-                '<button type="button" onclick="up('+row.oid+')" class="btn btn-warning">\n' +
-                '                        <span class="glyphicon glyphicon-cog"></span>修改\n' +
-                '                            </button>'
+                    '                            </button>'
+            }
+        },{field:'cz',title:'操作',sortable:true,
+            formatter:function(value,row,index){   //  格式化  当前单元格内容
+                return '<button type="button" onclick="up('+row.oid+')" class="btn btn-warning">\n' +
+                    '                        <span class="glyphicon glyphicon-cog"></span>修改\n' +
+                    '                            </button>'
             }
         }
             , ],
@@ -187,7 +192,7 @@ function XiangQing(oid){
                 "className": "btn-sm btn-success",
                 "callback": function () {
                     $.ajax({
-                        url: '<%=request.getContextPath()%>/commodity/updateCommodity',
+                        url: '/commodity/updateCommodity',
                         async: false,
                         data: $("#updateCommodityFormwjw").serialize(),
                         success: function (resutlt) {
@@ -263,7 +268,7 @@ function up(oid){
                 }
             },
             "cancel": {
-                "label": "<i class='icon-info'></i> 关闭",
+                "label": "<i class=\"glyphicon glyphicon-refresh\"></i> 关闭",
                 "className": "btn-sm btn-danger",
                 "callback": function () {
 
