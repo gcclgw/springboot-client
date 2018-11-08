@@ -5,7 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@RabbitListener(queues = "chuchu")
+@RabbitListener(queues = "regUser")
 public class GetRabbitMqData {
 
     @RabbitHandler
@@ -15,7 +15,7 @@ public class GetRabbitMqData {
       /*  JSONObject jb = JSONArray.parseObject(msg);
         Integer id = jb.getInteger("id");*/
 
-        System.out.println(msg);
+        System.out.println("----4564556456456----"+msg);
 
     }
 

@@ -116,9 +116,9 @@
                 {field:'qstatus',title:'合作状态',width:100,sortable:true,
                     formatter:function(value,row,index){   //  格式化  当前单元格内容
                         if (value==1){
-                            return "签约";
-                        } else {
                             return "未签约";
+                        } else {
+                            return "签约";
                         }
                     }
 

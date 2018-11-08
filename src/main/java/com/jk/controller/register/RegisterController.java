@@ -1,7 +1,9 @@
 package com.jk.controller.register;
 
 import com.jk.controller.login.LoginController;
+import com.jk.model.blacklist.BlackList;
 import com.jk.model.users.Users;
+import com.jk.service.blacklist.BlackListService;
 import com.jk.service.register.RegisterService;
 import com.jk.utils.ConstantsConf;
 import com.jk.utils.HttpUtils;
@@ -21,6 +23,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 @RequestMapping("reg")
@@ -43,6 +48,14 @@ public class RegisterController {
 
     @Autowired
     private RegisterService registerService;
+
+    @Autowired
+    private BlackListService blackListService;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+
+    ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     @RequestMapping("/toregPage")
     public  String toregPage(){
@@ -72,6 +85,7 @@ public class RegisterController {
 
         System.out.println(users.getCode());
         String random = request.getSession().getAttribute("random").toString();
+        System.out.println("短信验证码："+random);
         if (random.equals(users.getCode())) {
             return registerService.regUser(users);
 
@@ -102,32 +116,22 @@ public class RegisterController {
 
     @RequestMapping("getPhone")
     @ResponseBody
-    public Boolean getPhone(Users user,HttpServletRequest request) {
+    public int getPhone(Users user,HttpServletRequest request) {
+        List<BlackList> blackLists = blackListService.queryByUid(user.getPhone());
 
-        System.out.println(user.getPhone());
-        String random = "";
-        for (int i = 0; i < 6; i++) {
-            random = random + (int)(Math.random()*9);
-        }
+        if (blackLists.size()>0){
+            return 1;
+        }else {
+            String random = "";
+            for (int i = 0; i < 6; i++) {
+                random = random + (int) (Math.random() * 9);
+            }
 
-        if(StringUtils.isNotEmpty(user.getPhone())) {
-
-
-            SimpleDateFormat sim = new SimpleDateFormat("yyyyMMddHHmmss");
-            HashMap<String, Object> params = new HashMap<String, Object>();
-            params.put("accountSid", ConstantsConf.ACCOUNTSID);
-            params.put("templateid", ConstantsConf.TEMPLATEID);
-            params.put("param", random);
-            params.put("to", user.getPhone());
-            String timestamp= sim.format(new Date());
-            params.put("timestamp", timestamp);
-            String sign= Md5Util.getMd532(ConstantsConf.ACCOUNTSID+ConstantsConf.AUTH_TOKEN+timestamp);
-            params.put("sig", sign);
-            HttpUtils.post(ConstantsConf.SMS_URL, params);
             request.getSession().setAttribute("random", random);
-            return true;
+            cachedThreadPool.execute(new ThreadReg(amqpTemplate, user, random));
+            return 2;
         }
- return false;
+
     }
 
 
