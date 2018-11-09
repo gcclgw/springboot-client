@@ -7,4 +7,9 @@ spring:
       suffix: .jsp
   data:
     mongodb:
-      uri: mongodb://127.0.0.1:27017/test
+      uri: mongodb://127.0.0.1:27017/1804A
+  rabbitmq:
+    password: guest
+    username: guest
+    host: 127.0.0.1
+    port: 5672
