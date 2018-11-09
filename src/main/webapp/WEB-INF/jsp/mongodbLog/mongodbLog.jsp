@@ -51,18 +51,6 @@
 
 
 <script type="text/javascript">
-function search(){
-	$("#findLog").bootstrapTable('refresh',
-			{query: {
-	 			"minDate":$("#minTime").val(),
-	 			"maxDate":$("#maxTime").val(),
-	 			//"product.proType":$("#proType").val(),
-			}}
-	);
-	
-}
-
-
 
 
 $().ready(function(){
@@ -98,16 +86,6 @@ $().ready(function(){
         pageSize: 6,                       //每页的记录行数（*）
         pageList: [6,9,12],        //可供选择的每页的行数（*）
         //得到查询的参数
-        /*queryParams : function (params) {
-            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            var temp = {
-                rows: params.limit,                         //页面大小
-                page: (params.offset / params.limit) + 1,   //页码
-                sort: params.sort,      //排序列名
-                sortOrder: params.order //排位命令（desc，asc）
-            };
-            return temp;
-        },*/
 		columns:[
 		     	{field:'userId',title:'日志编号',width:50,
 					/*formatter:function(value,row,index){   //  格式化  当前单元格内容

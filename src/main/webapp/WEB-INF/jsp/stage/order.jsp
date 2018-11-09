@@ -107,15 +107,15 @@
 
 		<table>
 			<tbody>
-
 			<c:forEach items="${orders}" var="o">
 			<tr>
-				<th colspan="5">订单编号:${o.oid};订单金额:<font
+                <th colspan="5">订单编号:${o.oid};订单金额:<font
 						color="red">${o.total}
 				</font>
+
 					&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">
 						<c:if test="${o.state==2}">
-							<a href="/shop/order_findByOid.action?oid=9004">付款</a>
+							<a href="javascript:payment(${o.oid})">付款</a>
 						</c:if>
 						<c:if test="${o.state==1}">
 							已完成
@@ -237,9 +237,21 @@
             }
 		})
     }
-	
-	
-	
+
+    function payment(oid) {
+        location.href="<%=request.getContextPath()%>/alipay/toPayment?oid="+oid;
+    }
+
+    //进页面刷新一次   一次！！！
+    $(document).ready(function () {
+
+        if(location.href.indexOf("#reloaded")==-1){
+            location.href=location.href+"#reloaded";
+            location.reload();
+        }
+    })
+
+
 </script>
 </body>
 </html>

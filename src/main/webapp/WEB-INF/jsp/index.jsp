@@ -54,7 +54,7 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true" ></span> 用户名：</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true" ></span> 用户名：${userInfo.username}</a></li>
                 <li><a href="#">注册</a></li>
             </ul>
 

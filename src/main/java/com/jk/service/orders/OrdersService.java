@@ -28,4 +28,11 @@ public interface OrdersService {
 
     //修改订单状态
     void updateOrderById(Integer oid);
+
+    //根据oid  查询订单
+    List<Orders> queryOrdersByOid(Integer oid);
+
+    Orders queryTotalByOid(Integer oid);
+
+    void updateOrderState(Integer oid);
 }

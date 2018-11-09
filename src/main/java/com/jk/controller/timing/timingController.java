@@ -22,16 +22,16 @@ public class timingController {
 
     //项目启动就开始执行
     //"秒 分 时 * * ? "  规定在什么时间执行
-//    @Scheduled(cron = "0 46 23 * * ? ")
-//    public void timerRate() {
-//
-//        timingSMS();
-//       // IndustrySMS.execute("13146789072");
-//    }
+    /*@Scheduled(cron = "0 40 21 * * ? ")
+    public void timerRate() {
+
+        timingSMS();
+
+    }*/
 
 
 
-    public  void  timingSMS(){
+    public  void  timingSMS() {
         List<Contxract> contxract = timingService.queryHtPhone();
         Date date = new Date();
         if(contxract!=null && !"".equals(contxract)){
@@ -44,6 +44,23 @@ public class timingController {
                 }
             }
         }
+
+      /*  if (contxract!=null ){
+            for (int i = 0 ; i<contxract.size();i++){
+                String endtime = contxract.get(i).getEndtime();
+                Date parse = sdf.parse(endtime);
+                long date  =  (parse.getTime()-time.getTime())/1000/3600/24;
+                date=date+1;
+                if (date==30 ){
+                    IndustrySMS.execute("13146789257");
+                    System.out.println(111);
+                }if (date == 5 ){
+                    workService.addWork(contxes.get(i).getHtid());
+                }
+                System.out.println(date);
+
+            }
+        }*/
 
     }
 

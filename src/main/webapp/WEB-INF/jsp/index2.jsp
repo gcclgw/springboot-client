@@ -100,7 +100,7 @@
 			<a href="<%=request.getContextPath()%>/cart_myCart.action">购物车</a>
 		</div>
 		<div class="phone">
-			客服热线: <strong>96008/53277764</strong>
+			客服热线: <strong>13146789257</strong>
 		</div>
 	</div>
 

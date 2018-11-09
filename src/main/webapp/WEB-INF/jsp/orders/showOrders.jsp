@@ -21,8 +21,6 @@
 
     <!-- 引入jquery -->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
-    <!-- 引入my97 -->
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/my97/WdatePicker.js"></script>
     <!-- 引入bootstrap的js-->
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
     <!-- 引入bootstrap的js-->
