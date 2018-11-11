@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -119,6 +120,38 @@ public class UserController {
             userService.SaveUserRole(userId,roleIds.split(","));
         }
 
+
+        /*跳转到转盘页面*/
+    @RequestMapping("toZp")
+        public String toZp(HttpServletRequest request,Model mm){
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            mm.addAttribute("user",dbuser);
+
+            System.out.println(dbuser);
+        }
+            return "zhuanpan/zp";
+        }
+
+
+
+    /*红包获得积分*/
+    @RequestMapping("addJf")
+    public String addJf(Integer awards, Model model, HttpServletRequest request, HttpServletResponse response){
+        //登录判断
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
+        }
+
+        //添加积分
+        Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+        Integer uid = dbuser.getUid();
+        System.out.println("awards==================="+awards);
+        commodityService.addJf(awards,uid);
+        return "redirect:/user/toIndex";
+    }
 
 
 

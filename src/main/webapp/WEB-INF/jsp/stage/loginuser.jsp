@@ -41,7 +41,7 @@
 
 
 				<li><a>会员中心</a> |</li>
-				<li><a>购物指南</a> |</li>
+				<li><a href="<%=request.getContextPath()%>/comm/shoppingguide">购物指南</a> |</li>
 				<li><a>关于我们</a></li>
 			</ul>
 		</div>
@@ -183,7 +183,8 @@ function loginUser () {
                 alert("密码错误！")
 
             } else if (2 == data) {
-                location.href = "<%=request.getContextPath()%>/user/toIndex";
+
+                location.href = "<%=request.getContextPath()%>/user/toZp";
 
             }
         }

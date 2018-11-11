@@ -48,7 +48,7 @@
 
 
 				<li><a>会员中心</a> |</li>
-				<li><a>购物指南</a> |</li>
+				<li><a href="<%=request.getContextPath()%>/comm/shoppingguide">购物指南</a> |</li>
 				<li><a>关于我们</a></li>
 			</ul>
 		</div>
@@ -82,6 +82,10 @@
 
 		</ul>
 	</div>
+
+
+
+
 
 </div>	<div class="container register">
 	<div class="span24">
@@ -338,7 +342,7 @@
                     if (1 == data) {
                         alert("用户名已存在！");
                     } else if (2 == data) {
-                        alert("注册成功！")
+                        alert("新用户注册成功！ 赠送100积分已到账")
                         location.href = "<%=request.getContextPath()%>/user/toIndex";
                     } else if (3 == data) {
                         alert("验证码错误！");
@@ -347,6 +351,7 @@
             })
         }
     }
+
 
     /*var res;
     function createAddContent(url){
@@ -364,7 +369,7 @@
     function choseArea(){
         bootbox.dialog({
             title: '修改订单',
-            message: createAddContent('<%=request.getContextPath()%>/reg/toarea'),
+            message: createAddContent('/reg/toarea'),
             closeButton: true,
             //queryParams:{id:id},
             keyboard:true,
@@ -374,7 +379,7 @@
                     "className": "btn-sm btn-success",
                     "callback": function () {
                         $.ajax({
-                            url: '<%=request.getContextPath()%>/orders/updateOrder',
+                            url: '/orders/updateOrder',
                             async: false,
                             data: $("#ordersform").serialize(),
                             success: function (resutlt) {

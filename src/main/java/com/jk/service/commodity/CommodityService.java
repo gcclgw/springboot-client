@@ -1,11 +1,15 @@
 package com.jk.service.commodity;
 
 
+import com.jk.model.ResultPage;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
+import com.jk.model.orders.Orders;
+import com.jk.model.users.Users;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CommodityService {
@@ -36,10 +40,34 @@ public interface CommodityService {
 
     List<Product> thePrimaryQuery(String cid,String csid);
 
+    /**
+     * 前端分页
+     * @param cid
+     * @param csid
+     * @return
+     */
+    ResultPage limitProduct(Product product,String cid, String csid);
+
     List<Product> queryDetails(String pid);
 
 
     List<CommodityProperty> queryCommodityProperty(String pid);
 
     void updateIs_Hot(String pid);
+
+    List<Product> queryShopIntegral();
+
+    void addOrders(Product product, Integer count, Integer uid, Orders orders);
+
+    void addOrdersitem(Product product, Integer count, Orders orders);
+
+    Product selectProduct(Orders orders);
+
+    Users selectUsers(Integer uid);
+
+    void updateOrder(Orders orders);
+
+    void updateUsers(Integer ssss,Integer userid);
+
+    void addJf(Integer awards,Integer uid);
 }

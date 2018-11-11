@@ -1,11 +1,13 @@
 package com.jk.controller.commodity;
 
 import com.jk.model.adver.Adver;
+import com.jk.model.ResultPage;
 import com.jk.model.category.Category;
 import com.jk.model.commodity.Categorysecond;
 import com.jk.model.commodity.CommodityProperty;
 import com.jk.model.commodity.Product;
 import com.jk.model.logo.Logo;
+import com.jk.model.orders.Orders;
 import com.jk.model.users.Users;
 import com.jk.service.adver.AdverService;
 import com.jk.service.categorysecond.CategorysecondService;
@@ -23,9 +25,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.Integer.parseInt;
 
 @Controller
 @RequestMapping("comm")
@@ -148,9 +158,11 @@ public class CommodityController {
     /*前台*/
     @RequestMapping("thePrimaryQuery")
     public String thePrimaryQuery(HttpServletRequest request,String cid,String csid,Model model){
+        //登录判断
         if (request.getSession().getAttribute("dbuser")!=null){
             Users dbuser = (Users) request.getSession().getAttribute("dbuser");
             model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
         }
         //根据一级分类查询商品
         List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,csid);
@@ -171,9 +183,25 @@ public class CommodityController {
         return "frontpage/clothing";
     }
 
+
+    /**
+     * 前端分页
+     */
+    @RequestMapping("limitProduct")
+    @ResponseBody
+    public ResultPage limitProduct(Product product,String cid,String csid){
+        return commodityService.limitProduct(product,cid,csid);
+    }
+
     /*前台*/
     @RequestMapping("querydetails")
-    public String queryDetails(String cid,Model model,String pid){
+    public String queryDetails(HttpServletRequest request,String cid,Model model,String pid){
+        //登录判断
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
+        }
         //根据一级分类查询商品
         List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,pid);
         model.addAttribute("thePrimaryList", thePrimaryList);
@@ -205,5 +233,156 @@ public class CommodityController {
         List<CommodityProperty> cProperties = commodityService.queryCommodityProperty(pid);
              return cProperties;
     }
+
+    //跳转到购物指南
+    @RequestMapping("shoppingguide")
+    public String shoppingGuide(Model model,String cid,String pid,HttpServletRequest request){
+        //登录判断
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
+        }
+        //根据一级分类查询商品
+        List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,pid);
+        model.addAttribute("thePrimaryList", thePrimaryList);
+        //查询一级表
+        List<Category> cate = categorysecondService.queryCategory();
+        model.addAttribute("cate",cate);
+        //查询二级
+        List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
+        model.addAttribute("cs",cs);
+        //商品详情
+        List<Product> details = commodityService.queryDetails(pid);
+        model.addAttribute("details", details);
+        System.out.println(details);
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
+        return "frontpage/shoppingguide";
+    }
+
+
+
+    //跳转到积分商城
+    @RequestMapping("jfsc")
+    public String jfsc(HttpServletRequest request,Model model){
+        //登录判断
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
+        }
+
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
+
+        List<Product> queryIntegral = commodityService.queryShopIntegral();
+        model.addAttribute("queryIntegral", queryIntegral);
+        System.out.println(queryIntegral);
+        return "integral/shopIntegral";
+    }
+
+
+    /*跳转积分商品详情*/
+    @RequestMapping("queryintegraldetails")
+    public String queryintegraldetails(Model model,HttpServletRequest request,String cid,String pid){
+        //登录判断
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
+        }
+        //根据一级分类查询商品
+        List<Product> thePrimaryList = commodityService.thePrimaryQuery(cid,pid);
+        model.addAttribute("thePrimaryList", thePrimaryList);
+        //查询一级表
+        List<Category> cate = categorysecondService.queryCategory();
+        model.addAttribute("cate",cate);
+        //查询二级
+        List<com.jk.model.categorysecond.Categorysecond> cs = categorysecondService.queryOneAndTwo();
+        model.addAttribute("cs",cs);
+        //商品详情
+        List<Product> details = commodityService.queryDetails(pid);
+        model.addAttribute("details", details);
+        System.out.println(details);
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
+
+        List<Product> queryIntegral = commodityService.queryShopIntegral();
+        model.addAttribute("queryIntegral", queryIntegral);
+        System.out.println(queryIntegral);
+        return "integral/shopintegraldetails";
+    }
+
+
+    /*新增订单*/
+    @RequestMapping("addOrder")
+    public String addOrder(Product product, Integer count, Model model, HttpServletRequest request, Orders orders){
+        //登录判断
+        if (request.getSession().getAttribute("dbuser")!=null){
+            Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+            model.addAttribute("user",dbuser);
+            System.out.println(dbuser);
+        }
+        /*时间戳*/
+        String timeStamp = timeStamp();
+              System.out.println("timeStamp="+timeStamp); //运行输出:timeStamp=1470278082
+        orders.setOid(parseInt(timeStamp));
+        model.addAttribute("orders", orders);
+        Users dbuser = (Users) request.getSession().getAttribute("dbuser");
+        Integer uid = dbuser.getUid();
+        System.out.println("id="+product.getPid()+"数量"+count+"价格"+product.getShop_price()+"时间戳");
+        /*新增订单*/
+       commodityService.addOrders(product, count, uid, orders);
+        /*新增商品订单关联表*/
+        commodityService.addOrdersitem(product,count,orders);
+
+         /*查询关联商品*/
+        Product selectPro = commodityService.selectProduct(orders);
+        model.addAttribute("selectPro", selectPro);
+
+        //LOGO
+        List<Logo> logos = logoService.queryLogo();
+        System.out.println(logos.size());
+        model.addAttribute("logo",logos);
+
+        /*用户信息回显*/
+        Users uu = commodityService.selectUsers(dbuser.getUid());
+        model.addAttribute("uu", uu);
+        return "integral/createorder";
+    }
+
+    @RequestMapping("updateOrder")
+    public String updateOrder(Orders orders,Integer ssss,Integer userid){
+        commodityService.updateOrder(orders);
+        System.out.println("积分=========="+ssss);
+        commodityService.updateUsers(ssss,userid);
+          return "stage/order";
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+          * 取得当前时间戳（精确到秒）
+          * @return
+          */
+    public static String timeStamp(){
+                 long time = System.currentTimeMillis();
+                 String t = String.valueOf(time/1000);
+                 return t;
+             }
 
 }

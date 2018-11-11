@@ -25,6 +25,7 @@
 <body>
 <input type="hidden" value="${user.uid}" id="userId">
 <input type="hidden" value="${user.username}" id="userName">
+<input type="hidden" value="${user.integral}" id="userintegral">
 <div class="container header">
     <div class="span5">
         <div class="logo">
@@ -69,10 +70,8 @@
     </div>
     <div class="span24">
         <ul class="mainNav">
-            <a href="<%=request.getContextPath()%>/user/toIndex">首页</a>
-            <c:forEach items="${cate}" var="ccc">
-                <li><a href="javascript:thePrimaryQuery(${ccc.cid})">${ccc.cname}</a> |</li>
-            </c:forEach>
+            <li><center><a href="<%=request.getContextPath()%>comm/jfsc">积分商城</a></center></li>
+            <li><center><a><span id="userSpanuserSpan"></span></a></center></li>
         </ul>
     </div>
 
@@ -111,83 +110,79 @@
 
     <div class="span18 last">
         <c:forEach items="${details}" var="det">
-        <div class="productImage">
-            <a title="" style="outline-style: none; text-decoration: none;" id="zoom" href="${det.image}" rel="gallery">
-                <div class="zoomPad"><img style="opacity: 1;" title="" class="medium" src="${det.image}"><div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div><div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow"><div style="width: 368px;" class="zoomWrapper"><div style="width: 100%; position: absolute; display: none;" class="zoomWrapperTitle"></div><div style="width: 0%; height: 0px;" class="zoomWrapperImage"><img src="${det.image}" style="position: absolute; border: 0px none; display: block; left: -432px; top: 0px;"></div></div></div><div style="visibility: hidden; top: 129.5px; left: 106px; position: absolute;" class="zoomPreload">Loading zoom</div></div>
-            </a>
+            <div class="productImage">
+                <a title="" style="outline-style: none; text-decoration: none;" id="zoom" href="${det.image}" rel="gallery">
+                    <div class="zoomPad"><img style="opacity: 1;" title="" class="medium" src="${det.image}"><div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div><div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow"><div style="width: 368px;" class="zoomWrapper"><div style="width: 100%; position: absolute; display: none;" class="zoomWrapperTitle"></div><div style="width: 0%; height: 0px;" class="zoomWrapperImage"><img src="${det.image}" style="position: absolute; border: 0px none; display: block; left: -432px; top: 0px;"></div></div></div><div style="visibility: hidden; top: 129.5px; left: 106px; position: absolute;" class="zoomPreload">Loading zoom</div></div>
+                </a>
 
-        </div>
+            </div>
 
-        <div class="name">${det.pname}</div>
-        <div class="sn">
-            <div>编号：${det.pid}</div>
-        </div>
-        <div class="info">
-            <dl>
-                <dt>商城价:</dt>
-                <dd>
-                    <strong>￥：${det.shop_price}元</strong>
-                    参 考 价：
-                    <del>￥${det.market_price}元</del>
-                </dd>
-            </dl>
-            <dl>
-                <dt>促销:</dt>
-                <dd>
-                    <a target="_blank" title="限时抢购 (2018-11-11:00:00:00 ~ 2018-11-11:23:59:59)">限时抢购</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>    </dt>
-                <dd>
-                    <span>    </span>
-                </dd>
-            </dl>
-        </div>
-
-        <form id="cartForm" action="/cart_addCart.action" method="post" >
-            <input type="hidden" name="pid" value="73"/>
-            <div class="action">
-                <dl class="quantity">
-                    <dt>购买数量:</dt>
+            <div class="name">${det.pname}</div>
+            <div class="sn">
+                <div>编号：${det.pid}</div>
+            </div>
+            <div class="info">
+                <dl>
+                    <dt></dt>
                     <dd>
-                        <input id="count" name="count" value="1" maxlength="4" onpaste="return false;" type="text"/>
+                        <input type="hidden" id="priceid" value="${det.shop_price}">
+                        <strong>${det.shop_price}积分</strong>
+
                     </dd>
+                </dl>
+                <dl>
+                    <dt>    </dt>
                     <dd>
-                        件
+                        <span>    </span>
                     </dd>
                 </dl>
 
-                <div class="buy">
-                    <input id="addCart" class="addCart" value="加入购物车" type="button" onclick="saveCart()"/>
+
+                <form id="cartForm" action="<%=request.getContextPath()%>/comm/addOrder" method="post" >
+                    <input type="hidden" name="pid" value="${det.pid}">
+                    <input type="hidden" name="shop_price" value="${det.shop_price}">
+                    <div class="action">
+                        <dl class="quantity">
+                            <dt>购买数量:</dt>
+                            <dt>
+                                <input id="count" name="count" value="1" maxlength="4" onblur="aaa()" onpaste="return false;" type="text"/>
+                            件&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                所需积分:<span id="spanpriceid"></span>
+                            </dt>
+                        </dl>
+
+                        <div class="buy">
+                                <input id="addCart" class="addCart" value="兑换" type="button" onclick="saveCart()"/>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+            <div id="bar" class="bar">
+                <ul>
+                    <li id="introductionTab">
+                        <a href="javascript:sx()">商品介绍</a>
+                    </li>
+                    <li id="introductionidid">
+                        <a href="javascript:querydetails(${det.pid})">商品属性</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="introduction" name="introduction" class="introduction">
+                <div class="title">
+                    <strong>${det.pdesc}</strong>
+                </div>
+                <div>
+                    <img src="${det.image}" width="400px" height="400px">
                 </div>
             </div>
-        </form>
-
-        <div id="bar" class="bar">
-            <ul>
-                <li id="introductionTab">
-                    <a href="javascript:sx()">商品介绍</a>
-                </li>
-                <li id="introductionidid">
-                    <a href="javascript:querydetails(${det.pid})">商品属性</a>
-                </li>
-            </ul>
-        </div>
-
-        <div id="introduction" name="introduction" class="introduction">
-            <div class="title">
-                <strong>${det.pdesc}</strong>
-            </div>
-            <div>
-                <img src="${det.image}" width="400px" height="400px">
-            </div>
-        </div>
         </c:forEach>
 
-            <div id="introductionid" name="introductionid" class="introductionid" hidden>
+        <div id="introductionid" name="introductionid" class="introductionid" hidden>
 
-            </div>
+        </div>
 
 
     </div>
@@ -247,11 +242,6 @@
 
 
 <script>
-    function saveCart(){
-        document.getElementById("cartForm").submit();
-    }
-
-
 
     function querydetails(pid) {
         location.href="<%=request.getContextPath()%>/comm/querydetails?pid="+pid;
@@ -269,6 +259,25 @@
         location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?csid="+csid;
     }
 
+    var asd = $("#priceid").val()*$("#count").val();
+    $("#spanpriceid").html(asd)
+   function aaa() {
+       var asd = $("#priceid").val()*$("#count").val();
+       $("#spanpriceid").html(asd)
+   }
+
+
+
+    function saveCart(){
+        var aa = $("#spanpriceid").html()
+        var ss = $("#userintegral").val()
+        if (parseInt(aa)>parseInt(ss)) {
+            alert("您的积分不足，购买不了此商品");
+        }else {
+            document.getElementById("cartForm").submit();
+        }
+    }
+
 
 
 
@@ -277,17 +286,17 @@
         $(".introduction").hide();
         $(".introductionid").show();
         $.ajax({
-               url:"<%=request.getContextPath()%>/comm/queryaaa?pid="+pid,
-               type:"post",
-                dataType:"text",
-                    success:function (data) {
-                  // alert(data)
-                        var str ="";
-                   var da = eval(data);
-                        for (var i = 0; i < da.length; i++){
-                            str+= da[i].cname+":"+da[i].cvalue+"<br>";
-                        }
-                        $("#introductionid").replaceWith(str)
+            url:"<%=request.getContextPath()%>/comm/queryaaa?pid="+pid,
+            type:"post",
+            dataType:"text",
+            success:function (data) {
+                // alert(data)
+                var str ="";
+                var da = eval(data);
+                for (var i = 0; i < da.length; i++){
+                    str+= da[i].cname+":"+da[i].cvalue+"<br>";
+                }
+                $("#introductionid").replaceWith(str)
             }
         })
     }
@@ -304,6 +313,9 @@
         console.info($("#userId"))
         var uid = $("#userId").val();
         var username = $("#userName").val();
+        var userintegral = $("#userintegral").val();
+        var aa= "我的积分:"+userintegral;
+        $("#userSpanuserSpan").html(aa)
         if (uid!='' && uid!=null) {
             $("#usernameSpan").html(username);
             $("#mydd").html("<a href='<%=request.getContextPath()%>/loginUser/madd'>我的订单</a>");

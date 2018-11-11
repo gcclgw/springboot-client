@@ -23,12 +23,10 @@ public class Users implements Serializable {
     private String members;
     private String code;
 
-    public String getCode() {
-        return code;
-    }
+    private Integer integral;
 
-    public void setCode(String code) {
-        this.code = code;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getUid() {
@@ -44,7 +42,7 @@ public class Users implements Serializable {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getPassword() {
@@ -52,7 +50,7 @@ public class Users implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getName() {
@@ -60,7 +58,7 @@ public class Users implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getEmail() {
@@ -68,7 +66,7 @@ public class Users implements Serializable {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getPhone() {
@@ -76,7 +74,7 @@ public class Users implements Serializable {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getAddr() {
@@ -84,7 +82,7 @@ public class Users implements Serializable {
     }
 
     public void setAddr(String addr) {
-        this.addr = addr == null ? null : addr.trim();
+        this.addr = addr;
     }
 
     public Integer getState() {
@@ -100,6 +98,22 @@ public class Users implements Serializable {
     }
 
     public void setMembers(String members) {
-        this.members = members == null ? null : members.trim();
+        this.members = members;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
     }
 }

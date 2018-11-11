@@ -9,45 +9,52 @@
 	<link href="<%=request.getContextPath()%>/css/slider.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/index.css" rel="stylesheet" type="text/css"/>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
-	<style>
-		.main{width:1080px;min-height:390px;margin:10px auto;}
-		.scroll{ float:left; width:50px; height:50px; }
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="<%=request.getContextPath()%>/js/addTabs/addTabs.css" rel="stylesheet" >
 
-	</style>
+
+
+
+
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/fileinput/themes/fa/theme.js"></script>
+
+<style>
+	.main{width:1080px;min-height:390px;margin:10px auto;}
+	.scroll{ float:left; width:50px; height:50px;}
+</style>
+
+
 </head>
 <body>
 
 <input type="hidden" value="${user.uid}" id="userId">
 <input type="hidden" value="${user.username}" id="userName">
-<!-- 广告位左 -->
-	<div class="scrol" style="float:left; width:15%; height:1000px;" >
-		<center>
-			<br><br><br><br><br><br><br><br>
-			<div style="height: 300px; width: 200px; ">
-				<a>
-					<img src="" alt="广告位左">
-				</a>
-			</div>
-		</center>
-
-	</div>
-<!-- 广告位右 -->
-	<div class="scro" style="float:right; width:15%; height:1000px;  " >
-		<center>
-			<br><br><br><br><br><br><br><br>
-			<div style="height: 300px; width: 200px; ">
-                   <a>
-					   <img src="" alt="广告位右">
-				   </a>
-			</div>
-		</center>
-	</div>
 
 
-
-<div class="scrolll" style="width:70%; height:1000px; float: left">
+<div class="scrolll" style="width:100%; height:1000px; float: left">
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
@@ -56,10 +63,10 @@
 			</a>
 		</div>
 	</div>
-	<!-- 广告位上 -->
+
 	<div class="span9">
 		<div class="headerAd">
-			<img src="" width="320" height="50" alt="广告位上" title="正品保障"/>
+			<img src="" width="320" height="50" alt="" title="正品保障"/>
 		</div>
 	</div>
 <div class="span10 last">
@@ -76,8 +83,8 @@
 					style="display: list-item;"><span id="exit"><a href="<%=request.getContextPath()%>/reg/toregPage">注册</a></span>|
 				</li>
 
-				<li><a>会员中心</a> |</li>
-				<li><a>购物指南</a> |</li>
+				<li><a href="<%=request.getContextPath()%>/comm/jfsc">积分商城</a> |</li>
+				<li><a href="<%=request.getContextPath()%>/comm/shoppingguide">购物指南</a> |</li>
 				<li><a>关于我们</a></li>
 			</ul>
 		</div>
@@ -100,7 +107,8 @@
 
 </div>
 
-<div class="container index">
+
+    <div class="container index">
 
 
 	<div class="span24">
@@ -214,6 +222,13 @@
 					</div>
 				</c:forEach>
 			</div>
+
+
+
+
+
+
+
 
 
 
@@ -385,6 +400,8 @@
     function thePrimaryQuery(cid) {
         location.href="<%=request.getContextPath()%>/comm/thePrimaryQuery?cid="+cid;
     }
+
+
     $(function () {
         console.info($("#userId"))
         var uid = $("#userId").val();
@@ -396,6 +413,7 @@
 
         }
     })
+
 
 
 </script>
