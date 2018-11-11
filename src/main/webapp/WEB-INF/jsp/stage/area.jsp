@@ -11,7 +11,8 @@
 	<title>Insert title here</title>
 	<link href="<%=request.getContextPath()%>/css/common.css" rel="stylesheet" type="text/css"/>
 	<link href="<%=request.getContextPath()%>/css/login.css" rel="stylesheet" type="text/css"/>
-
+	<!-- 引入jquery -->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
 
 	<style type="text/css">

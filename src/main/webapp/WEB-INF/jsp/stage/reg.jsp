@@ -48,7 +48,7 @@
 
 
 				<li><a>会员中心</a> |</li>
-				<li><a href="<%=request.getContextPath()%>/comm/shoppingguide">购物指南</a> |</li>
+				<li><a>购物指南</a> |</li>
 				<li><a>关于我们</a></li>
 			</ul>
 		</div>
@@ -130,7 +130,7 @@
 								<span class="requiredField">*</span>E-mail:
 							</th>
 							<td>
-								<input type="text" id="email" name="email" class="text" maxlength="200">
+								<input type="text" id="email" onblur="checkemail()" name="email" class="text" maxlength="200">
 								<span></span>
 							</td>
 						</tr>
@@ -149,7 +149,7 @@
 								电话:
 							</th>
 							<td>
-								<input type="text" name="phone" class="text" />
+								<input type="text" onblur="checkPhone()" id="uphone" name="phone" class="text" />
 							</td>
 						</tr>
 
@@ -171,7 +171,7 @@
 							<td>
 										<span class="fieldSet">
 											<input type="text"  id="checkcode" name="code" class="text captcha"  >
-											<input type="button" class="submit" value="获取验证码" onclick="loginphone()">
+											<input type="button"  id="btn" value="获取验证码" onclick="loginphone()">
 											<%--<img id="checkImg" class="captchaImage" src="<%=request.getContextPath()%>/reg/verificationCode" onclick="change()" title="点击更换验证码">--%>
 										</span>
 							</td>
@@ -181,7 +181,7 @@
 
 							</th>
 							<td>
-								<input type="button" onclick="submitReg()"  value="同意以下协议并注册">
+								<input type="button" class="submit" onclick="submitReg()"  value="同意以下协议并注册">
 							</td>
 						</tr>
 						<tr>
@@ -223,7 +223,7 @@
 						<dt>已经拥有账号了？</dt>
 						<dd>
 							立即登录即可体验在线购物！
-							<a href="<%=request.getContextPath()%>/user_loginPage.action">立即登录</a>
+							<a href="<%=request.getContextPath()%>/loginUser/toLoginUser">立即登录</a>
 						</dd>
 					</dl>
 					</div>
@@ -283,6 +283,57 @@
 </div>
 <div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 190px; height: 191px;" src="./会员注册 - Powered By Mango Team_files/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
 <script>
+    var countdown=60;
+
+    function settime(obj) { //发送验证码倒计时
+        if (countdown == 0) {
+            obj.attr('disabled',false);
+            //obj.removeattr("disabled");
+            obj.val("免费获取验证码");
+            countdown = 60;
+            return;
+        } else {
+            obj.attr('disabled',true);
+            obj.val("重新发送(" + countdown + ")");
+            countdown--;
+        }
+        setTimeout(function() {
+                settime(obj) }
+            ,1000)
+    }
+
+function checkemail() {
+    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+    var obj = document.getElementById("email"); //要验证的对象
+    if(obj.value === ""){ //输入不能为空
+        alert("输入不能为空!");
+        return false;
+    }else if(!reg.test(obj.value)){ //正则验证不通过，格式不对
+        alert("请填写正确邮箱!");
+        return false;
+    }else{
+
+        return true;
+    }
+}
+
+function checkPhone () {
+    var reg = new RegExp("^1[0-9]{10}$"); //正则表达式
+    var obj = document.getElementById("uphone"); //要验证的对象
+    if(obj.value === ""){ //输入不能为空
+        alert("输入不能为空!");
+        return false;
+    }else if(!reg.test(obj.value)){ //正则验证不通过，格式不对
+        alert("请填写正确手机号!");
+        return false;
+    }else{
+
+        return true;
+    }
+
+}
+
+
     function checkusername() {
         // 校验用户名:
         // 获得用户名文本框的值:
@@ -318,23 +369,24 @@
         }
     }
     function loginphone(){
-
-        $.ajax({
-            url:"<%=request.getContextPath()%>/reg/getPhone",
-            data:$("form").serialize(),
-            type:"post",
-            success:function(a){
-                if (a==true) {
-                    alert("短信发送成功")
-                }else{
-                    alert("短信发送失败")
+        var obj = $("#btn");
+        settime(obj);
+        if (checkPhone()) {
+            $.ajax({
+                url: "<%=request.getContextPath()%>/reg/getPhone",
+                data: $("form").serialize(),
+                type: "post",
+                success: function (a) {
+                    if (a == 1) {
+                        alert("您已是黑名单用户，无权注册本商城")
+                    }
                 }
-            }
-        })
+            })
+        }
     }
     function submitReg() {
 
-        if (checkusername() & checkpassword() & checkrepassword()) {
+        if (checkusername() &checkPhone()& checkpassword() & checkrepassword()& checkemail()) {
             $.ajax({
                 url:"<%=request.getContextPath()%>/reg/regUser",
                 data:$("#registerForm").serialize(),
@@ -342,6 +394,8 @@
                     if (1 == data) {
                         alert("用户名已存在！");
                     } else if (2 == data) {
+                        alert("注册成功！")
+                        location.href = "<%=request.getContextPath()%>/loginUser/toLoginUser";
                         alert("新用户注册成功！ 赠送100积分已到账")
                         location.href = "<%=request.getContextPath()%>/user/toIndex";
                     } else if (3 == data) {

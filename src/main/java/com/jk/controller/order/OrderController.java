@@ -3,12 +3,15 @@ package com.jk.controller.order;
 import com.alibaba.dubbo.common.json.JSONObject;
 import com.jk.model.orders.Orders;
 import com.jk.model.orders.Product;
+import com.jk.model.orders.Trees;
+import com.jk.model.power.PowerTree;
 import com.jk.service.orders.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.List;
 import java.util.Map;
@@ -86,7 +89,42 @@ public class OrderController {
     }
 
 
+/*    //跳转到首页
+    @RequestMapping("csy")
+    public String csy(){
+        return "/orders/layout";
+    }
 
+    *//**
+     * 获取tree的数据
+     * @return
+     *//*
+    @RequestMapping(value="queryTree",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String getSysOrganizeIdJSON(){
+        String StrJSON = getSysOrganizeByParentIdJSON(0);
+        StrJSON=StrJSON.substring(0, StrJSON.length()-1);
+        return StrJSON;
+    }
 
+    *//**
+     * 机构的JSON拼接
+     * @param id
+     * @return
+     *//*
+    private String getSysOrganizeByParentIdJSON(Integer id){
+        String sonNodes="";
+        List<Trees> list = ordersService.getSysOrganizeByParentId(id);
+        for(Trees tree : list){
+            sonNodes+="{ text: '"+tree.getText()+"', id: '"+tree.getId()+"', url: '"+tree.getUrl()+"'";
+            if(!getSysOrganizeByParentIdJSON(tree.getId()).isEmpty()){
+
+                sonNodes+= ", nodes: ["+getSysOrganizeByParentIdJSON(tree.getId())+"] ";
+
+            }
+            sonNodes+= "},";
+        }
+        return sonNodes;
+    }*/
 
 }
